@@ -1,0 +1,14 @@
+/* variables */
+:root{
+    --header-height: 4.5rem;
+    /*cores */
+    --laranja1: #f27405;
+    --laranja2: #f25c05;
+    --vinho: #8c5656; /* é vinho isso mesmo? */
+    --rosaClaro: #d9baba;
+    --fundo: #f2f2f2
+}
+
+body{
+    background-color: var(--fundo) !important;
+}
