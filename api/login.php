@@ -2,24 +2,24 @@
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
 
-$dados = json_decode(file_get_contents("php://input"));
+$dados = json_decode(file_get_contents("php://input"), true);
 
 if (isset($dados["acessar"])) {
     session_start();
     header("Content-Type: application/json; charset=UTF-8");
 
-    include "conexao.php";
+    include "conn.php";
 
     $email = $dados["email"];
     $senha = $dados["password"];
 
-    $sql = "SELECT * FROM usuario WHERE email = '$email' AND senha = '$senha'";
-    
+    $sql = "SELECT * FROM usuario 
+    WHERE email = ?
+    AND senha = ?";
     $consulta = $banco->prepare($sql);
-    $consulta->execute();
-    $row = $consulta->rowCount();
+    $consulta->execute(array($email, $senha));
     $registro = $consulta->fetch();
-    if($row > 0){
+    if($registro){
         $_SESSION["user"] = $registro["nome"];
         echo json_encode(array('codigo'=>1, 'mensagem'=>'Login efetuado com sucesso!'));
     }else{
