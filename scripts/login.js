@@ -20,14 +20,14 @@ btnEntrar.addEventListener("click", event=> {
     alert("Por favor, preencha todos os campos");
     return false;
   }
-  postData("../api/login.php", { 
+  postData("./api/login.php", { 
     acessar: 1,
     email: email,
     password: password
    }).then((data) => {
     console.log(data);
     if(data.codigo == 1){
-      window.location.replace("../home.php");
+      window.location.replace("./home.php");
     }else{
       alert(data.mensagem);
     }
