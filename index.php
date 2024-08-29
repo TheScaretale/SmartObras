@@ -1,8 +1,4 @@
 <?php include "navbar.php"; ?>
-<div class="container justify-content-center">
-
-  <img src="assets/logoTCC.svg" alt="" class="img-fluid">
-
   <div class="d-flex justify-content-center  align-items-center">
     <form>
       <div class="mb-3">
@@ -16,12 +12,12 @@
       </div>
       <div class="mb-3 form-check">
         <input type="checkbox" class="form-check-input" id="checkRemember">
-        <div class="form-text" id="emailHelp"><a href="">Esqueceu a senha?</a></div>
+        <div class="form-text" id="emailHelp"><a href="forgot.php">Esqueceu a senha?</a></div>
         <label class="form-check-label" for="checkRemember">Lembre-me</label>
       </div>
       <button type="submit" class="btn btn-primary" id="btnEntrar">Entrar</button>
     </form>
   </div>
-</div>
+
 
 <?php include "footer.php"; ?>
