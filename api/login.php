@@ -16,9 +16,11 @@ if (isset($dados["acessar"])) {
     $senha = $dados["senha"];
     
     // Prepare and execute the SQL query
-    $sql = "SELECT * FROM usuario WHERE email = ? AND senha = ?";
+    $sql = "SELECT * FROM usuario WHERE email = :email AND senha = :senha";
     $consulta = $banco->prepare($sql);
-    $consulta->execute(array($email, $senha));
+    $consulta->bindParam(':email', $email);
+    $consulta->bindParam(':senha', $senha);
+    $consulta->execute();
     $registro = $consulta->fetch();
 
     if ($registro) {

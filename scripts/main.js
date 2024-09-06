@@ -45,7 +45,7 @@ function login(event) {
       });
   }
 }
-document.getElementById('btnEntrar').addEventListener('click', login);
+
 
 
 function forgotPass(event) {

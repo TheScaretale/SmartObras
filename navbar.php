@@ -15,7 +15,7 @@
     <nav class="navbar-navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a href="" class="navbar-brand">
-                <img src="assets/2.svg" alt="" width="50" height="50">
+                <img src="assets/logo.png" alt="" width="150" height="50">
             </a>
         </div>
     </nav>
