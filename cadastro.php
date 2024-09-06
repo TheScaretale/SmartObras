@@ -18,7 +18,7 @@ include "navbar.php";
         </div>
         <div class="mb-3">
             <label for="password2" class="form-label">Confirme a senha</label>
-            <input type="password" class="form-control" id="password2">
+            <input type="password" class="form-control" id="passwordConf">
         </div>
         <div class="mb-3">
             <label for="telefone" class="form-label">Telefone: </label>
@@ -31,7 +31,7 @@ include "navbar.php";
                 <option value="U">Buscando profissionais</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary" id="btnCadastrar">Cadastrar</button>
+        <button type="submit" class="btn btn-primary" id="btnCadastrar" onclick="register()">Cadastrar</button>
         <a href="index.php" class="btn btn-primary">Voltar</a>
     </form>
 </div>

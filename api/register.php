@@ -31,5 +31,6 @@ if(isset($dados["cadastrar"])){
     }else{
         echo json_encode(array('codigo'=>2, 'mensagem'=>'Erro ao cadastrar usuário!'));
     }
-
+}else{
+    echo json_encode(array('codigo'=>3, 'mensagem'=>'Erro desconhecido'));
 }

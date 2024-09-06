@@ -13,9 +13,7 @@ function postData(url = "", data = {}) {
     });
 }
 
-function login(event) {
-  event.preventDefault();
-
+function login() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
@@ -31,7 +29,7 @@ function login(event) {
     alert("Por favor, preencha todos os campos");
     return false;
   } else {
-    postData('http://localhost/TCC/SmartObras/api/login.php', data)
+    postData('./api/login.php', data)
       .then((data) => {
         console.log('Success:', data);
         if (data.codigo === 1) {
@@ -48,19 +46,20 @@ function login(event) {
 
 
 
-function forgotPass(event) {
-  event.preventDefault();
+function forgotPass() {
   const email = document.getElementById("email").value;
   const data = {
     recuperar: 1,
     email: email,
   };
 
+  console.log(data);
+
   if (email == "") {
     alert("Por favor, preencha o campo de e-mail");
     return false;
   } else {
-    postData('http://localhost/TCC/SmartObras/api/forgot.php', data)
+    postData('./api/forgot.php', data)
       .then((data) => {
         console.log('Success:', data);
         if (data.codigo === 1) {
@@ -76,12 +75,11 @@ function forgotPass(event) {
 
 }
 
-function register(event){
-  event.preventDefault();
+function register(){
   const nome = document.getElementById("nome").value;
   const email = document.getElementById("email").value;
-  const senha = document.getElementById("senha").value;
-  const confirmarSenha = document.getElementById("confirmarSenha").value;
+  const senha = document.getElementById("password").value;
+  const confirmarSenha = document.getElementById("passwordConf").value;
   const telefone = document.getElementById("telefone").value;
   const tipo = document.getElementById("tipo").value;
   const data = {
@@ -94,6 +92,8 @@ function register(event){
     tipo: tipo
   };
 
+  console.log(data);
+
   if (nome == "" || email == "" || senha == "" || confirmarSenha == "" || telefone == "" || tipo == "") {
     alert("Por favor, preencha todos os campos");
     return false;
@@ -101,7 +101,7 @@ function register(event){
     alert("As senhas não coincidem");
     return false;
   } else {
-    postData('http://localhost/TCC/SmartObras/api/register.php', data)
+    postData('./api/register.php', data)
       .then((data) => {
         console.log('Success:', data);
         if (data.codigo === 1) {
