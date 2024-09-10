@@ -1,6 +1,9 @@
+<?php
+session_start()
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,13 +13,49 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 </head>
-
 <body>
-    <nav class="navbar-navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a href="" class="navbar-brand">
                 <img src="assets/logo.png" alt="" width="150" height="50">
             </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#conteudoNavbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="conteudoNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <?php
+                    if ($_SESSION["user"]) {
+                    ?>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Encontre trabalho</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">Encontre profissionais</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="" class="btn btn-outline-success" type="submit">Sair</a>
+                    </div>
+
+                    <?php
+                    } else {
+                    ?>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a href="" class="nav-link">Quero contratar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">Quero trabalhar</a>
+                        </li>
+                    <?php
+                    }
+                    ?>
+                    </ul>
+
+                
+            </div>
         </div>
     </nav>
     <div class="container justify-content-center">

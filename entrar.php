@@ -1,6 +1,6 @@
 <?php include "navbar.php"; ?>
   <div class="d-flex justify-content-center  align-items-center">
-    <form>
+    <form id="loginForm">
       <div class="mb-3">
         <label for="email" class="form-label">Endereço de email</label>
         <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
@@ -16,6 +16,7 @@
         <label class="form-check-label" for="checkRemember">Lembre-me</label>
       </div>
       <button type="submit" class="btn btn-primary" id="btnEntrar" onclick="login()">Entrar</button>
+      <a href="index.php" class="btn btn-primary">Voltar</a>
     </form>
   </div>
 <?php include "footer.php"; ?>

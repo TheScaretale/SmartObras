@@ -2,7 +2,7 @@
 include "navbar.php";
 ?>
 <div class="d-flex justify-content-center align-items-center">
-    <form action="">
+    <form action="" id="registerForm">
         <div class="mb-3">
             <label for="nome" class="form-label">Nome</label>
             <input type="text" class="form-control" id="nome">
