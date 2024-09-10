@@ -1,5 +1,9 @@
 <?php
-session_start()
+session_start();
+if(isset($_GET["logout"])) {
+    session_unset();
+    session_destroy();
+}
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +15,7 @@ session_start()
 
     <link rel="stylesheet" href="styles/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
 </head>
 <body>
@@ -25,7 +30,7 @@ session_start()
             <div class="collapse navbar-collapse" id="conteudoNavbar">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <?php
-                    if ($_SESSION["user"]) {
+                    if (!empty($_SESSION["user"])) {
                     ?>
 
                         <li class="nav-item">
@@ -36,7 +41,7 @@ session_start()
                         </li>
                     </ul>
                     <div class="d-flex">
-                        <a href="" class="btn btn-outline-success" type="submit">Sair</a>
+                        <a href="index.php?logout" class="btn btn-outline-success" type="submit">Sair</a>
                     </div>
 
                     <?php

@@ -15,7 +15,7 @@
         <div class="form-text" id="emailHelp"><a href="esquecisenha.php">Esqueceu a senha?</a></div>
         <label class="form-check-label" for="checkRemember">Lembre-me</label>
       </div>
-      <button type="submit" class="btn btn-primary" id="btnEntrar" onclick="login()">Entrar</button>
+      <button type="submit" class="btn btn-primary" id="btnEntrar" onclick="">Entrar</button>
       <a href="index.php" class="btn btn-primary">Voltar</a>
     </form>
   </div>

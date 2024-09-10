@@ -50,8 +50,13 @@ function login() {
 }
 
 
+document.addEventListener("DOMContentLoaded", function () {
+  const forgotPass = document.getElementById("forgotPass");
+  forgotPass.addEventListener("submit", login);
+})
 
-function forgotPass(event) {
+
+function forgotPass() {
   event.preventDefault();
   const email = document.getElementById("email").value;
   const data = {
@@ -82,8 +87,8 @@ function forgotPass(event) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  const loginForm = document.getElementById("registerForm");
-  loginForm.addEventListener("submit", login);
+  const registerForm = document.getElementById("registerForm");
+  registerForm.addEventListener("submit", login);
 })
 
 function register(){
