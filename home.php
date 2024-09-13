@@ -19,7 +19,12 @@
     </div>
     <div class="col-md-8">
         <h3 class="card-title">Olá <?php echo $_SESSION["user"] ?></h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus distinctio, aut eveniet reprehenderit recusandae obcaecati molestias possimus dolorum ut minus numquam veritatis ipsum quasi tempora facilis illum voluptates iste laboriosam incidunt ipsam sunt sequi nesciunt laborum. Magni minima pariatur aspernatur, voluptatum possimus ratione architecto officia labore, praesentium vero officiis cumque eos dolore est reiciendis. Culpa quod reprehenderit consequatur aperiam at eos cumque laudantium quasi praesentium sed sunt earum nostrum natus expedita iusto, soluta consequuntur omnis eveniet modi ipsam vel corporis aliquid autem? Sapiente veritatis corrupti neque suscipit sunt necessitatibus facilis vero ad illo, officiis autem provident est error tempora doloribus, temporibus eaque rerum! Est temporibus saepe officiis ipsum expedita voluptate nisi nemo alias aliquid magnam dicta, obcaecati recusandae minima illo magni enim odit fugiat nihil possimus. Deserunt eius quisquam officia expedita, dolore eum quaerat praesentium? Excepturi et ea accusantium sint ullam odio, voluptates rerum amet nam aperiam animi soluta sunt!</p>
+        
+        <button class="btn btn-primary" id="getUserReviews" onclick="getReviews()">Pegar dados</button>
+
+        <table class="table" id="reviewsTable">
+            
+        </table>
     </div>
 </div>
 <?php include "footer.php"; ?>

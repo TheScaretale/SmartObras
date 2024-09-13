@@ -132,3 +132,58 @@ function register(){
       });
   }
 }
+
+function getReviews() {
+  fetch('./api/reviews.php')
+    .then((response) => response.text())
+    .then((text) => {
+      console.log('Raw response:', text); // Log the raw response
+
+      try {
+        const data = JSON.parse(text); // Attempt to parse the text as JSON
+        console.log('Success:', data);
+        // Process the data here
+        const reviews = data.reviews; // Assuming the JSON response has a property called "reviews" that contains an array of review objects
+        // Store the reviews in a variable or pass it to a function to populate the table
+        populateTable(reviews);
+      } catch (error) {
+        console.error('Failed to parse JSON:', error);
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
+
+function populateTable(reviews) {
+  // Assuming you have a table element with id "reviewsTable" in your HTML
+  const table = document.getElementById('reviewsTable');
+
+  // Clear existing table rows
+  table.innerHTML = '';
+
+  // Iterate over the reviews array and create table rows
+  reviews.forEach((review) => {
+    const row = document.createElement('tr');
+
+    // Assuming each review object has properties like "id", "name", "rating", "comment"
+    const idCell = document.createElement('td');
+    idCell.textContent = review.id;
+    row.appendChild(idCell);
+
+    const nameCell = document.createElement('td');
+    nameCell.textContent = review.name;
+    row.appendChild(nameCell);
+
+    const ratingCell = document.createElement('td');
+    ratingCell.textContent = review.rating;
+    row.appendChild(ratingCell);
+
+    const commentCell = document.createElement('td');
+    commentCell.textContent = review.comment;
+    row.appendChild(commentCell);
+
+    // Append the row to the table
+    table.appendChild(row);
+  });
+}
