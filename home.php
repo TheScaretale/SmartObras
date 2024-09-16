@@ -22,9 +22,19 @@
         
         <button class="btn btn-primary" id="getUserReviews" onclick="getReviews()">Pegar dados</button>
 
-        <table class="table" id="reviewsTable">
-            
+        <table class="table table-striped" id="reviewsTable">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Comentário</th>
+                    <th scope="col">Média</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Populado pelo javascript -->
+            </tbody>
         </table>
+
     </div>
 </div>
 <?php include "footer.php"; ?>

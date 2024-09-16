@@ -133,22 +133,16 @@ function register(){
   }
 }
 
+document.addEventListener('DOMContentLoaded', (event) => {
+  getReviews();
+});
+
 function getReviews() {
   fetch('./api/reviews.php')
-    .then((response) => response.text())
-    .then((text) => {
-      console.log('Raw response:', text); // Log the raw response
-
-      try {
-        const data = JSON.parse(text); // Attempt to parse the text as JSON
-        console.log('Success:', data);
-        // Process the data here
-        const reviews = data.reviews; // Assuming the JSON response has a property called "reviews" that contains an array of review objects
-        // Store the reviews in a variable or pass it to a function to populate the table
-        populateTable(reviews);
-      } catch (error) {
-        console.error('Failed to parse JSON:', error);
-      }
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Success:', data);
+      populateTable(data);
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -156,34 +150,28 @@ function getReviews() {
 }
 
 function populateTable(reviews) {
-  // Assuming you have a table element with id "reviewsTable" in your HTML
-  const table = document.getElementById('reviewsTable');
+  const tableBody = document.querySelector('#reviewsTable tbody');
 
   // Clear existing table rows
-  table.innerHTML = '';
+  tableBody.innerHTML = '';
 
   // Iterate over the reviews array and create table rows
-  reviews.forEach((review) => {
+  reviews.forEach((review, index) => {
     const row = document.createElement('tr');
 
-    // Assuming each review object has properties like "id", "name", "rating", "comment"
-    const idCell = document.createElement('td');
-    idCell.textContent = review.id;
-    row.appendChild(idCell);
-
     const nameCell = document.createElement('td');
-    nameCell.textContent = review.name;
+    nameCell.textContent = review.nome; // Assuming "nome" is the user's name
     row.appendChild(nameCell);
 
+    const reviewCell = document.createElement('td');
+    reviewCell.textContent = review.comentario; // Assuming "comentario" is the review text
+    row.appendChild(reviewCell);
+
     const ratingCell = document.createElement('td');
-    ratingCell.textContent = review.rating;
+    ratingCell.textContent = review.media; // Assuming "media" is the rating
     row.appendChild(ratingCell);
 
-    const commentCell = document.createElement('td');
-    commentCell.textContent = review.comment;
-    row.appendChild(commentCell);
-
-    // Append the row to the table
-    table.appendChild(row);
+    // Append the row to the table body
+    tableBody.appendChild(row);
   });
 }
