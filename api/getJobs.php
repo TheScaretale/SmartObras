@@ -8,13 +8,37 @@ header("Content-Type: application/json; charset=UTF-8");
 
 include "conn.php";
 
-$sql = "SELECT * FROM servico;";
+$dados = json_decode(file_get_contents("php://input"), true);
+$sql = "SELECT * FROM servico WHERE 1=1";
+
+$tipos = "";
+$ctrl = "";
+if($dados["azulejista"]==1) {
+    $tipos .= $ctrl."1";
+    $ctrl = ",";
+}
+if($dados["eletricista"]==2){
+    $tipos .= $ctrl."2";
+    $ctrl = ",";
+}
+if($dados["hidraulica"]==3){
+    $tipos .= $ctrl."3";
+    $ctrl = ",";
+}
+if($tipos <> "") {
+    $sql .= " AND id_tipo_servico IN ($tipos)";
+    echo $sql;
+}
 
 $consulta = $banco->prepare($sql);
 $consulta->execute();
 
 $servicos = array();
 
+
+if (isset($dados["filtrar"])) {
+    
+}
 while($registro = $consulta->fetch()){
     $servicos[] = array(
         "id_servico" => $registro["id_servico"],

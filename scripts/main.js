@@ -175,3 +175,4 @@ function populateTable(reviews) {
     tableBody.appendChild(row);
   });
 }
+

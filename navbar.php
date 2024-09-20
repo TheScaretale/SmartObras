@@ -34,10 +34,10 @@ if(isset($_GET["logout"])) {
                     ?>
 
                         <li class="nav-item">
-                            <a href="cadastro.php" class="nav-link">Encontre trabalho</a>
+                            <a href="trabalhar.php" class="nav-link">Encontre trabalho</a>
                         </li>
                         <li class="nav-item">
-                            <a href="cadastro.php" class="nav-link">Encontre profissionais</a>
+                            <a href="contratar.php" class="nav-link">Encontre profissionais</a>
                         </li>
                     </ul>
                     <div class="d-flex">
@@ -49,10 +49,10 @@ if(isset($_GET["logout"])) {
                     ?>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a href="" class="nav-link">Quero contratar</a>
+                            <a href="cadastro.php" class="nav-link">Quero contratar</a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">Quero trabalhar</a>
+                            <a href="cadastro.php" class="nav-link">Quero trabalhar</a>
                         </li>
                     <?php
                     }
