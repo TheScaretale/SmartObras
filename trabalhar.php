@@ -15,21 +15,22 @@ include "navbar.php";
             <div class="card-body">
                 <h5 class="card-title">Filtros</h5>
                 <p class="fw-bold">Project Type</p>
+                <form action="" id="filters">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="tipoEletrica">
+                    <input class="form-check-input" type="checkbox" value="azulejista" id="tipoEletrica">
                     <label class="form-check-label" for="flexCheckDefault">
                         Elétrica
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="tipoAzulejista" checked>
-                    <label class="form-check-label" for="flexCheckChecked">
+                    <input class="form-check-input" type="checkbox" value="eletricista" id="tipoAzulejista">
+                    <label class="form-check-label" for="flexCheckDefault">
                         Azulejista
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="tipoHidraulica" checked>
-                    <label class="form-check-label" for="flexCheckChecked">
+                    <input class="form-check-input" type="checkbox" value="hidraulica" id="tipoHidraulica">
+                    <label class="form-check-label" for="flexCheckDefault">
                         Hidráulica
                     </label>
                 </div>
@@ -48,7 +49,9 @@ include "navbar.php";
                     <span class="input-group-text">
                     <i class="fa fa-calendar"></i>
                     </span>
-            </span>
+                </span>
+                </form>
+                <button class="btn btn-primary" id="filterButton" onclick="getJobs()">Pegar trabalhos</button>
         </div>
     </div>
 

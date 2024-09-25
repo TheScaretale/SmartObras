@@ -15,10 +15,13 @@ function postData(url = "", data = {}) {
 
 document.addEventListener("DOMContentLoaded", function () {
   const loginForm = document.getElementById("loginForm");
-  loginForm.addEventListener("submit", login);
-})
+  if (loginForm) {
+    loginForm.addEventListener("submit", login);
+  }
+});
 
-function login() {
+function login(event) {
+  event.preventDefault();
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
@@ -52,7 +55,9 @@ function login() {
 
 document.addEventListener("DOMContentLoaded", function () {
   const forgotPass = document.getElementById("forgotPass");
-  forgotPass.addEventListener("submit", login);
+  if (forgotPass) {
+    forgotPass.addEventListener("submit", forgotPass);
+  }
 })
 
 
@@ -88,7 +93,9 @@ function forgotPass() {
 
 document.addEventListener("DOMContentLoaded", function () {
   const registerForm = document.getElementById("registerForm");
-  registerForm.addEventListener("submit", login);
+  if (registerForm) {
+    registerForm.addEventListener("submit", register);
+  }
 })
 
 function register(){
@@ -133,9 +140,7 @@ function register(){
   }
 }
 
-document.addEventListener('DOMContentLoaded', (event) => {
-  getReviews();
-});
+
 
 function getReviews() {
   fetch('./api/reviews.php')
@@ -143,6 +148,92 @@ function getReviews() {
     .then((data) => {
       console.log('Success:', data);
       populateTable(data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+}
+
+const filters = {
+  azulejista: null,
+  eletricista: null,
+  hidraulica: null
+};
+
+document.addEventListener("DOMContentLoaded", function () {
+  const tipoEletricaCheckbox = document.getElementById("tipoEletrica");
+  tipoEletricaCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      filters.eletricista = 2;
+      console.log("Checkbox is checked. Value is: " + filters.eletrica);
+    } else {
+      filters.eletricista = null;
+      console.log("Checkbox is unchecked.");
+    }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const tipoAzulejistaCheckbox = document.getElementById("tipoAzulejista");
+  tipoAzulejistaCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      filters.azulejista = 1;
+      console.log("Checkbox is checked. Value is: " + filters.azulejista);
+    } else {
+      filters.azulejista = null;
+      console.log("Checkbox is unchecked.");
+    }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const tipoHidraulicaCheckbox = document.getElementById("tipoHidraulica");
+  tipoHidraulicaCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      filters.hidraulica = 3;
+      console.log("Checkbox is checked. Value is: " + filters.hidraulica);
+    } else {
+      filters.hidraulica = null;
+      console.log("Checkbox is unchecked.");
+    }
+  });
+});
+
+// Function to convert filters object to query string
+function toQueryString(params) {
+  return Object.keys(params)
+    .filter(key => params[key] !== null) // Filter out null values
+    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key]))
+    .join('&');
+}
+
+/*const filterButton = document.getElementById("filterButton");
+filterButton.addEventListener("click", function () {
+  console.log('Filter button clicked');
+  console.log('Filters:', filters);
+  console.log('Query string:', toQueryString(filters));
+  getJobs();
+});*/
+
+function getJobs() {
+  const data = JSON.stringify(filters);
+  const url = './api/getJobs.php';
+
+  fetch(url, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: data
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then((json) => {
+      console.log('Success:', json);
     })
     .catch((error) => {
       console.error('Error:', error);

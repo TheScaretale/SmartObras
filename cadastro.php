@@ -28,7 +28,7 @@ include "navbar.php";
             <label for="tipo" class="form-label">O que você busca no SmartObras?</label>
             <select name="tipo" id="tipo" class="form-select">
                 <option value="P">Buscando trabalho</option>
-                <option value="U">Buscando profissionais</option>
+                <option value="C">Buscando profissionais</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary" id="btnCadastrar" onclick="register()">Cadastrar</button>

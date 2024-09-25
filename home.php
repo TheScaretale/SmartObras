@@ -6,22 +6,31 @@
     <div class="col-md-4 mt-4">
         <div class="card">
             <div class="card-body">
-            <?php
+                <?php
                 $user = $_SESSION["user"];
                 $nomeSobrenome = explode(" ", $user);
 
                 $nome = $nomeSobrenome[0];
                 $sobrenome = isset($nomeSobrenome[1]) ? $nomeSobrenome[1] : '';
-            ?>
-            <div class="card-header d-flex justify-content-between align-items-start">
-                <h5 class="card-title">
-                    Olá <?php echo $nome; ?><br>
-                    <?php echo $sobrenome; ?>
-                </h5>
-            <div class="card-title">
-                <button class="btn btn-primary" id="getUserReviews" onclick="getReviews()">Encontrar Trabalho</button>
-            </div>
-            </div>
+                ?>
+                <div class="card-header d-flex justify-content-between align-items-start">
+                    <h5 class="card-title">
+                        Olá <?php echo $nome; ?><br>
+                        <?php echo $sobrenome; ?>
+                    </h5>
+                    <div class="card-title">
+                        <?php
+                        if ($_SESSION["userType"] == "P") {
+                            ?>
+                            <a class="btn btn-primary" id="getUserReviews" href="trabalhar.php">Encontrar Trabalho</a>
+                            <?php
+                        } else {
+                            ?>
+                            <a class="btn btn-primary" id="getUserReviews" href="contratar.php">Criar trabalho</a>
+                            <?php
+                        } ?>
+                    </div>
+                </div>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="ratings">
                         <i class="fa fa-star checked"></i>
@@ -43,8 +52,9 @@
 
     <div class="col-md-8 mt-4">
         <h3 class="card-title">Olá <?php echo $_SESSION["user"] ?></h3>
-        
+
         <button class="btn btn-primary" id="getUserReviews" onclick="getReviews()">Pegar dados</button>
+        <button class="btn btn-primary" id="getJobs" onclick="getJobs()">Pegar trabalhos</button>
 
         <table class="table table-striped" id="reviewsTable">
             <thead>
@@ -58,7 +68,7 @@
                 <!-- Populado pelo javascript -->
             </tbody>
         </table>
-        
+
     </div>
 </div>
 <?php include "footer.php"; ?>
