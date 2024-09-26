@@ -2,7 +2,7 @@
 include "navbar.php";
 ?>
 <div class="row">
-<div class="col-md-8 mt-4">
+    <div class="col-md-8 mt-4">
         <!-- Cria o form aqui -->
         <div class="mb-3">
             <label class="form-label" for="">Titulo do Serviço</p>
@@ -36,18 +36,7 @@ include "navbar.php";
         </select>
         <label class="form-label">Data Validade</label>
         <div class="form-group" id="date">
-            <div class="input-group date" id="datepicker">
-                <input type="text" id="dataValidade" class="form-control" placeholder="MM/DD/YYYY">
-                <span class="input-group-append">
-                    <span class="input-group-text">
-                        <i class="fa fa-calendar"></i>
-                    </span>
-                </span>
-            </div>
-        </div>
-        <label class="form-label">Data Conclução</label>
-        <div class="form-group" id="date">
-            <div class="input-group date" id="datepicker">
+            <div class="input-group date" id="datepicker" data-provide="datepicker">
                 <input type="text" id="dataConclusão" class="form-control" placeholder="MM/DD/YYYY">
                 <span class="input-group-append">
                     <span class="input-group-text">
@@ -55,6 +44,21 @@ include "navbar.php";
                     </span>
                 </span>
             </div>
+        </div>
+        <label class="form-label">Data Conclusão</label>
+        <div class="form-group" id="date">
+            <input type="date" name="" id="" class="form-control">
+            <!-- <div class="input-group date" id="datepicker" data-provide="datepicker">
+                <input type="text" id="dataConclusão" class="form-control" placeholder="MM/DD/YYYY">
+                <span class="input-group-append">
+                    <span class="input-group-text">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                </span>
+            </div> -->
+        </div>
+        <div class="my-3">
+            <button class="btn btn-primary" id="criarJob">Criar trabalho</button>
         </div>
     </div>
 </div>

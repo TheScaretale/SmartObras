@@ -198,6 +198,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+const filterButton = document.getElementById("filterButton");
+filterButton.addEventListener("click", function () {
+  console.log('Filter button clicked');
+  console.log('Filters:', filters); // Debugging log
+  getJobs();
+});
+
 function getJobs() {
   const url = './api/getJobs.php'
   const dados = {
@@ -223,11 +230,10 @@ function getJobs() {
     });
 }
 
-const filterButton = document.getElementById("filterButton");
-filterButton.addEventListener("click", function () {
-  console.log('Filter button clicked');
-  console.log('Filters:', filters); // Debugging log
-  getJobs();
+const createJobButton = document.getElementById("criarJob");
+createJobButton.addEventListener("click", function () {
+  console.log('Botão de criar job clicado');
+  createJob();
 });
 
 function createJob(){

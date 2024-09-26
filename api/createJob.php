@@ -15,7 +15,7 @@
         $data_validade = $dados["data_validade"];
         $data_conclusao = $dados["data_conclusao"];
 
-        $sql = "INSERT INTO usuario
+        $sql = "INSERT INTO servico
             (titulo, descricao, orcamento, id_tipo_servico, id_usuario, id_status, data_inclusao, data_validade, data_conclusao)
             VALUES 
             (:titulo, :descricao, :orcamento, :id_tipo_servico, :id_usuario, :id_status, NOW(), :data_validade, :data_conclusao)";
