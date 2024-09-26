@@ -11,7 +11,6 @@ if(isset($_GET["logout"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="no-referrer">
     <title>SmartObras</title>
 
     <link rel="stylesheet" href="styles/style.css">
@@ -40,6 +39,9 @@ if(isset($_GET["logout"])) {
                         <li class="nav-item">
                             <a href="contratar.php" class="nav-link">Encontre profissionais</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="criarTrabalho.php" class="nav-link">Criar trabalho</a>
+                        </li>
                     </ul>
                     <div class="d-flex">
                         <a href="index.php?logout" class="btn btn-outline-success" type="submit">Sair</a>
@@ -55,6 +57,7 @@ if(isset($_GET["logout"])) {
                         <li class="nav-item">
                             <a href="cadastro.php" class="nav-link">Quero trabalhar</a>
                         </li>
+                        
                     <?php
                     }
                     ?>

@@ -15,7 +15,6 @@ include "navbar.php";
             <div class="card-body">
                 <h5 class="card-title">Filtros</h5>
                 <p class="fw-bold">Project Type</p>
-                <form action="" id="filters">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="azulejista" id="tipoEletrica">
                     <label class="form-check-label" for="flexCheckDefault">
@@ -34,28 +33,29 @@ include "navbar.php";
                         Hidráulica
                     </label>
                 </div>
-                <br> 
-                <div class="price" id="precoOrcamento">  
-                <p class="fw-bold">Preço do Orçamento</p>
-                <input type="range" class="form-range" id="rangeValues" min="0" max="100" value="50" oninput="this.nextElementSibling.value = this.value">
+                <br>
+                <div class="price" id="precoOrcamento">
+                    <p class="fw-bold">Preço do Orçamento</p>
+                    <input type="range" class="form-range" id="rangeValues" min="0" max="100" value="50" oninput="this.nextElementSibling.value = this.value">
                     <output>50</output>
-                    </div> 
-                    <br>
-                    <p class="fw-bold">Data</p>
+                </div>
+                <br>
+                <p class="fw-bold">Data</p>
                 <div class="form-group" id="date">
-                <div class="input-group date" id="datepicker">
-                    <input type="text" class="form-control" placeholder="MM/DD/YYYY">
-                    <span class="input-group-append">
-                    <span class="input-group-text">
-                    <i class="fa fa-calendar"></i>
-                    </span>
-                </span>
-                </form>
-                <button class="btn btn-primary" id="filterButton" onclick="getJobs()">Pegar trabalhos</button>
-        </div>
-    </div>
-
+                    <label for="date" class="form-label">Data</label>
+                    <div class="col-sm-8">
+                        <div class="input-group date" id="datepicker">
+                            <input type="text" name="" id="" class="form-control" placeholder="DD/MM/AAAA">
+                            <span class="input-group-append">
+                                <span class="input-group-text bg-white">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <button class="btn btn-primary" id="filterButton">Pegar trabalhos</button>
         </div>
     </div>
 

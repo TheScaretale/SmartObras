@@ -62,7 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function forgotPass() {
-  event.preventDefault();
   const email = document.getElementById("email").value;
   const data = {
     recuperar: 1,
@@ -165,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
   tipoEletricaCheckbox.addEventListener("change", function () {
     if (this.checked) {
       filters.eletricista = 2;
-      console.log("Checkbox is checked. Value is: " + filters.eletrica);
+      console.log("Checkbox is checked. Value is: " + filters.eletricista);
     } else {
       filters.eletricista = null;
       console.log("Checkbox is unchecked.");
@@ -199,46 +198,81 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// Function to convert filters object to query string
-function toQueryString(params) {
-  return Object.keys(params)
-    .filter(key => params[key] !== null) // Filter out null values
-    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key]))
-    .join('&');
-}
-
-/*const filterButton = document.getElementById("filterButton");
-filterButton.addEventListener("click", function () {
-  console.log('Filter button clicked');
-  console.log('Filters:', filters);
-  console.log('Query string:', toQueryString(filters));
-  getJobs();
-});*/
-
 function getJobs() {
-  const data = JSON.stringify(filters);
-  const url = './api/getJobs.php';
+  const url = './api/getJobs.php'
+  const dados = {
+    filtrar: 1,
+    azulejista: filters.azulejista,
+    eletricista: filters.eletricista,
+    hidraulica: filters.hidraulica
+  };
 
-  fetch(url, {
-    method: "POST",
+  fetch(url,{
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: data
+    body: JSON.stringify(dados)
   })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok ' + response.statusText);
-      }
-      return response.json();
-    })
-    .then((json) => {
-      console.log('Success:', json);
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Success:', data);
     })
     .catch((error) => {
       console.error('Error:', error);
     });
 }
+
+const filterButton = document.getElementById("filterButton");
+filterButton.addEventListener("click", function () {
+  console.log('Filter button clicked');
+  console.log('Filters:', filters); // Debugging log
+  getJobs();
+});
+
+function createJob(){
+  const url = './api/createJob.php';
+  const titulo = document.getElementById("titulo").value;
+  const descricao = document.getElementById("descricao").value;
+  const orcamento = document.getElementById("orcamento").value;
+  const tipo = document.getElementById("tipo_servico").value;
+  const status = document.getElementById("status").value;
+  const dataV = document.getElementById("dataValidade").value;
+  const dataC = document.getElementById("dataConclusao").value;
+
+  const dados = {
+    criar: 1,
+    titulo: titulo,
+    descricao: descricao,
+    orcamento: orcamento,
+    tipo: tipo,
+    status: status,
+    dataValidade: dataV,
+    dataConclusao: dataC
+  };
+
+  fetch(url,{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dados)
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Success:', data);
+      if(data.codigo === 1){
+        alert(data.mensagem);
+      } else {
+        alert(data.mensagem);
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+
+}
+
 
 function populateTable(reviews) {
   const tableBody = document.querySelector('#reviewsTable tbody');
@@ -265,5 +299,8 @@ function populateTable(reviews) {
     // Append the row to the table body
     tableBody.appendChild(row);
   });
-}
+};
 
+$(function() {
+  $('.datepicker').datepicker();
+});

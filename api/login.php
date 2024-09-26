@@ -34,6 +34,7 @@ if (isset($dados["acessar"])) {
     if ($registro) {
         $_SESSION["user"] = $registro["nome"];
         $_SESSION["userType"] = $registro["tipo"];
+        $_SESSION["userId"] = $registro["id_usuario"];
         echo json_encode(array('codigo' => 1, 'mensagem' => 'Login efetuado com sucesso!'));
     } else {
         echo json_encode(array('codigo' => 2, 'mensagem' => 'Usuário ou senha inválidos!'));

@@ -54,7 +54,7 @@
         <h3 class="card-title">Olá <?php echo $_SESSION["user"] ?></h3>
 
         <button class="btn btn-primary" id="getUserReviews" onclick="getReviews()">Pegar dados</button>
-        <button class="btn btn-primary" id="getJobs" onclick="getJobs()">Pegar trabalhos</button>
+        <button class="btn btn-primary" id="getJobs">Pegar trabalhos</button>
 
         <table class="table table-striped" id="reviewsTable">
             <thead>
