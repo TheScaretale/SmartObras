@@ -1,3 +1,38 @@
+/**
+ * Este script PHP é responsável por buscar e filtrar serviços de um banco de dados.
+ * 
+ * Funcionalidades:
+ * - Permite requisições de qualquer origem (CORS).
+ * - Aceita métodos POST, GET e OPTIONS.
+ * - Define o tipo de conteúdo da resposta como JSON.
+ * - Inclui um arquivo de conexão com o banco de dados.
+ * - Decodifica dados JSON recebidos via `php://input`.
+ * - Filtra serviços com base nos parâmetros fornecidos (azulejista, eletricista, hidráulica).
+ * - Calcula a média de avaliações e o número de dias passados desde a inclusão do serviço.
+ * - Retorna os serviços filtrados em formato JSON.
+ * 
+ * Parâmetros de entrada:
+ * - `filtrar`: Indica se a filtragem deve ser aplicada.
+ * - `azulejista`: Filtra serviços do tipo azulejista (1).
+ * - `eletricista`: Filtra serviços do tipo eletricista (2).
+ * - `hidraulica`: Filtra serviços do tipo hidráulica (3).
+ * 
+ * Estrutura da resposta JSON:
+ * - `id_servico`: ID do serviço.
+ * - `titulo`: Título do serviço.
+ * - `descricao`: Descrição do serviço.
+ * - `orcamento`: Orçamento do serviço.
+ * - `id_tipo_servico`: ID do tipo de serviço.
+ * - `id_usuario`: ID do usuário que criou o serviço.
+ * - `id_status`: Status do serviço.
+ * - `data_inclusao`: Data de inclusão do serviço.
+ * - `data_validade`: Data de validade do serviço.
+ * - `data_conclusao`: Data de conclusão do serviço.
+ * - `avaliacao`: Média das avaliações do usuário.
+ * - `diasPassados`: Número de dias passados desde a inclusão do serviço.
+ * 
+ * Em caso de erro, retorna um JSON com código 2 e mensagem de erro desconhecido.
+ */
 <?php
 
 header("Access-Control-Allow-Origin: *");

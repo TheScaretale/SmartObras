@@ -1,3 +1,12 @@
+/**
+ * Conexão com o banco de dados utilizando PDO.
+ *
+ * Este script estabelece uma conexão com o banco de dados MySQL utilizando as credenciais
+ * fornecidas no arquivo "config.env". Em caso de falha na conexão, uma mensagem de erro
+ * será exibida.
+ *
+ * @throws PDOException Se ocorrer um erro ao tentar se conectar ao banco de dados.
+ */
 <?php
 include_once "config.env";
 try{

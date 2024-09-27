@@ -1,3 +1,33 @@
+/**
+ * Este script PHP registra um novo usuário no banco de dados.
+ * 
+ * Cabeçalhos HTTP configurados:
+ * - Access-Control-Allow-Origin: *
+ * - Access-Control-Allow-Headers: Content-Type, Authorization
+ * - Access-Control-Allow-Methods: POST, GET, OPTIONS
+ * - Access-Control-Allow-Credentials: true
+ * - Content-Type: application/json; charset=UTF-8
+ * 
+ * O script espera receber um JSON via método POST contendo os seguintes campos:
+ * - cadastrar: booleano para indicar a intenção de cadastro
+ * - nome: string com o nome do usuário
+ * - email: string com o email do usuário
+ * - senha: string com a senha do usuário
+ * - telefone: string com o telefone do usuário
+ * - tipo: string com o tipo de usuário
+ * 
+ * O script realiza as seguintes ações:
+ * 1. Decodifica o JSON recebido.
+ * 2. Verifica se o campo "cadastrar" está presente e é verdadeiro.
+ * 3. Inclui o arquivo de conexão com o banco de dados (conn.php).
+ * 4. Prepara e executa uma consulta SQL para inserir os dados do usuário na tabela "usuario".
+ * 5. Retorna uma resposta JSON indicando o sucesso ou falha do cadastro.
+ * 
+ * Possíveis respostas JSON:
+ * - Sucesso: {"codigo":1, "mensagem":"Usuário cadastrado com sucesso!"}
+ * - Falha: {"codigo":2, "mensagem":"Erro ao cadastrar usuário!"}
+ * - Erro desconhecido: {"codigo":3, "mensagem":"Erro desconhecido"}
+ */
 <?php
 
 header("Access-Control-Allow-Origin: *");
