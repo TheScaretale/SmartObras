@@ -16,9 +16,9 @@
         $data_conclusao = $dados["data_conclusao"];
 
         $sql = "INSERT INTO servico
-            (titulo, descricao, orcamento, id_tipo_servico, id_usuario, id_status, data_inclusao, data_validade, data_conclusao)
+            (titulo, descricao, orcamento, id_tipo_servico, id_usuario, id_status, data_inclusao, data_validade)
             VALUES 
-            (:titulo, :descricao, :orcamento, :id_tipo_servico, :id_usuario, :id_status, NOW(), :data_validade, :data_conclusao)";
+            (:titulo, :descricao, :orcamento, :id_tipo_servico, :id_usuario, :id_status, NOW(), date_add(now(), interval 1 month))";
         $consulta = $banco->prepare($sql);
         $consulta->bindParam(':titulo', $titulo);
         $consulta->bindParam(':descricao', $descricao);
@@ -26,8 +26,6 @@
         $consulta->bindParam(':id_tipo_servico', $id_tipo_servico);
         $consulta->bindParam(':id_usuario', $id_usuario);
         $consulta->bindParam(':id_status', $id_status);
-        $consulta->bindParam(':data_validade', $data_validade);
-        $consulta->bindParam(':data_conclusao', $data_conclusao);
         $consulta->execute();
         
         if($consulta == true){

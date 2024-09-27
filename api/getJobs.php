@@ -10,7 +10,13 @@ include "conn.php";
 
 $dados = json_decode(file_get_contents("php://input"), true);
 if (isset($dados["filtrar"])) {
-    $sql = "SELECT * FROM servico WHERE 1=1";
+    $sql = "SELECT 
+    s.*, 
+    (SELECT ROUND(AVG(ava_nota), 1) 
+        FROM avaliacao 
+        WHERE ava_id_usuario = id_usuario) AS avaliacao,
+        DATEDIFF(CURDATE(), data_inclusao) AS diasPassados
+        FROM servico s WHERE 1=1";
 
     $tipos = "";
     $ctrl = "";
@@ -47,13 +53,15 @@ if (isset($dados["filtrar"])) {
             "id_status" => $registro["id_status"],
             "data_inclusao" => $registro["data_inclusao"],
             "data_validade" => $registro["data_validade"],
-            "data_conclusao" => $registro["data_conclusao"]
+            "data_conclusao" => $registro["data_conclusao"],
+            "avaliacao" => $registro["avaliacao"],
+            "diasPassados" => $registro["diasPassados"]
         );
     }
 
 
     header('Content-Type: application/json');
     echo json_encode($servicos);
-}else{
-    echo json_encode(array('codigo'=>2, 'mensagem'=>'Erro desconhecido'));
+} else {
+    echo json_encode(array('codigo' => 2, 'mensagem' => 'Erro desconhecido'));
 }
