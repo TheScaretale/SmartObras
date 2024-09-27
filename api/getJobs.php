@@ -1,3 +1,4 @@
+<?php
 /**
  * Este script PHP é responsável por buscar e filtrar serviços de um banco de dados.
  * 
@@ -33,7 +34,7 @@
  * 
  * Em caso de erro, retorna um JSON com código 2 e mensagem de erro desconhecido.
  */
-<?php
+
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");

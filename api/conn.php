@@ -1,3 +1,4 @@
+<?php
 /**
  * Conexão com o banco de dados utilizando PDO.
  *
@@ -7,7 +8,7 @@
  *
  * @throws PDOException Se ocorrer um erro ao tentar se conectar ao banco de dados.
  */
-<?php
+
 include_once "config.env";
 try{
     $banco = new PDO("mysql:host=$server;dbname=$db",$user,$passw);

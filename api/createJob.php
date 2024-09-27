@@ -1,3 +1,4 @@
+<?php
 /**
  * Este script cria um novo serviço no banco de dados.
  * 
@@ -34,7 +35,7 @@
  * - A data de validade é definida automaticamente como um mês após a data de inclusão.
  * - O ID do usuário é obtido da sessão atual ($_SESSION["userId"]).
  */
-<?php
+
     header("Access-Control-Allow-Origin: *");
 
     require "conn.php";

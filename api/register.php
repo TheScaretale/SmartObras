@@ -1,3 +1,4 @@
+<?php
 /**
  * Este script PHP registra um novo usuário no banco de dados.
  * 
@@ -28,7 +29,7 @@
  * - Falha: {"codigo":2, "mensagem":"Erro ao cadastrar usuário!"}
  * - Erro desconhecido: {"codigo":3, "mensagem":"Erro desconhecido"}
  */
-<?php
+
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");

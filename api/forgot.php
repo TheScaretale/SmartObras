@@ -1,3 +1,4 @@
+<?php
 /**
  * Este script lida com solicitações de recuperação de senha.
  * 
@@ -23,7 +24,7 @@
  * Dependências:
  * - Conexão com o banco de dados através do arquivo "conn.php".
  */
-<?php
+
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");

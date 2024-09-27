@@ -1,3 +1,4 @@
+<?php
 /**
  * Este script PHP retorna uma lista de usuários com suas respectivas avaliações.
  * 
@@ -24,7 +25,7 @@
  * @package SmartObras
  * @file /home/mikael/Documents/TCC/SmartObras/api/reviews.php
  */
-<?php
+
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");

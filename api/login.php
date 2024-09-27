@@ -1,3 +1,4 @@
+<?php
 /**
  * Arquivo: /home/mikael/Documents/TCC/SmartObras/api/login.php
  * 
@@ -26,7 +27,7 @@
  * - Erro de credenciais: { "codigo": 2, "mensagem": "Usuário ou senha inválidos!" }
  * - Erro desconhecido: { "codigo": 3, "mensagem": "Erro desconhecido" }
  */
-<?php
+
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");

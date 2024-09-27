@@ -1,6 +1,6 @@
 /**
  * Envia dados para uma URL especificada usando o método POST.
- * 
+ *
  * @param {string} url - A URL para onde os dados serão enviados.
  * @param {Object} data - Os dados a serem enviados.
  * @returns {Promise<Object>} - Uma promessa que resolve com a resposta da API em formato JSON.
@@ -12,7 +12,7 @@
 
 /**
  * Função de login que envia os dados para o arquivo login.php.
- * 
+ *
  * @param {Event} event - O evento de submissão do formulário.
  */
 
@@ -38,7 +38,7 @@
 
 /**
  * Filtros para a busca de serviços, selecionados nas páginas de busca de serviços.
- * 
+ *
  * @typedef {Object} Filters
  * @property {number|null} azulejista - Filtro para azulejista.
  * @property {number|null} eletricista - Filtro para eletricista.
@@ -63,13 +63,13 @@
 
 /**
  * Popula a tabela de reviews com os dados fornecidos.
- * 
+ *
  * @param {Array<Object>} reviews - Um array de objetos de review.
  */
 
 /**
  * Cria um elemento de trabalho (job) com base nos dados fornecidos.
- * 
+ *
  * @param {Object} job - Os dados do trabalho.
  * @returns {HTMLElement} - O elemento de trabalho criado.
  */
@@ -103,7 +103,6 @@ document.addEventListener("DOMContentLoaded", function () {
 function login(event) {
   event.preventDefault(); //Evitar erro de CORS
 
-
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
   // Pegando os dados dos campos acima
@@ -116,7 +115,7 @@ function login(event) {
 
   console.log(data); // Log para debug no console, deve sair até o final do trabalho
 
-  if (email == "" || password == "") { 
+  if (email == "" || password == "") {
     alert("Por favor, preencha todos os campos");
     return false;
   } // Verificação dos inputs acima
@@ -432,15 +431,17 @@ function getJobs() {
     .then((data) => {
       console.log("Success:", data);
       const container = document.getElementById("jobsContainer"); // Replace with your container ID
-      container.innerHTML = ""; // Clear existing content
+      if (container) {
+        container.innerHTML = ""; // Clear existing content
 
-      if (Array.isArray(data)) {
-        data.forEach((job) => {
-          const jobElement = createJobElement(job);
-          container.appendChild(jobElement);
-        });
-      } else {
-        console.error("Expected an array but got:", data);
+        if (Array.isArray(data)) {
+          data.forEach((job) => {
+            const jobElement = createJobElement(job);
+            container.appendChild(jobElement);
+          });
+        } else {
+          console.error("Expected an array but got:", data);
+        }
       }
     })
     .catch((error) => {
@@ -449,4 +450,6 @@ function getJobs() {
 }
 
 // Call the function to populate jobs
-getJobs();
+if (window.location.pathname === "/trabalhar.php") {
+  getJobs();
+}
