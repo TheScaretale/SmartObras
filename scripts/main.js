@@ -1,3 +1,83 @@
+/**
+ * Envia dados para uma URL especificada usando o método POST.
+ * 
+ * @param {string} url - A URL para onde os dados serão enviados.
+ * @param {Object} data - Os dados a serem enviados.
+ * @returns {Promise<Object>} - Uma promessa que resolve com a resposta da API em formato JSON.
+ */
+
+/**
+ * Adiciona um listener ao formulário de login para tratar o evento de submissão.
+ */
+
+/**
+ * Função de login que envia os dados para o arquivo login.php.
+ * 
+ * @param {Event} event - O evento de submissão do formulário.
+ */
+
+/**
+ * Adiciona um listener ao formulário de recuperação de senha para tratar o evento de submissão.
+ */
+
+/**
+ * Função de recuperação de senha que envia os dados para o arquivo forgot.php.
+ */
+
+/**
+ * Adiciona um listener ao formulário de cadastro para tratar o evento de submissão.
+ */
+
+/**
+ * Função de cadastro que envia os dados para o arquivo register.php.
+ */
+
+/**
+ * Busca as reviews do arquivo reviews.php e chama a função populateTable.
+ */
+
+/**
+ * Filtros para a busca de serviços, selecionados nas páginas de busca de serviços.
+ * 
+ * @typedef {Object} Filters
+ * @property {number|null} azulejista - Filtro para azulejista.
+ * @property {number|null} eletricista - Filtro para eletricista.
+ * @property {number|null} hidraulica - Filtro para hidráulica.
+ */
+
+/**
+ * Adiciona um listener ao checkbox de eletricista para atualizar o filtro.
+ */
+
+/**
+ * Adiciona um listener ao checkbox de azulejista para atualizar o filtro.
+ */
+
+/**
+ * Adiciona um listener ao checkbox de hidráulica para atualizar o filtro.
+ */
+
+/**
+ * Adiciona um listener ao botão de filtro de serviços.
+ */
+
+/**
+ * Popula a tabela de reviews com os dados fornecidos.
+ * 
+ * @param {Array<Object>} reviews - Um array de objetos de review.
+ */
+
+/**
+ * Cria um elemento de trabalho (job) com base nos dados fornecidos.
+ * 
+ * @param {Object} job - Os dados do trabalho.
+ * @returns {HTMLElement} - O elemento de trabalho criado.
+ */
+
+/**
+ * Busca os trabalhos filtrados do arquivo getJobs.php e os exibe na página.
+ */
+
 function postData(url = "", data = {}) {
   return fetch(url, {
     method: "POST",
