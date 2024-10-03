@@ -6,6 +6,6 @@
         <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
         <div id="emailHelp" class="form-text">Nunca iremos compartilhar essa informação com alguém.</div>
     </div>
-    <button type="submit" class="btn btn-primary" id="btnRecuperar">Recuperar</button>
+    <button type="submit" class="btn btn-primary" id="btnRecuperar" onclick="forgotPass()">Recuperar</button>
 </form>
 <?php include "footer.php"; ?>

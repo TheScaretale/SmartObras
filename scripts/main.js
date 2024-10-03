@@ -93,12 +93,6 @@ function postData(url = "", data = {}) {
     });
 } // Não usar essa função, estamos utilizando fetch diretamente
 
-document.addEventListener("DOMContentLoaded", function () {
-  const loginForm = document.getElementById("loginForm");
-  if (loginForm) {
-    loginForm.addEventListener("submit", login);
-  }
-}); //Carregar o botão de login e garantir que ele funcione
 
 function login(event) {
   event.preventDefault(); //Evitar erro de CORS
@@ -135,12 +129,7 @@ function login(event) {
   }
 } // Função de login que envia os dados para o arquivo login.php
 
-document.addEventListener("DOMContentLoaded", function () {
-  const forgotPass = document.getElementById("forgotPass");
-  if (forgotPass) {
-    forgotPass.addEventListener("submit", forgotPass);
-  }
-}); //Carregar o botão de esqueci a senha e garantir que ele funcione
+
 
 function forgotPass() {
   const email = document.getElementById("email").value;
@@ -170,12 +159,6 @@ function forgotPass() {
   }
 } // Função de esqueci a senha que envia os dados para o arquivo forgot.php
 
-document.addEventListener("DOMContentLoaded", function () {
-  const registerForm = document.getElementById("registerForm");
-  if (registerForm) {
-    registerForm.addEventListener("submit", register);
-  }
-}); //Carregar o botão de cadastro e garantir que ele funcione
 
 function register() {
   const nome = document.getElementById("nome").value;
@@ -288,6 +271,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 }); // Instanciação do checkbox de hidraulica
+
+// Slider do filtro:
+document.addEventListener("DOMContentLoaded", function () {
+  fetch("./api/getJobs.php").then((response) => response.json())
+  .then((data) => {
+    const valorMax = data.maxValue
+    const valorMin = data.minValue
+    const input = document.getElementById("slideValor")
+    input.min = valorMin
+    input.max = valorMax
+    input.value = valorMin
+    input.nextElementSibling.textContent = valorMin
+  })
+  .catch((error) => console.error("Erro ao pegar valores:", error));
+});
 
 const filterButton = document.getElementById("filterButton");
 if (filterButton) {
@@ -450,6 +448,4 @@ function getJobs() {
 }
 
 // Call the function to populate jobs
-if (window.location.pathname === "/trabalhar.php") {
-  getJobs();
-}
+getJobs();

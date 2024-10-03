@@ -44,6 +44,9 @@ if(isset($_GET["logout"])) {
                         <li class="nav-item">
                             <a href="criarTrabalho.php" class="nav-link">Criar trabalho</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="encontrartrabalho.php" class="nav-link">Encontrar trabalho</a>
+                        </li>
                     </ul>
                     <div class="d-flex">
                         <a href="index.php?logout" class="btn btn-outline-success" type="submit">Sair</a>

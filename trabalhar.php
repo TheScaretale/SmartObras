@@ -36,7 +36,7 @@ include "navbar.php";
                 <br>
                 <div class="price" id="precoOrcamento">
                     <p class="fw-bold">Preço do Orçamento</p>
-                    <input type="range" class="form-range" id="rangeValues" min="0" max="100" value="50" oninput="this.nextElementSibling.value = this.value">
+                    <input id="sliderValor" type="range" class="form-range" id="rangeValues" min="0" max="100" value="50" oninput="this.nextElementSibling.value = this.value">
                     <output>50</output>
                 </div>
                 <br>
