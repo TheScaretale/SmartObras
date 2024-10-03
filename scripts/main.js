@@ -93,6 +93,12 @@ function postData(url = "", data = {}) {
     });
 } // Não usar essa função, estamos utilizando fetch diretamente
 
+document.addEventListener("DOMContentLoaded", function () {
+  const loginForm = document.getElementById("loginForm");
+  if (loginForm) {
+    loginForm.addEventListener("submit", login);
+  }
+}); //Carregar o botão de login e garantir que ele funcione
 
 function login(event) {
   event.preventDefault(); //Evitar erro de CORS
