@@ -10,6 +10,7 @@
  */
 
 include_once "config.env";
+session_start();
 try{
     $banco = new PDO("mysql:host=$server;dbname=$db",$user,$passw);
     $banco->exec("set names utf8");

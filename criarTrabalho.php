@@ -26,14 +26,6 @@ include "navbar.php";
             <option value="2">Eletricista</option>
             <option value="3">hidraulica</option>
         </select>
-        <label class="form-label">Qual o status do pedido</label>
-        <select class="form-select form-select-sm" aria-label="Small select example" id="status">
-            <option selected>Selecione qual o status do seu pedido</option>
-            <option value="1">Em Andamento</option>
-            <option value="2">Fechado</option>
-            <option value="3">Aberto</option>
-            <option value="4">Concluido</option>
-        </select>
         <div class="my-3">
             <button class="btn btn-primary" id="criarJob" onclick="createJob()">Criar trabalho</button>
         </div>

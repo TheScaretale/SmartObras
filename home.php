@@ -9,7 +9,6 @@
                 <?php
                 $user = $_SESSION["user"];
                 $nomeSobrenome = explode(" ", $user);
-
                 $nome = $nomeSobrenome[0];
                 $sobrenome = isset($nomeSobrenome[1]) ? $nomeSobrenome[1] : '';
                 ?>
@@ -52,13 +51,24 @@
 
     <div class="col-md-8 mt-4">
         <h3 class="card-title">Olá <?php echo $_SESSION["user"] ?></h3>
+        <?php
+            if($_SESSION["userType"] == "P"){
+                ?>
+                <h5>Aqui estão os trabalhos a realizar:</h5>
+                <div class="list-group" id="profileJobs">
 
-        <button class="btn btn-primary" id="getUserReviews" onclick="getJobsProfile()">Pegar dados</button>
-        <button class="btn btn-primary" id="getJobs">Pegar trabalhos</button>
+                </div>
+                <?php
+            }else{
+                ?>
+                <h5>Aqui estão seus trabalhos que você criou:</h5>
+                <div class="list-group" id="profileJobsCliente">
 
-        <div id="profileJobs">
-
-        </div>
+                </div>
+                <?php
+            }
+        ?>
+        
 
     </div>
 </div>

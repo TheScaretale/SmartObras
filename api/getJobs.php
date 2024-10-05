@@ -46,8 +46,14 @@ include "conn.php";
 
 
 $dados = json_decode(file_get_contents("php://input"), true);
-if (isset($dados["filtrar"])) {
-    $sql = "SELECT 
+if (isset($dados["source"])) {
+    $source = $dados["source"];
+    $sql = "";
+    $params = [];
+
+    switch ($source) {
+        case 'filtrar':
+            $sql = "SELECT 
     s.*, 
     (SELECT ROUND(AVG(ava_nota), 1) 
         FROM avaliacao 
@@ -55,26 +61,44 @@ if (isset($dados["filtrar"])) {
         DATEDIFF(CURDATE(), data_inclusao) AS diasPassados
         FROM servico s WHERE 1=1";
 
-    $tipos = "";
-    $ctrl = "";
-    if (isset($dados["azulejista"]) && $dados["azulejista"] == 1) {
-        $tipos .= $ctrl . "1";
-        $ctrl = ",";
+            $tipos = "";
+            $ctrl = "";
+            if (isset($dados["azulejista"]) && $dados["azulejista"] == 1) {
+                $tipos .= $ctrl . "1";
+                $ctrl = ",";
+            }
+            if (isset($dados["eletricista"]) && $dados["eletricista"] == 2) {
+                $tipos .= $ctrl . "2";
+                $ctrl = ",";
+            }
+            if (isset($dados["hidraulica"]) && $dados["hidraulica"] == 3) {
+                $tipos .= $ctrl . "3";
+                $ctrl = ",";
+            }
+            if ($tipos <> "") {
+                $sql .= " AND id_tipo_servico IN ($tipos)";
+            }
+            break;
+        case 'perfil':
+            $usuario = $_SESSION["userId"];
+            $sql = "SELECT 
+                        s.*, 
+                        (SELECT ROUND(AVG(ava_nota), 1) 
+                         FROM avaliacao 
+                         WHERE ava_id_usuario = 4) AS avaliacao,
+                        DATEDIFF(CURDATE(), '2024-09-18') AS dias_desde_servico,
+                        (SELECT MAX(orcamento) FROM servico s) as valorMax,
+                        (SELECT MIN(orcamento) FROM servico s) as valorMin
+                        FROM servico s
+                        where s.id_usuario = :usuario";
+            $params[':usuario'] = $usuario;
+            break;
+        default:
+            echo json_encode(array('codigo' => 3, 'mensagem' => 'Souce desconhecido'));
+            break;
     }
-    if (isset($dados["eletricista"]) && $dados["eletricista"] == 2) {
-        $tipos .= $ctrl . "2";
-        $ctrl = ",";
-    }
-    if (isset($dados["hidraulica"]) && $dados["hidraulica"] == 3) {
-        $tipos .= $ctrl . "3";
-        $ctrl = ",";
-    }
-    if ($tipos <> "") {
-        $sql .= " AND id_tipo_servico IN ($tipos)";
-    }
-
     $consulta = $banco->prepare($sql);
-    $consulta->execute();
+    $consulta->execute($params);
 
     $servicos = array();
 

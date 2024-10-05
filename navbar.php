@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_GET["logout"])) {
+if (isset($_GET["logout"])) {
     session_unset();
     session_destroy();
 }
@@ -8,6 +8,7 @@ if(isset($_GET["logout"])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,9 +18,10 @@ if(isset($_GET["logout"])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-    
+
 
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
@@ -50,28 +52,26 @@ if(isset($_GET["logout"])) {
                         <li class="nav-item">
                             <a href="sobre.php" class="nav-link">Sobre</a>
                         </li>
-                    </ul>
-                    <div class="d-flex">
-                        <a href="index.php?logout" class="btn btn-outline-success" type="submit">Sair</a>
-                    </div>
+                </ul>
+                <div class="d-flex">
+                    <a href="index.php?logout" class="btn btn-outline-success" type="submit">Sair</a>
+                </div>
 
-                    <?php
+            <?php
                     } else {
-                    ?>
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a href="cadastro.php" class="nav-link">Quero contratar</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="cadastro.php" class="nav-link">Quero trabalhar</a>
-                        </li>
-                        
-                    <?php
-                    }
-                    ?>
-                    </ul>
+            ?>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="cadastro.php" class="nav-link">Quero contratar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="cadastro.php" class="nav-link">Quero trabalhar</a>
+                    </li>
 
-                
+                <?php
+                    }
+                ?>
+                </ul>
             </div>
         </div>
     </nav>

@@ -1,83 +1,3 @@
-/**
- * Envia dados para uma URL especificada usando o método POST.
- *
- * @param {string} url - A URL para onde os dados serão enviados.
- * @param {Object} data - Os dados a serem enviados.
- * @returns {Promise<Object>} - Uma promessa que resolve com a resposta da API em formato JSON.
- */
-
-/**
- * Adiciona um listener ao formulário de login para tratar o evento de submissão.
- */
-
-/**
- * Função de login que envia os dados para o arquivo login.php.
- *
- * @param {Event} event - O evento de submissão do formulário.
- */
-
-/**
- * Adiciona um listener ao formulário de recuperação de senha para tratar o evento de submissão.
- */
-
-/**
- * Função de recuperação de senha que envia os dados para o arquivo forgot.php.
- */
-
-/**
- * Adiciona um listener ao formulário de cadastro para tratar o evento de submissão.
- */
-
-/**
- * Função de cadastro que envia os dados para o arquivo register.php.
- */
-
-/**
- * Busca as reviews do arquivo reviews.php e chama a função populateTable.
- */
-
-/**
- * Filtros para a busca de serviços, selecionados nas páginas de busca de serviços.
- *
- * @typedef {Object} Filters
- * @property {number|null} azulejista - Filtro para azulejista.
- * @property {number|null} eletricista - Filtro para eletricista.
- * @property {number|null} hidraulica - Filtro para hidráulica.
- */
-
-/**
- * Adiciona um listener ao checkbox de eletricista para atualizar o filtro.
- */
-
-/**
- * Adiciona um listener ao checkbox de azulejista para atualizar o filtro.
- */
-
-/**
- * Adiciona um listener ao checkbox de hidráulica para atualizar o filtro.
- */
-
-/**
- * Adiciona um listener ao botão de filtro de serviços.
- */
-
-/**
- * Popula a tabela de reviews com os dados fornecidos.
- *
- * @param {Array<Object>} reviews - Um array de objetos de review.
- */
-
-/**
- * Cria um elemento de trabalho (job) com base nos dados fornecidos.
- *
- * @param {Object} job - Os dados do trabalho.
- * @returns {HTMLElement} - O elemento de trabalho criado.
- */
-
-/**
- * Busca os trabalhos filtrados do arquivo getJobs.php e os exibe na página.
- */
-
 function postData(url = "", data = {}) {
   return fetch(url, {
     method: "POST",
@@ -413,6 +333,11 @@ function getJobs() {
     });
 }
 
+const jobsContainer = document.getElementById("jobsContainer");
+if (jobsContainer) {
+  getJobs();
+} // Página de busca de serviços
+
 function getJobsProfile() {
   const url = "./api/getJobs2.php";
   const dados = {
@@ -446,4 +371,86 @@ function getJobsProfile() {
     .catch((error) => {
       console.error("Error:", error);
     });
+}
+
+function getJobsProfile2() {
+  const url = "./api/getJobs.php";
+  const dados = {
+    source: "perfil",
+  };
+
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dados),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      const container = document.getElementById("profileJobsCliente"); // Replace with your container ID
+      if (container) {
+        container.innerHTML = ""; // Clear existing content
+
+        if (Array.isArray(data)) {
+          data.forEach((job) => {
+            const jobElement = createJobElement(job);
+            container.appendChild(jobElement);
+          });
+        } else {
+          console.error("Expected an array but got:", data);
+        }
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+const profileJobs = document.getElementById("profileJobs");
+if (profileJobs) {
+  getJobsProfile();
+} // Página de perfil para profissional
+
+const profileJobs2 = document.getElementById("profileJobsCliente");
+if (profileJobs2) {
+  getJobsProfile2();
+}//
+
+function createJob(){
+  const titulo = document.getElementById("titulo").value;
+  const descricao = document.getElementById("descricao").value;
+  const orcamento = document.getElementById("orcamento").value;
+  const tipoServico = document.getElementById("tipo_servico").value;
+  const data = {
+    criar: 1,
+    titulo: titulo,
+    descricao: descricao,
+    orcamento: orcamento,
+    id_tipo_servico: tipoServico,
+  };
+  console.log(data);
+
+  if (titulo == "" || descricao == "" || orcamento == "") {
+    alert("Por favor, preencha todos os campos");
+    return false;
+  } else {
+    fetch("./api/createJob.php", {
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body: JSON.stringify(data),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      if(data.codigo === 1){
+        alert(data.mensagem);
+      }else{
+        alert(data.mensagem);
+      }
+    })
+  }
 }

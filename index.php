@@ -1,11 +1,10 @@
-<a?php
+<?php
     session_start();
     if (isset($_GET["logout"])) {
-    session_unset();
-    session_destroy();
+        session_unset();
+        session_destroy();
     }
-    ?>
-
+?>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -30,17 +29,46 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="conteudoNavbar">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <?php
+                    if (!empty($_SESSION["user"])) {
+                    ?>
+
                         <li class="nav-item">
-                            <a href="cadastro.php" class="nav-link">Quero contratar</a>
+                            <a href="trabalhar.php" class="nav-link">Encontre trabalho</a>
                         </li>
                         <li class="nav-item">
-                            <a href="cadastro.php" class="nav-link">Quero trabalhar</a>
+                            <a href="contratar.php" class="nav-link">Encontre profissionais</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="criarTrabalho.php" class="nav-link">Criar trabalho</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="encontrartrabalho.php" class="nav-link">Encontrar trabalho</a>
                         </li>
                         <li class="nav-item">
                             <a href="sobre.php" class="nav-link">Sobre</a>
                         </li>
-                    </ul>
+                </ul>
+                <div class="d-flex">
+                    <a href="index.php?logout" class="btn btn-outline-success" type="submit">Sair</a>
+                </div>
+
+            <?php
+                    } else {
+            ?>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a href="cadastro.php" class="nav-link">Quero contratar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="cadastro.php" class="nav-link">Quero trabalhar</a>
+                    </li>
+
+                <?php
+                    }
+                ?>
+                </ul>
                 </div>
             </div>
         </nav>

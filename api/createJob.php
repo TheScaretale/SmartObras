@@ -48,21 +48,17 @@
         $orcamento = $dados["orcamento"];
         $id_tipo_servico = $dados["id_tipo_servico"];
         $id_usuario = $_SESSION["userId"];
-        $id_status = $dados["id_status"];
-        $data_validade = $dados["data_validade"];
-        $data_conclusao = $dados["data_conclusao"];
 
         $sql = "INSERT INTO servico
             (titulo, descricao, orcamento, id_tipo_servico, id_usuario, id_status, data_inclusao, data_validade)
             VALUES 
-            (:titulo, :descricao, :orcamento, :id_tipo_servico, :id_usuario, :id_status, NOW(), date_add(now(), interval 1 month))";
+            (:titulo, :descricao, :orcamento, :id_tipo_servico, :id_usuario, 1, NOW(), date_add(now(), interval 1 month))";
         $consulta = $banco->prepare($sql);
         $consulta->bindParam(':titulo', $titulo);
         $consulta->bindParam(':descricao', $descricao);
         $consulta->bindParam(':orcamento', $orcamento);
         $consulta->bindParam(':id_tipo_servico', $id_tipo_servico);
         $consulta->bindParam(':id_usuario', $id_usuario);
-        $consulta->bindParam(':id_status', $id_status);
         $consulta->execute();
         
         if($consulta == true){
