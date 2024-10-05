@@ -279,19 +279,6 @@ document.addEventListener("DOMContentLoaded", function () {
 }); // Instanciação do checkbox de hidraulica
 
 // Slider do filtro:
-document.addEventListener("DOMContentLoaded", function () {
-  fetch("./api/getJobs.php").then((response) => response.json())
-  .then((data) => {
-    const valorMax = data.maxValue
-    const valorMin = data.minValue
-    const input = document.getElementById("slideValor")
-    input.min = valorMin
-    input.max = valorMax
-    input.value = valorMin
-    input.nextElementSibling.textContent = valorMin
-  })
-  .catch((error) => console.error("Erro ao pegar valores:", error));
-});
 
 const filterButton = document.getElementById("filterButton");
 if (filterButton) {
@@ -301,33 +288,6 @@ if (filterButton) {
     getJobs();
   });
 } // Botão de filtrar serviços
-
-function populateTable(reviews) {
-  const tableBody = document.querySelector("#reviewsTable tbody");
-
-  // Clear existing table rows
-  tableBody.innerHTML = "";
-
-  // Iterate over the reviews array and create table rows
-  reviews.forEach((review, index) => {
-    const row = document.createElement("tr");
-
-    const nameCell = document.createElement("td");
-    nameCell.textContent = review.nome; // Assuming "nome" is the user's name
-    row.appendChild(nameCell);
-
-    const reviewCell = document.createElement("td");
-    reviewCell.textContent = review.comentario; // Assuming "comentario" is the review text
-    row.appendChild(reviewCell);
-
-    const ratingCell = document.createElement("td");
-    ratingCell.textContent = review.media; // Assuming "media" is the rating
-    row.appendChild(ratingCell);
-
-    // Append the row to the table body
-    tableBody.appendChild(row);
-  });
-} // Função que popula a tabela de reviews
 
 function createJobElement(job) {
   const a = document.createElement("a");

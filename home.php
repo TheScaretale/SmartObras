@@ -56,7 +56,7 @@
         <button class="btn btn-primary" id="getUserReviews" onclick="getJobsProfile()">Pegar dados</button>
         <button class="btn btn-primary" id="getJobs">Pegar trabalhos</button>
 
-        <div class="profileJobs">
+        <div id="profileJobs">
 
         </div>
 
