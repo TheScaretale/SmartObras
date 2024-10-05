@@ -453,5 +453,37 @@ function getJobs() {
     });
 }
 
-// Call the function to populate jobs
-getJobs();
+function getJobsProfile() {
+  const url = "./api/getJobs2.php";
+  const dados = {
+    getjobs: 1,
+  };
+
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dados),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      const container = document.getElementById("profileJobs"); // Replace with your container ID
+      if (container) {
+        container.innerHTML = ""; // Clear existing content
+
+        if (Array.isArray(data)) {
+          data.forEach((job) => {
+            const jobElement = createJobElement(job);
+            container.appendChild(jobElement);
+          });
+        } else {
+          console.error("Expected an array but got:", data);
+        }
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}

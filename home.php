@@ -53,21 +53,12 @@
     <div class="col-md-8 mt-4">
         <h3 class="card-title">Olá <?php echo $_SESSION["user"] ?></h3>
 
-        <button class="btn btn-primary" id="getUserReviews" onclick="getReviews()">Pegar dados</button>
+        <button class="btn btn-primary" id="getUserReviews" onclick="getJobsProfile()">Pegar dados</button>
         <button class="btn btn-primary" id="getJobs">Pegar trabalhos</button>
 
-        <table class="table table-striped" id="reviewsTable">
-            <thead>
-                <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Comentário</th>
-                    <th scope="col">Média</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Populado pelo javascript -->
-            </tbody>
-        </table>
+        <div class="profileJobs">
+
+        </div>
 
     </div>
 </div>

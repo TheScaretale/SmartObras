@@ -23,7 +23,7 @@ if(isset($_GET["logout"])) {
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a href="" class="navbar-brand">
+            <a href="home.php" class="navbar-brand">
                 <img src="assets/logo.png" alt="" width="150" height="50">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#conteudoNavbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,6 +46,9 @@ if(isset($_GET["logout"])) {
                         </li>
                         <li class="nav-item">
                             <a href="encontrartrabalho.php" class="nav-link">Encontrar trabalho</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="sobre.php" class="nav-link">Sobre</a>
                         </li>
                     </ul>
                     <div class="d-flex">

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Este script PHP é responsável por buscar e filtrar serviços de um banco de dados.
  * 

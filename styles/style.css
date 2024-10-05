@@ -12,3 +12,25 @@
 body{
     background-color: var(--fundo) !important;
 }
+
+.botaoo {
+    color: black;
+    width: 150px;
+    border: 2px solid #f27c05;
+    padding: 5px 24px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease; 
+    border-radius: 8px;
+}
+
+.botaoo:hover {
+    background-color: #f25405 ;
+    color: white;
+    transform: scale(1.1); 
+}
+
+.botaoo:active {
+    transform: scale(0.95); 
+}
