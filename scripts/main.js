@@ -1,3 +1,17 @@
+const chatBtn = document.getElementById("chat-button");
+if (chatBtn) {
+  document.getElementById("chat-button").addEventListener("click", function() {
+    var chatWindow = document.getElementById("chat-window");
+    // Alterna entre abrir e fechar o chat
+    if (chatWindow.style.display === "none" || chatWindow.style.display === "") {
+        chatWindow.style.display = "block";
+    } else {
+        chatWindow.style.display = "none";
+    }
+});
+}
+
+
 function postData(url = "", data = {}) {
   return fetch(url, {
     method: "POST",
@@ -514,7 +528,10 @@ if (jobDetails) {
 }
 
 
-function fillJobDetails(jobData){
+function fillJobDetails(jobData) {
+  const jobDetails = document.getElementById("jobDetails");
+  jobDetails.innerHTML = ""; // Clear existing content
+
   const divRow = document.createElement("div");
   divRow.className = "row";
 
@@ -542,7 +559,8 @@ function fillJobDetails(jobData){
 
   const divCol2 = document.createElement("div");
   divCol2.className = "col-md-4";
-  
+  divRow.appendChild(divCol2);
+
   const divCard2 = document.createElement("div");
   divCard2.className = "card";
   divCol2.appendChild(divCard2);
@@ -551,15 +569,69 @@ function fillJobDetails(jobData){
   divCardBody2.className = "card-body";
   divCard2.appendChild(divCardBody2);
 
+  
+
   const h5_2 = document.createElement("h5");
-  h5_2.className = "card-title";
-  h5_2.textContent = "Preço máximo: ";
+  h5_2.className = "card-title text-end";
+  h5_2.textContent = `Orçamento do cliente: R$ ${jobData.orcamento}`;
   divCardBody2.appendChild(h5_2);
 
-  const p_2 = document.createElement("p");
-  p_2.className = "card-text";
-  p_2.textContent = jobData.orcamento;
-  divCardBody2.appendChild(p_2);
+  /* const p_2 = document.createElement("p");
+  p_2.className = "text-end";
+  p_2.textContent = `R$ ${jobData.orcamento}`;
+  divCardBody2.appendChild(p_2); */
 
-  divRow.appendChild(divCol2);
-  }
+/*   const backBtn = document.createElement("button")
+  backBtn.className = "btn btn-primary";
+  backBtn.textContent = "Voltar";
+  backBtn.onclick = function () {
+    window.history.back();
+  };
+  divCardBody2.appendChild(backBtn); */
+
+  const dGrid = document.createElement("div");
+  dGrid.className = "d-grid gap-2";
+  divCardBody2.appendChild(dGrid);
+
+  const bidBtn = document.createElement("button");
+  bidBtn.className = "btn btn-primary";
+  bidBtn.textContent = "Fazer proposta uma proposta";
+  dGrid.appendChild(bidBtn);
+
+  const hr = document.createElement("hr")
+  divCardBody2.appendChild(hr);
+
+  const divFlex = document.createElement("div");
+  divFlex.className = "d-flex justify-content-between align-items-center mt-3";
+  divCardBody2.appendChild(divFlex);
+
+  divCard3 = document.createElement("div");
+  divCard3.className = "card";
+  divCardBody2.appendChild(divCard3);
+
+  const internalCard = document.createElement("div");
+  internalCard.className = "card-body";
+  divCard3.appendChild(internalCard);
+
+  const p_3 = document.createElement("p");
+  p_3.className = "card-text";
+  p_3.textContent = `Quem criou este trabalho: Nome Teste`;
+  internalCard.appendChild(p_3);
+
+  const hr2 = document.createElement("hr")
+  divCard2.appendChild(hr2)
+
+  const atividades = document.createElement("h6")
+  atividades.className = "card-title text-center";
+  atividades.textContent = "Total de propostas neste trabalho: <a definir>";
+
+  
+  jobDetails.appendChild(divRow);
+}
+
+const btnVoltar = getElementById("btnVoltar");
+if (btnVoltar) {
+  btnVoltar.addEventListener("click", function () {
+    window.history.back();
+  });
+}
