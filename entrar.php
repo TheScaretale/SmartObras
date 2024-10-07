@@ -1,6 +1,6 @@
 <?php include "navbar.php"; ?>
 <div class="d-flex justify-content-center  align-items-center">
-  <div class="card">
+  <div class="card mt-4">
     <form id="loginForm">
       <div class="card-body text-center">
         <div class="mb-3">
@@ -17,7 +17,7 @@
           <div class="form-text" id="emailHelp"><a href="esquecisenha.php">Esqueceu a senha?</a></div>
           <label class="form-check-label" for="checkRemember">Lembre-me</label>
         </div>
-        <button type="submit" class="botaoo" id="btnEntrar" onclick="">Entrar</button>
+        <a type="submit" class="botaoo" id="btnEntrar" onclick="">Entrar</a>
       </div>
   </div>
   </form>
