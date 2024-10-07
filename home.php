@@ -21,11 +21,11 @@
                         <?php
                         if ($_SESSION["userType"] == "P") {
                             ?>
-                            <a class="btn btn-primary" id="getUserReviews" href="trabalhar.php">Encontrar Trabalho</a>
+                            <a class="btn btn-primary" id="findJobs" href="trabalhar.php">Encontrar Trabalho</a>
                             <?php
                         } else {
                             ?>
-                            <a class="btn btn-primary" id="getUserReviews" href="contratar.php">Criar trabalho</a>
+                            <a class="btn btn-primary" id="createJobs" href="contratar.php">Criar trabalho</a>
                             <?php
                         } ?>
                     </div>

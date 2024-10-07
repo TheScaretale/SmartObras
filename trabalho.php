@@ -1,14 +1,14 @@
 <?php
 include "navbar.php";
 ?>
-<div class="container mt-5">
+<div class="container mt-5" id="jobDetails">
     <div class="row">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <h5>Sobre este serviço</h5>
-                    <p>Azuleijo no Banheiro</p>
-                    <h6>Descrição do serviço</h6>
+                    <h5>Lorem ipsum dolor</h5>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, dolorem?</p>
+                    <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam officiis non delectus sapiente rem, facilis at nesciunt aperiam veritatis animi vitae maxime quae nobis libero in rerum earum doloribus? Perferendis.</h6>
                     <p>Colocar azuleijo no banheiro</p>
                 </div>
             </div>

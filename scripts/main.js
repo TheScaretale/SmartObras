@@ -211,7 +211,7 @@ if (filterButton) {
 
 function createJobElement(job) {
   const a = document.createElement("a");
-  a.href = "#";
+  a.href = "trabalho.php?&id_servico=" + job.id_servico;
   a.className = "list-group-item list-group-item-action d-flex gap-3 py-3";
   a.setAttribute("aria-current", "true");
 
@@ -229,6 +229,11 @@ function createJobElement(job) {
 
   const divContent = document.createElement("div");
   divMain.appendChild(divContent);
+
+  const jobId = document.createElement("input");
+  jobId.type = "hidden";
+  jobId.value = job.id_servico;
+  divContent.appendChild(jobId);
 
   const h6 = document.createElement("h6");
   h6.className = "mb-0";
@@ -298,7 +303,7 @@ function createJobElement(job) {
 function getJobs() {
   const url = "./api/getJobs.php";
   const dados = {
-    filtrar: 1,
+    source: "filtrar",
     azulejista: filters.azulejista,
     eletricista: filters.eletricista,
     hidraulica: filters.hidraulica,
@@ -454,3 +459,107 @@ function createJob(){
     })
   }
 }
+
+function getURLJob(){
+
+  const urlGET = window.location.search.substring(1).split("&");
+  let $_GET = {};
+  for (let i = 0; i < urlGET.length; i++){
+    let temp = urlGET[i].split("=");
+    $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
+  }
+
+  return $_GET["id_servico"];
+}
+
+function getJobById(id_servico) {
+  const url = "./api/jobDetailsById.php";
+  const dados = { getId: id_servico };
+
+  return fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dados),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.codigo && data.codigo !== 1) {
+        console.error("Error:", data.mensagem);
+        return null;
+      } else {
+        console.log("Success:", data);
+        return data;
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      return null;
+    });
+}
+
+const jobDetails = document.getElementById("jobDetails");
+if (jobDetails) {
+  const id_servico = getURLJob();
+  getJobById(id_servico).then((jobData) => {
+    if (jobData) {
+      fillJobDetails(jobData);
+    } else {
+      console.error("Trabalho não encontrado para o id: ", id_servico);
+    }
+  });
+} else {
+  console.log("ID jobDetails não encontrado"); // Página de detalhes do serviço,
+}
+
+
+function fillJobDetails(jobData){
+  const divRow = document.createElement("div");
+  divRow.className = "row";
+
+  const divCol = document.createElement("div");
+  divCol.className = "col-md-8";
+  divRow.appendChild(divCol);
+
+  const divCard = document.createElement("div");
+  divCard.className = "card";
+  divCol.appendChild(divCard);
+
+  const divCardBody = document.createElement("div");
+  divCardBody.className = "card-body";
+  divCard.appendChild(divCardBody);
+
+  const h5 = document.createElement("h5");
+  h5.className = "card-title";
+  h5.textContent = jobData.titulo;
+  divCardBody.appendChild(h5);
+
+  const p = document.createElement("p");
+  p.className = "card-text";
+  p.textContent = jobData.descricao;
+  divCardBody.appendChild(p);
+
+  const divCol2 = document.createElement("div");
+  divCol2.className = "col-md-4";
+  
+  const divCard2 = document.createElement("div");
+  divCard2.className = "card";
+  divCol2.appendChild(divCard2);
+
+  const divCardBody2 = document.createElement("div");
+  divCardBody2.className = "card-body";
+  divCard2.appendChild(divCardBody2);
+
+  const h5_2 = document.createElement("h5");
+  h5_2.className = "card-title";
+  h5_2.textContent = "Preço máximo: ";
+  divCardBody2.appendChild(h5_2);
+
+  const p_2 = document.createElement("p");
+  p_2.className = "card-text";
+  p_2.textContent = jobData.orcamento;
+  divCardBody2.appendChild(p_2);
+
+  divRow.appendChild(divCol2);
+  }
