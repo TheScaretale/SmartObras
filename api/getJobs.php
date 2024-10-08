@@ -86,7 +86,7 @@ if (isset($dados["source"])) {
                         (SELECT ROUND(AVG(ava_nota), 1) 
                          FROM avaliacao 
                          WHERE ava_id_usuario = 4) AS avaliacao,
-                        DATEDIFF(CURDATE(), '2024-09-18') AS dias_desde_servico,
+                        DATEDIFF(CURDATE(), '2024-09-18') AS diasPassados,
                         (SELECT MAX(orcamento) FROM servico s) as valorMax,
                         (SELECT MIN(orcamento) FROM servico s) as valorMin
                         FROM servico s

@@ -27,12 +27,10 @@ function postData(url = "", data = {}) {
     });
 } // Não usar essa função, estamos utilizando fetch diretamente
 
-document.addEventListener("DOMContentLoaded", function () {
-  const loginForm = document.getElementById("loginForm");
-  if (loginForm) {
-    loginForm.addEventListener("submit", login);
-  }
-}); //Carregar o botão de login e garantir que ele funcione
+const loginBtn = document.getElementById("btnEntrar")
+if(loginBtn){
+  loginBtn.addEventListener("click", login);
+} //Carregar o botão de login e garantir que ele funcione
 
 function login(event) {
   event.preventDefault(); //Evitar erro de CORS
@@ -230,6 +228,9 @@ function createJobElement(job) {
   a.setAttribute("aria-current", "true");
 
   const img = document.createElement("img");
+  if(job.id_tipo_servico){
+    
+  }
   img.src = "https://github.com/twbs.png"; // Replace with dynamic image URL if available
   img.alt = "twbs";
   img.width = 32;

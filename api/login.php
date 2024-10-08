@@ -45,7 +45,6 @@ $dados = json_decode(file_get_contents("php://input"), true);
 
 // Check if 'acessar' field is set
 if (isset($dados["acessar"])) {
-    session_start();
     include "conn.php";
 
     
