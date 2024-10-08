@@ -86,7 +86,7 @@ if (isset($_GET["logout"])) {
     </div>
 
  <!-- parte entrar -->
- <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+ <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
  <div class="card mt-4" style="width: 500px;"> 
         <form id="loginForm">
             <div class="card-body text-center">
