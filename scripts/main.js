@@ -221,20 +221,27 @@ if (filterButton) {
 } // Botão de filtrar serviços
 
 function createJobElement(job) {
+  const fragment = document.createDocumentFragment();
+
   const a = document.createElement("a");
   a.href = "trabalho.php?&id_servico=" + job.id_servico;
   a.className = "list-group-item list-group-item-action d-flex gap-3 py-3";
   a.setAttribute("aria-current", "true");
+  fragment.appendChild(a);
 
   const img = document.createElement("img");
-  if (job.id_tipo_servico == "1") {
-    img.src = "assets/azulejista1.png";
-  } else if (job.id_tipo_servico == "2") {
-    img.src = "assets/eletrica.png";
-  } else if (job.id_tipo_servico == "3") {
-    img.src = "assets/hidraulica.png";
-  } else {
-    img.src = "assets/capacete.png";
+  switch (job.id_tipo_servico) {
+    case "1":
+      img.src = "assets/azulejista1.png";
+      break;
+    case "2":
+      img.src = "assets/eletrica.png";
+      break;
+    case "3":
+      img.src = "assets/hidraulica.png";
+      break;
+    default:
+      img.src = "assets/capacete.png";
   }
   img.alt = "twbs";
   img.width = 32;
@@ -256,10 +263,9 @@ function createJobElement(job) {
 
   const h6 = document.createElement("h6");
   h6.className = "mb-0";
-  h6.textContent = job.titulo; // Assuming "titulo" is the job title
+  h6.textContent = job.titulo;
   divContent.appendChild(h6);
 
-  
   if (window.location.pathname == "/trabalhar.php") {
     const br = document.createElement("br");
     divContent.appendChild(br);
@@ -291,37 +297,38 @@ function createJobElement(job) {
     }
 
     const ratingText = document.createElement("i");
-    ratingText.textContent = `(${job.avaliacao})`; // Assuming "avaliacao" is the job rating
+    ratingText.textContent = `(${job.avaliacao})`;
     divRatings.appendChild(ratingText);
-  }else{
+  } else {
     const hr = document.createElement("hr");
     divContent.appendChild(hr);
   }
+
   const p = document.createElement("p");
   p.className = "mb-0 opacity-75";
-  p.textContent = job.descricao; // Assuming "descricao" is the job description
+  p.textContent = job.descricao;
   divContent.appendChild(p);
 
   const divPrice = document.createElement("div");
-  divPrice.className = "flex-direction: column;";
+  divPrice.style.flexDirection = "column";
   divMain.appendChild(divPrice);
 
   const small = document.createElement("small");
   small.className = "opacity-90 text-nowrap";
-  small.textContent = `R$${job.orcamento} por hora`; // Assuming "orcamento" is the job price
+  small.textContent = `R$${job.orcamento} por hora`;
   divPrice.appendChild(small);
 
   const pTime = document.createElement("p");
   pTime.className = "text-end";
   pTime.style.opacity = 0.5;
-  pTime.textContent = `${job.diasPassados} dias atrás`; // Replace with dynamic time if available
+  pTime.textContent = `${job.diasPassados} dias atrás`;
   if (job.diasPassados >= 31) {
     const diaParaMes = Math.floor(job.diasPassados / 31);
     pTime.textContent = `${diaParaMes} meses atrás`;
   }
   divPrice.appendChild(pTime);
 
-  return a;
+  return fragment;
 }
 
 function getJobs() {

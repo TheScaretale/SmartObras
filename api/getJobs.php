@@ -36,14 +36,12 @@
  * Em caso de erro, retorna um JSON com código 2 e mensagem de erro desconhecido.
  */
 
-
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Content-Type: application/json; charset=UTF-8");
 
 include "conn.php";
-
 
 $dados = json_decode(file_get_contents("php://input"), true);
 if (isset($dados["source"])) {
@@ -54,75 +52,67 @@ if (isset($dados["source"])) {
     switch ($source) {
         case 'filtrar':
             $sql = "SELECT 
-    s.*, 
-    (SELECT ROUND(AVG(ava_nota), 1) 
-        FROM avaliacao 
-        WHERE ava_id_usuario = id_usuario) AS avaliacao,
-        DATEDIFF(CURDATE(), data_inclusao) AS diasPassados
-        FROM servico s WHERE 1=1";
+                        s.id_servico, s.titulo, s.descricao, s.orcamento, s.id_tipo_servico, s.id_usuario, s.id_status, s.data_inclusao, s.data_validade, s.data_conclusao,
+                        (SELECT ROUND(AVG(ava_nota), 1) FROM avaliacao WHERE ava_id_usuario = s.id_usuario) AS avaliacao,
+                        DATEDIFF(CURDATE(), s.data_inclusao) AS diasPassados
+                    FROM servico s WHERE 1=1";
 
-            $tipos = "";
-            $ctrl = "";
+            $tipos = [];
             if (isset($dados["azulejista"]) && $dados["azulejista"] == 1) {
-                $tipos .= $ctrl . "1";
-                $ctrl = ",";
+                $tipos[] = 1;
             }
             if (isset($dados["eletricista"]) && $dados["eletricista"] == 2) {
-                $tipos .= $ctrl . "2";
-                $ctrl = ",";
+                $tipos[] = 2;
             }
             if (isset($dados["hidraulica"]) && $dados["hidraulica"] == 3) {
-                $tipos .= $ctrl . "3";
-                $ctrl = ",";
+                $tipos[] = 3;
             }
-            if ($tipos <> "") {
-                $sql .= " AND id_tipo_servico IN ($tipos)";
+            if (!empty($tipos)) {
+                $placeholders = implode(',', array_fill(0, count($tipos), '?'));
+                $sql .= " AND s.id_tipo_servico IN ($placeholders)";
+                $params = array_merge($params, $tipos);
             }
             break;
         case 'perfil':
             $usuario = $_SESSION["userId"];
             $sql = "SELECT 
-                        s.*, 
-                        (SELECT ROUND(AVG(ava_nota), 1) 
-                         FROM avaliacao 
-                         WHERE ava_id_usuario = 4) AS avaliacao,
-                        DATEDIFF(CURDATE(), '2024-09-18') AS diasPassados,
-                        (SELECT MAX(orcamento) FROM servico s) as valorMax,
-                        (SELECT MIN(orcamento) FROM servico s) as valorMin
-                        FROM servico s
-                        where s.id_usuario = :usuario";
-            $params[':usuario'] = $usuario;
+                        s.id_servico, s.titulo, s.descricao, s.orcamento, s.id_tipo_servico, s.id_usuario, s.id_status, s.data_inclusao, s.data_validade, s.data_conclusao,
+                        (SELECT ROUND(AVG(ava_nota), 1) FROM avaliacao WHERE ava_id_usuario = s.id_usuario) AS avaliacao,
+                        DATEDIFF(CURDATE(), s.data_inclusao) AS diasPassados,
+                        (SELECT MAX(s.orcamento) FROM servico s) as valorMax,
+                        (SELECT MIN(s.orcamento) FROM servico s) as valorMin
+                    FROM servico s
+                    WHERE s.id_usuario = ?";
+            $params[] = $usuario;
             break;
         default:
-            echo json_encode(array('codigo' => 3, 'mensagem' => 'Souce desconhecido'));
-            break;
+            echo json_encode(array('codigo' => 3, 'mensagem' => 'Source desconhecido'));
+            exit;
     }
+
     $consulta = $banco->prepare($sql);
     $consulta->execute($params);
 
     $servicos = array();
+    while ($registro = $consulta->fetch(PDO::FETCH_ASSOC)) {
+        $servicos[] = $registro;
+    }
 
-
-    while ($registro = $consulta->fetch()) {
-        $servicos[] = array(
-            "id_servico" => $registro["id_servico"],
-            "titulo" => $registro["titulo"],
-            "descricao" => $registro["descricao"],
-            "orcamento" => $registro["orcamento"],
-            "id_tipo_servico" => $registro["id_tipo_servico"],
-            "id_usuario" => $registro["id_usuario"],
-            "id_status" => $registro["id_status"],
-            "data_inclusao" => $registro["data_inclusao"],
-            "data_validade" => $registro["data_validade"],
-            "data_conclusao" => $registro["data_conclusao"],
-            "avaliacao" => $registro["avaliacao"],
-            "diasPassados" => $registro["diasPassados"]
-        );
+    // Implement caching (example using file-based caching)
+    $cacheFile = './cache/jobs.json';
+    if (!file_exists($cacheFile)){
+        file_put_contents($cacheFile, json_encode($servicos));
     }
 
 
-    header('Content-Type: application/json');
-    echo json_encode($servicos);
+    if (file_exists($cacheFile) && (time() - filemtime($cacheFile)) < 3600) {
+        // Serve from cache if cache is less than 1 hour old
+        echo file_get_contents($cacheFile);
+    } else {
+        // Save to cache
+        file_put_contents($cacheFile, json_encode($servicos));
+        echo json_encode($servicos);
+    }
 } else {
     echo json_encode(array('codigo' => 2, 'mensagem' => 'Erro desconhecido'));
 }
