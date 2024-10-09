@@ -1,16 +1,18 @@
 const chatBtn = document.getElementById("chat-button");
 if (chatBtn) {
-  document.getElementById("chat-button").addEventListener("click", function() {
+  document.getElementById("chat-button").addEventListener("click", function () {
     var chatWindow = document.getElementById("chat-window");
     // Alterna entre abrir e fechar o chat
-    if (chatWindow.style.display === "none" || chatWindow.style.display === "") {
-        chatWindow.style.display = "block";
+    if (
+      chatWindow.style.display === "none" ||
+      chatWindow.style.display === ""
+    ) {
+      chatWindow.style.display = "block";
     } else {
-        chatWindow.style.display = "none";
+      chatWindow.style.display = "none";
     }
-});
+  });
 }
-
 
 function postData(url = "", data = {}) {
   return fetch(url, {
@@ -27,8 +29,8 @@ function postData(url = "", data = {}) {
     });
 } // Não usar essa função, estamos utilizando fetch diretamente
 
-const loginBtn = document.getElementById("btnEntrar")
-if(loginBtn){
+const loginBtn = document.getElementById("btnEntrar");
+if (loginBtn) {
   loginBtn.addEventListener("click", login);
 } //Carregar o botão de login e garantir que ele funcione
 
@@ -67,8 +69,6 @@ function login(event) {
   }
 } // Função de login que envia os dados para o arquivo login.php
 
-
-
 function forgotPass() {
   const email = document.getElementById("email").value;
   const data = {
@@ -96,7 +96,6 @@ function forgotPass() {
       });
   }
 } // Função de esqueci a senha que envia os dados para o arquivo forgot.php
-
 
 function register() {
   const nome = document.getElementById("nome").value;
@@ -228,10 +227,15 @@ function createJobElement(job) {
   a.setAttribute("aria-current", "true");
 
   const img = document.createElement("img");
-  if(job.id_tipo_servico){
-    
+  if (job.id_tipo_servico == "1") {
+    img.src = "assets/azulejista1.png";
+  } else if (job.id_tipo_servico == "2") {
+    img.src = "assets/eletrica.png";
+  } else if (job.id_tipo_servico == "3") {
+    img.src = "assets/hidraulica.png";
+  } else {
+    img.src = "assets/capacete.png";
   }
-  img.src = "https://github.com/twbs.png"; // Replace with dynamic image URL if available
   img.alt = "twbs";
   img.width = 32;
   img.height = 32;
@@ -255,39 +259,44 @@ function createJobElement(job) {
   h6.textContent = job.titulo; // Assuming "titulo" is the job title
   divContent.appendChild(h6);
 
-  const br = document.createElement("br");
-  divContent.appendChild(br);
+  
+  if (window.location.pathname == "/trabalhar.php") {
+    const br = document.createElement("br");
+    divContent.appendChild(br);
 
-  const divRatings = document.createElement("div");
-  divRatings.className = "ratings";
-  divContent.appendChild(divRatings);
+    const divRatings = document.createElement("div");
+    divRatings.className = "ratings";
+    divContent.appendChild(divRatings);
 
-  const fullStars = Math.floor(job.avaliacao);
-  const halfStar = job.avaliacao % 1 !== 0;
-  const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+    const fullStars = Math.floor(job.avaliacao);
+    const halfStar = job.avaliacao % 1 !== 0;
+    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
 
-  for (let i = 0; i < fullStars; i++) {
-    const star = document.createElement("i");
-    star.className = "fa fa-star checked";
-    divRatings.appendChild(star);
+    for (let i = 0; i < fullStars; i++) {
+      const star = document.createElement("i");
+      star.className = "fa fa-star checked";
+      divRatings.appendChild(star);
+    }
+
+    if (halfStar) {
+      const star = document.createElement("i");
+      star.className = "fa fa-star-half-o checked";
+      divRatings.appendChild(star);
+    }
+
+    for (let i = 0; i < emptyStars; i++) {
+      const star = document.createElement("i");
+      star.className = "fa fa-star-outline";
+      divRatings.appendChild(star);
+    }
+
+    const ratingText = document.createElement("i");
+    ratingText.textContent = `(${job.avaliacao})`; // Assuming "avaliacao" is the job rating
+    divRatings.appendChild(ratingText);
+  }else{
+    const hr = document.createElement("hr");
+    divContent.appendChild(hr);
   }
-
-  if (halfStar) {
-    const star = document.createElement("i");
-    star.className = "fa fa-star-half-o checked";
-    divRatings.appendChild(star);
-  }
-
-  for (let i = 0; i < emptyStars; i++) {
-    const star = document.createElement("i");
-    star.className = "fa fa-star-outline";
-    divRatings.appendChild(star);
-  }
-
-  const ratingText = document.createElement("i");
-  ratingText.textContent = `(${job.avaliacao})`; // Assuming "avaliacao" is the job rating
-  divRatings.appendChild(ratingText);
-
   const p = document.createElement("p");
   p.className = "mb-0 opacity-75";
   p.textContent = job.descricao; // Assuming "descricao" is the job description
@@ -436,9 +445,9 @@ if (profileJobs) {
 const profileJobs2 = document.getElementById("profileJobsCliente");
 if (profileJobs2) {
   getJobsProfile2();
-}//
+} //
 
-function createJob(){
+function createJob() {
   const titulo = document.getElementById("titulo").value;
   const descricao = document.getElementById("descricao").value;
   const orcamento = document.getElementById("orcamento").value;
@@ -457,29 +466,28 @@ function createJob(){
     return false;
   } else {
     fetch("./api/createJob.php", {
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Success:", data);
-      if(data.codigo === 1){
-        alert(data.mensagem);
-      }else{
-        alert(data.mensagem);
-      }
-    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        if (data.codigo === 1) {
+          alert(data.mensagem);
+        } else {
+          alert(data.mensagem);
+        }
+      });
   }
 }
 
-function getURLJob(){
-
+function getURLJob() {
   const urlGET = window.location.search.substring(1).split("&");
   let $_GET = {};
-  for (let i = 0; i < urlGET.length; i++){
+  for (let i = 0; i < urlGET.length; i++) {
     let temp = urlGET[i].split("=");
     $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
   }
@@ -528,7 +536,6 @@ if (jobDetails) {
   console.log("ID jobDetails não encontrado"); // Página de detalhes do serviço,
 }
 
-
 function fillJobDetails(jobData) {
   const jobDetails = document.getElementById("jobDetails");
   jobDetails.innerHTML = ""; // Clear existing content
@@ -548,10 +555,18 @@ function fillJobDetails(jobData) {
   divCardBody.className = "card-body";
   divCard.appendChild(divCardBody);
 
-  const h5 = document.createElement("h5");
+  const h5 = document.createElement("h3");
   h5.className = "card-title";
   h5.textContent = jobData.titulo;
   divCardBody.appendChild(h5);
+
+  const hr3 = document.createElement("hr");
+  divCardBody.appendChild(hr3);
+
+  const descriptionTitle = document.createElement("h5");
+  descriptionTitle.className = "card-title";
+  descriptionTitle.textContent = "Descrição:";
+  divCardBody.appendChild(descriptionTitle);
 
   const p = document.createElement("p");
   p.className = "card-text";
@@ -570,8 +585,6 @@ function fillJobDetails(jobData) {
   divCardBody2.className = "card-body";
   divCard2.appendChild(divCardBody2);
 
-  
-
   const h5_2 = document.createElement("h5");
   h5_2.className = "card-title text-end";
   h5_2.textContent = `Orçamento do cliente: R$ ${jobData.orcamento}`;
@@ -582,7 +595,7 @@ function fillJobDetails(jobData) {
   p_2.textContent = `R$ ${jobData.orcamento}`;
   divCardBody2.appendChild(p_2); */
 
-/*   const backBtn = document.createElement("button")
+  /*   const backBtn = document.createElement("button")
   backBtn.className = "btn btn-primary";
   backBtn.textContent = "Voltar";
   backBtn.onclick = function () {
@@ -596,10 +609,10 @@ function fillJobDetails(jobData) {
 
   const bidBtn = document.createElement("button");
   bidBtn.className = "btn btn-primary";
-  bidBtn.textContent = "Fazer proposta uma proposta";
+  bidBtn.textContent = "Fazer uma proposta";
   dGrid.appendChild(bidBtn);
 
-  const hr = document.createElement("hr")
+  const hr = document.createElement("hr");
   divCardBody2.appendChild(hr);
 
   const divFlex = document.createElement("div");
@@ -619,14 +632,19 @@ function fillJobDetails(jobData) {
   p_3.textContent = `Quem criou este trabalho: Nome Teste`;
   internalCard.appendChild(p_3);
 
-  const hr2 = document.createElement("hr")
-  divCard2.appendChild(hr2)
+  const hr2 = document.createElement("hr");
+  divCard2.appendChild(hr2);
 
-  const atividades = document.createElement("h6")
+  const atividades = document.createElement("h6");
   atividades.className = "card-title text-center";
-  atividades.textContent = "Total de propostas neste trabalho: <a definir>";
+  atividades.textContent = "Total de propostas neste trabalho:";
+  divCard2.appendChild(atividades);
 
-  
+  const activityNumber = document.createElement("p");
+  activityNumber.className = "card-text text-center";
+  activityNumber.textContent = jobData.totalPropostas;
+  divCard2.appendChild(activityNumber);
+
   jobDetails.appendChild(divRow);
 }
 

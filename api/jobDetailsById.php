@@ -6,7 +6,11 @@ $dados = json_decode(file_get_contents("php://input"), true);
 
 if(isset($dados["getId"])){
     $id = $dados["getId"];
-    $sql = "SELECT * FROM servico WHERE id_servico = :id";
+    $sql = "SELECT s.*, COUNT(sp.id) AS totalPropostas
+                FROM servico s
+                LEFT JOIN servico_proposta sp ON s.id_servico = sp.id_servico
+                WHERE s.id_servico = :id
+                GROUP BY s.id_servico;";
     $consulta = $banco->prepare($sql);
     $consulta->bindParam(':id', $id);
     $consulta->execute();

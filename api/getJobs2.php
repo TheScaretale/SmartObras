@@ -13,10 +13,13 @@ $dados = json_decode(file_get_contents("php://input"), true);
 if (isset($dados["getjobs"])) {
 
     $usuario = $_SESSION["userId"];
-    $sql = "SELECT * FROM servico
+    $sql = "SELECT s.*, 
+                DATEDIFF(CURDATE(), s.data_inclusao) AS diasPassados
+                FROM servico s
                 WHERE EXISTS 
-                (SELECT * FROM servico_proposta 
-                WHERE servico_proposta.id_servico = servico.id_servico and id_usuario = :usuario);";
+                (SELECT * FROM servico_proposta sp 
+                WHERE sp.id_servico = s.id_servico 
+                AND sp.id_usuario = :usuario);";
     $consulta = $banco->prepare($sql);
     $consulta->bindParam(':usuario', $usuario);
     try {
@@ -34,7 +37,8 @@ if (isset($dados["getjobs"])) {
                 "id_status" => $registro["id_status"],
                 "data_inclusao" => $registro["data_inclusao"],
                 "data_validade" => $registro["data_validade"],
-                "data_conclusao" => $registro["data_conclusao"]
+                "data_conclusao" => $registro["data_conclusao"],
+                "diasPassados" => $registro["diasPassados"]
             );
         }
         echo json_encode($servicos);

@@ -39,8 +39,8 @@
                         <i class="fa fa-star"></i>
                     </div>
                     <div class="text-end">
+                        <h5 class="review-count m-1">Projetos</h5>
                         <p class="m-0">32</p>
-                        <h5 class="review-count m-0">Projetos</h5>
                     </div>
                 </div>
             </div>
