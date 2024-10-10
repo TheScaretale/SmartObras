@@ -32,9 +32,21 @@ if (isset($_GET["logout"])) {
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
+        <?php
+                if(empty($_SESSION["user"])){
+            ?>
+            <a href="index.php" class="navbar-brand">
+                <img src="assets/logo.png" alt="" width="150" height="50">
+            </a>
+            <?php
+                } else {
+            ?>
             <a href="home.php" class="navbar-brand">
                 <img src="assets/logo.png" alt="" width="150" height="50">
             </a>
+            <?php
+                }
+            ?>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#conteudoNavbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
