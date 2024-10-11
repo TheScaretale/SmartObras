@@ -25,7 +25,7 @@
                             <?php
                         } else {
                             ?>
-                            <a class="btn btn-primary" id="createJobs" href="contratar.php">Criar trabalho</a>
+                            <a class="btn btn-primary" id="createJobs" href="criarTrabalho.php">Criar trabalho</a>
                             <?php
                         } ?>
                     </div>

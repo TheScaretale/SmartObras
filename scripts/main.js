@@ -58,9 +58,9 @@ function login(event) {
       .then((data) => {
         console.log("Success:", data); // Log para debug no console, deve sair até o final do trabalho
         if (data.codigo === 1) {
-          window.location.replace("./home.php"); // Se o código que a API mandar for 1 é redirecionado ao home
+          window.location.replace("./home.php"); // Se o código que a API mandar for 1 é redirecionado ao home e armazena alguns dados la no $_SESSION do PHP. 
         } else {
-          alert(data.mensagem); // Caso contrário ele exibe o motivo do porque não logou
+          alert(data.mensagem); // Caso contrário ele exibe o motivo do porque não logou, seja usuario ou senha errados ou então que algo deu errado
         }
       })
       .catch((error) => {
@@ -112,7 +112,7 @@ function register() {
     confirmarSenha: confirmarSenha,
     telefone: telefone,
     tipo: tipo,
-  };
+  }; //  Coletando as informações acima.
 
   console.log(data);
 
@@ -129,7 +129,9 @@ function register() {
   } else if (senha != confirmarSenha) {
     alert("As senhas não coincidem");
     return false;
-  } else {
+  }  // A estrutura acima faz a verificação dos campos.
+  
+  else {
     postData("./api/register.php", data)
       .then((data) => {
         console.log("Success:", data);
@@ -156,13 +158,13 @@ function getReviews() {
     .catch((error) => {
       console.error("Error:", error);
     });
-} // Função que pega as reviews do arquivo reviews.php e chama a função populateTable, isso vai mudar ainda
+} // Um simples fetch das avaliações, não sei para que vamos usar ainda.
 
 const filters = {
   azulejista: null,
   eletricista: null,
   hidraulica: null,
-}; // Filtros para a busca de serviços, selecionados nas paginas de busca de serviços
+}; // Filtros para a busca de serviços, selecionados nas paginas de busca de serviços (trabalhar.php)
 
 document.addEventListener("DOMContentLoaded", function () {
   const tipoEletricaCheckbox = document.getElementById("tipoEletrica");
@@ -209,8 +211,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 }); // Instanciação do checkbox de hidraulica
 
-// Slider do filtro:
-
 const filterButton = document.getElementById("filterButton");
 if (filterButton) {
   filterButton.addEventListener("click", function () {
@@ -221,7 +221,7 @@ if (filterButton) {
 } // Botão de filtrar serviços
 
 function createJobElement(job) {
-  const fragment = document.createDocumentFragment();
+  const fragment = document.createDocumentFragment(); //cria um fragmento com a intenção de acelerar o processo de renderização da pagina
 
   const a = document.createElement("a");
   a.href = "trabalho.php?&id_servico=" + job.id_servico;
@@ -552,11 +552,11 @@ function fillJobDetails(jobData) {
 
   const divCol = document.createElement("div");
   divCol.className = "col-md-8";
-  divRow.appendChild(divCol);
+  divRow.appendChild(divCol); // Coluna da esquerda, a maior coluna
 
   const divCard = document.createElement("div");
   divCard.className = "card";
-  divCol.appendChild(divCard);
+  divCol.appendChild(divCard); //Card 1
 
   const divCardBody = document.createElement("div");
   divCardBody.className = "card-body";
@@ -580,9 +580,28 @@ function fillJobDetails(jobData) {
   p.textContent = jobData.descricao;
   divCardBody.appendChild(p);
 
+  //Card 4 Começa aqui
+  
+  const divCard4 = document.createElement("div");
+  divCard4.className = "card";
+  divCol.appendChild(divCard4);
+  
+  const divCardBody4 = document.createElement("div");
+  divCardBody4.className = "card-body";
+  divCard4.appendChild(divCardBody4);
+  
+  const h5_4 = document.createElement("h5");
+  h5_4.className = "card-title text-center";
+  h5_4.textContent = "Propostas realizadas:";
+  divCardBody4.appendChild(h5_4);
+
+  // Coluna da direita
+
   const divCol2 = document.createElement("div");
   divCol2.className = "col-md-4";
   divRow.appendChild(divCol2);
+
+  // Card 2 começa aqui
 
   const divCard2 = document.createElement("div");
   divCard2.className = "card";
@@ -596,19 +615,6 @@ function fillJobDetails(jobData) {
   h5_2.className = "card-title text-end";
   h5_2.textContent = `Orçamento do cliente: R$ ${jobData.orcamento}`;
   divCardBody2.appendChild(h5_2);
-
-  /* const p_2 = document.createElement("p");
-  p_2.className = "text-end";
-  p_2.textContent = `R$ ${jobData.orcamento}`;
-  divCardBody2.appendChild(p_2); */
-
-  /*   const backBtn = document.createElement("button")
-  backBtn.className = "btn btn-primary";
-  backBtn.textContent = "Voltar";
-  backBtn.onclick = function () {
-    window.history.back();
-  };
-  divCardBody2.appendChild(backBtn); */
 
   const dGrid = document.createElement("div");
   dGrid.className = "d-grid gap-2";
@@ -626,7 +632,9 @@ function fillJobDetails(jobData) {
   divFlex.className = "d-flex justify-content-between align-items-center mt-3";
   divCardBody2.appendChild(divFlex);
 
-  divCard3 = document.createElement("div");
+  // Card interno do card 2
+
+  const divCard3 = document.createElement("div");
   divCard3.className = "card";
   divCardBody2.appendChild(divCard3);
 
@@ -662,3 +670,9 @@ if (btnVoltar) {
   });
 }
 
+function countJobs(){
+  const userType = ""
+  const totalJobs = ""
+
+  
+}
