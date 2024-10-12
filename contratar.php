@@ -7,7 +7,7 @@ include "navbar.php";
 ?>
 
 <div class="row">
-    <h2 class="title mt-3">Encontre seu próximo trabalho no SmartObras</h2>
+    <h2 class="title mt-3">Busque profissionais no SmartObras</h2>
     <div class="col-md-3 ">
         <div class="card p-3 mt-5">
             <div class="card-body">

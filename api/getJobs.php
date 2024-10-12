@@ -52,10 +52,12 @@ if (isset($dados["source"])) {
     switch ($source) {
         case 'filtrar':
             $sql = "SELECT 
-                        s.id_servico, s.titulo, s.descricao, s.orcamento, s.id_tipo_servico, s.id_usuario, s.id_status, s.data_inclusao, s.data_validade, s.data_conclusao,
+                        s.*, 
                         (SELECT ROUND(AVG(ava_nota), 1) FROM avaliacao WHERE ava_id_usuario = s.id_usuario) AS avaliacao,
                         DATEDIFF(CURDATE(), s.data_inclusao) AS diasPassados
-                    FROM servico s WHERE 1=1";
+                    FROM servico s
+                    JOIN tipo_pagamento tp ON tp.id_tipo_pagamento = s.tipo_pagamento
+                    WHERE 1=1";
 
             $tipos = [];
             if (isset($dados["azulejista"]) && $dados["azulejista"] == 1) {
@@ -67,10 +69,16 @@ if (isset($dados["source"])) {
             if (isset($dados["hidraulica"]) && $dados["hidraulica"] == 3) {
                 $tipos[] = 3;
             }
+            
             if (!empty($tipos)) {
                 $placeholders = implode(',', array_fill(0, count($tipos), '?'));
                 $sql .= " AND s.id_tipo_servico IN ($placeholders)";
                 $params = array_merge($params, $tipos);
+            }
+
+            if (isset($dados["orcamento"]) && $dados["orcamento"] !== null) {
+                $sql .= " AND s.tipo_pagamento = ?";
+                $params[] = $dados["orcamento"];
             }
             break;
         case 'perfil':

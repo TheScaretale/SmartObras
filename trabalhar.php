@@ -13,12 +13,11 @@ include "navbar.php";
 <div class="row">
     <h2 class="title mt-3">Encontre seu próximo trabalho no SmartObras</h2>
 
-
     <div class="col-md-3 ">
         <div class="card p-3 mt-5">
             <div class="card-body">
                 <h5 class="card-title">Filtros</h5>
-                <p class="fw-bold">Project Type</p>
+                <p class="fw-bold">Tipo do serviço</p>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="azulejista" id="tipoEletrica">
                     <label class="form-check-label" for="flexCheckDefault">
@@ -38,29 +37,30 @@ include "navbar.php";
                     </label>
                 </div>
                 <br>
-                <div id="orcamento">
+                <div id="tipo_orcamento">
                     <label for="orcamento" class="form-label">Tipo de pagamento</label>
                     <select name="orcamento" id="orcamento" class="form-select">
-                        <option>Por hora</option>
-                        <option>Por dia</option>
-                        <option>Por m²</option>
-                        <option>Por serviço</option>
+                        <option value="0">Qualquer</option>
+                        <option value="1">Por hora</option>
+                        <option value="2">Por dia</option>
+                        <option value="3">Por m²</option>
+                        <option value="4">Por serviço</option>
                     </select>
                 </div>
                 <br>
                 <div id="data">
                     <label for="data" class="form-label">Data de publicação</label>
-                    <select name="data" id="data" class="form-select">
-                        <option>Em qualquer momento</option>
-                        <option>Nas ultimas 24 horas</option>
-                        <option>Ultimos 3 dias</option>
-                        <option>Desde semana passada</option>
-                        <option>Mais de uma semana</option>
+                    <select name="data" id="filtroData" class="form-select">
+                        <option value="1">Em qualquer momento</option>
+                        <option value="2">Nas ultimas 24 horas</option>
+                        <option value="3">Ultimos 3 dias</option>
+                        <option value="4">Desde semana passada</option>
+                        <option value="5">Mais de uma semana</option>
                     </select>
                 </div>
                 
             </div>
-            <button class="btn btn-primary" id="filterButton">Pegar trabalhos</button>
+            <button class="btn btn-primary" id="filterButton">Aplicar Filtros</button>
         </div>
     </div>
 

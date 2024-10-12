@@ -58,7 +58,7 @@ function login(event) {
       .then((data) => {
         console.log("Success:", data); // Log para debug no console, deve sair até o final do trabalho
         if (data.codigo === 1) {
-          window.location.replace("./home.php"); // Se o código que a API mandar for 1 é redirecionado ao home e armazena alguns dados la no $_SESSION do PHP. 
+          window.location.replace("./home.php"); // Se o código que a API mandar for 1 é redirecionado ao home e armazena alguns dados la no $_SESSION do PHP.
         } else {
           alert(data.mensagem); // Caso contrário ele exibe o motivo do porque não logou, seja usuario ou senha errados ou então que algo deu errado
         }
@@ -129,8 +129,7 @@ function register() {
   } else if (senha != confirmarSenha) {
     alert("As senhas não coincidem");
     return false;
-  }  // A estrutura acima faz a verificação dos campos.
-  
+  } // A estrutura acima faz a verificação dos campos.
   else {
     postData("./api/register.php", data)
       .then((data) => {
@@ -164,6 +163,8 @@ const filters = {
   azulejista: null,
   eletricista: null,
   hidraulica: null,
+  orcamento: null,
+  data: null,
 }; // Filtros para a busca de serviços, selecionados nas paginas de busca de serviços (trabalhar.php)
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -210,6 +211,37 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 }); // Instanciação do checkbox de hidraulica
+
+document.addEventListener("DOMContentLoaded", function () {
+  const tipoOrcamento = document.getElementById("orcamento");
+  if (tipoOrcamento) {
+    tipoOrcamento.addEventListener("change", function () {
+      console.log("Elemento do orçamento encontrado");
+      if (this.value == "0") {
+        filters.orcamento = null;
+        console.log("Orcamento selecionado: " + filters.orcamento);
+      } else {
+        filters.orcamento = this.value;
+        console.log("Orcamento selecionado: " + filters.orcamento);
+      }
+    });
+  } else {
+    console.log("Elemento do orçamento não encontrado");
+  }
+}); // Instanciação do campo de orçamento
+
+document.addEventListener("DOMContentLoaded", function () {
+  const tipoData = document.getElementById("tipoData");
+  if (tipoData) {
+    tipoData.addEventListener("change", function () {
+      console.log("Elemento da data encontrado");
+      filters.data = this.value;
+      console.log("Data selecionada: " + filters.data);
+    });
+  } else {
+    console.log("Elemento da data não encontrado");
+  }
+}); // Instanciação do campo de data
 
 const filterButton = document.getElementById("filterButton");
 if (filterButton) {
@@ -338,7 +370,10 @@ function getJobs() {
     azulejista: filters.azulejista,
     eletricista: filters.eletricista,
     hidraulica: filters.hidraulica,
+    orcamento: filters.orcamento,
   };
+
+  console.log("Dados:", dados);
 
   fetch(url, {
     method: "POST",
@@ -581,15 +616,15 @@ function fillJobDetails(jobData) {
   divCardBody.appendChild(p);
 
   //Card 4 Começa aqui
-  
+
   const divCard4 = document.createElement("div");
   divCard4.className = "card";
   divCol.appendChild(divCard4);
-  
+
   const divCardBody4 = document.createElement("div");
   divCardBody4.className = "card-body";
   divCard4.appendChild(divCardBody4);
-  
+
   const h5_4 = document.createElement("h5");
   h5_4.className = "card-title text-center";
   h5_4.textContent = "Propostas realizadas:";
@@ -670,9 +705,7 @@ if (btnVoltar) {
   });
 }
 
-function countJobs(){
-  const userType = ""
-  const totalJobs = ""
-
-  
+function countJobs() {
+  const userType = "";
+  const totalJobs = "";
 }
