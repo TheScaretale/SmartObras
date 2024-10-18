@@ -41,6 +41,14 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Content-Type: application/json; charset=UTF-8");
 
+/* ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Log errors to a file
+ini_set('log_errors', 1);
+ini_set('error_log', '/path/to/your/error.log'); */
+
 include "conn.php";
 
 $dados = json_decode(file_get_contents("php://input"), true);
@@ -80,7 +88,33 @@ if (isset($dados["source"])) {
                 $sql .= " AND s.tipo_pagamento = ?";
                 $params[] = $dados["orcamento"];
             }
+
+            if(isset($dados["intervalo"])){
+                switch($dados["intervalo"]){
+                    case "2":
+                        $sql .= " AND s.data_inclusao >= CURDATE() - INTERVAL 1 DAY";
+                        break;
+                    case "3":
+                        $sql .=" AND s.data_inclusao >= CURDATE() - INTERVAL 3 DAY";
+                        break;
+                    case "4":
+                        $sql .=" AND s.data_inclusao >= CURDATE() - INTERVAL 1 WEEK";
+                        break;
+                    case "5":
+                        $sql .=" AND s.data_inclusao >= 
+                        CURDATE() - INTERVAL 1 MONTH";
+                        break;
+                    case 1:
+                        break;
+                    default:
+                        break;
+                }
+            }
             break;
+
+/*             error_log("SQL Query: " . $sql);
+            error_log("Parameters: " . print_r($params, true)); */
+
         case 'perfil':
             $usuario = $_SESSION["userId"];
             $sql = "SELECT 

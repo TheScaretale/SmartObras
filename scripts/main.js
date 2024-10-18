@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }); // Instanciação do campo de orçamento
 
 document.addEventListener("DOMContentLoaded", function () {
-  const tipoData = document.getElementById("tipoData");
+  const tipoData = document.getElementById("filtroData");
   if (tipoData) {
     tipoData.addEventListener("change", function () {
       console.log("Elemento da data encontrado");
@@ -371,6 +371,7 @@ function getJobs() {
     eletricista: filters.eletricista,
     hidraulica: filters.hidraulica,
     orcamento: filters.orcamento,
+    intervalo: filters.data,
   };
 
   console.log("Dados:", dados);
@@ -698,14 +699,156 @@ function fillJobDetails(jobData) {
   jobDetails.appendChild(divRow);
 }
 
-const btnVoltar = getElementById("btnVoltar");
-if (btnVoltar) {
-  btnVoltar.addEventListener("click", function () {
-    window.history.back();
+const jobDetailsClient = document.getElementById("jobDetailsClient");
+if (jobDetailsClient) {
+  const id_servico = getURLJob();
+  getJobById(id_servico).then((jobData) => {
+    if (jobData) {
+      fillJobDetailsClient(jobData);
+    } else {
+      console.error("Trabalho não encontrado para o id: ", id_servico);
+    }
   });
+} else {
+  console.log(`ID ${jobDetailsClient} não encontrado`); // Página de detalhes do serviço,
 }
 
-function countJobs() {
-  const userType = "";
-  const totalJobs = "";
+function fillJobDetailsClient(jobData) {
+  const jobDetails = document.getElementById("jobDetailsClient");
+  jobDetails.innerHTML = ""; // Clear existing content
+
+  const divRow = document.createElement("div");
+  divRow.className = "row";
+
+  const divCol = document.createElement("div");
+  divCol.className = "col-md-8";
+  divRow.appendChild(divCol); // Coluna da esquerda, a maior coluna
+
+  const divCard = document.createElement("div");
+  divCard.className = "card";
+  divCol.appendChild(divCard); //Card 1
+
+  const divCardBody = document.createElement("div");
+  divCardBody.className = "card-body";
+  divCard.appendChild(divCardBody);
+
+  const h5 = document.createElement("h3");
+  h5.className = "card-title";
+  h5.textContent = jobData.titulo;
+  divCardBody.appendChild(h5);
+
+  const hr3 = document.createElement("hr");
+  divCardBody.appendChild(hr3);
+
+  const descriptionTitle = document.createElement("h5");
+  descriptionTitle.className = "card-title";
+  descriptionTitle.textContent = "Descrição:";
+  divCardBody.appendChild(descriptionTitle);
+
+  const p = document.createElement("p");
+  p.className = "card-text";
+  p.textContent = jobData.descricao;
+  divCardBody.appendChild(p);
+
+  // Coluna da direita
+
+  const divCol2 = document.createElement("div");
+  divCol2.className = "col-md-4";
+  divRow.appendChild(divCol2);
+
+  // Card 2 começa aqui
+
+  const divCard2 = document.createElement("div");
+  divCard2.className = "card";
+  divCol2.appendChild(divCard2);
+
+  const divCardBody2 = document.createElement("div");
+  divCardBody2.className = "card-body";
+  divCard2.appendChild(divCardBody2);
+
+  const h5_2 = document.createElement("h5");
+  h5_2.className = "card-title text-end";
+  h5_2.textContent = `Orçamento do cliente: R$ ${jobData.orcamento}`;
+  divCardBody2.appendChild(h5_2);
+
+  const dGrid = document.createElement("div");
+  dGrid.className = "d-grid gap-2";
+  divCardBody2.appendChild(dGrid);
+
+  const bidBtn = document.createElement("button");
+  bidBtn.className = "btn btn-primary";
+  bidBtn.textContent = "Fazer uma proposta";
+  dGrid.appendChild(bidBtn);
+
+  const hr = document.createElement("hr");
+  divCardBody2.appendChild(hr);
+
+  const divFlex = document.createElement("div");
+  divFlex.className = "d-flex justify-content-between align-items-center mt-3";
+  divCardBody2.appendChild(divFlex);
+
+  // Card interno do card 2
+
+  const divCard3 = document.createElement("div");
+  divCard3.className = "card";
+  divCardBody2.appendChild(divCard3);
+
+  const internalCard = document.createElement("div");
+  internalCard.className = "card-body";
+  divCard3.appendChild(internalCard);
+
+  const p_3 = document.createElement("p");
+  p_3.className = "card-text";
+  p_3.textContent = `Quem criou este trabalho: Nome Teste`;
+  internalCard.appendChild(p_3);
+
+  const hr2 = document.createElement("hr");
+  divCard2.appendChild(hr2);
+
+  const atividades = document.createElement("h6");
+  atividades.className = "card-title text-center";
+  atividades.textContent = "Total de propostas neste trabalho:";
+  divCard2.appendChild(atividades);
+
+  const activityNumber = document.createElement("p");
+  activityNumber.className = "card-text text-center";
+  activityNumber.textContent = jobData.totalPropostas;
+  divCard2.appendChild(activityNumber);
+
+  //Card 4 Começa aqui
+
+  const divCard4 = document.createElement("div");
+  divCard4.className = "card";
+  divCol.appendChild(divCard4);
+
+  const divCardBody4 = document.createElement("div");
+  divCardBody4.className = "card-body";
+  divCard4.appendChild(divCardBody4);
+
+  const h5_4 = document.createElement("h5");
+  h5_4.className = "card-title text-center";
+  h5_4.textContent = "Propostas realizadas:";
+  divCardBody4.appendChild(h5_4);
+
+  jobData.mensagens.forEach((mensagens) => {
+    const divCard5 = document.createElement("div");
+    divCard5.className = "card";
+    divCardBody4.appendChild(divCard5);
+
+    const divCardBody5 = document.createElement("div");
+    divCardBody5.className = "card-body";
+    divCard5.appendChild(divCardBody5);
+
+    const h5_5 = document.createElement("h5");
+    h5_5.className = "card-title";
+    h5_5.textContent = `Proposta de ${jobData.usuario_nome}`;
+    divCardBody5.appendChild(h5_5);
+
+    const p_4 = document.createElement("p");
+    p_4.className = "card-text";
+    p_4.textContent = mensagens.mensagem;
+    divCardBody5.appendChild(p_4);
+  });
+
+  jobDetails.appendChild(divRow);
 }
