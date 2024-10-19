@@ -856,3 +856,19 @@ function fillJobDetailsClient(jobData) {
 
   jobDetails.appendChild(divRow);
 }
+
+function makeOffer(){
+  const id_servico = getURLJob();
+  const mensagemProposta = document.getElementById("mensagemProposta")
+  const orcamentoProposta = document.getElementById("orcamentoProposta")
+
+  const data = {
+    proposta: 1,
+    id_servico: id_servico,
+    mensagemProposta: mensagemProposta,
+    orcamentoProposta: orcamentoProposta
+  }
+
+  fetch()
+
+}

@@ -92,7 +92,7 @@ if (isset($_GET["logout"])) {
                     <div class="card w-90 mb-3">
                         <div class="card-body">
                             <h1>Bem-vindo ao SmartObras!</h1>
-                            <h3>Sua plataforma de freelance de construção!</h3>
+                            <h3>Sua plataforma de freelance da construção!</h3>
                         </div>
                     </div>
                     <div class="card mt-4" style="width: 20rem; margin: 80px auto;">
