@@ -495,12 +495,14 @@ function createJob() {
   const descricao = document.getElementById("descricao").value;
   const orcamento = document.getElementById("orcamento").value;
   const tipoServico = document.getElementById("tipo_servico").value;
+  const tipoPagamento = document.getElementById("tipoOrcamento").value;
   const data = {
     criar: 1,
     titulo: titulo,
     descricao: descricao,
     orcamento: orcamento,
     id_tipo_servico: tipoServico,
+    tipo_pagamento: tipoPagamento,
   };
   console.log(data);
 
@@ -659,6 +661,8 @@ function fillJobDetails(jobData) {
   const bidBtn = document.createElement("button");
   bidBtn.className = "btn btn-primary";
   bidBtn.textContent = "Fazer uma proposta";
+  bidBtn.setAttribute("data-bs-toggle", "modal");
+  bidBtn.setAttribute("data-bs-target", "#propostaModal");
   dGrid.appendChild(bidBtn);
 
   const hr = document.createElement("hr");
@@ -680,7 +684,7 @@ function fillJobDetails(jobData) {
 
   const p_3 = document.createElement("p");
   p_3.className = "card-text";
-  p_3.textContent = `Quem criou este trabalho: Nome Teste`;
+  p_3.textContent = `Quem criou este trabalho: ${jobData.nomeCriador}`;
   internalCard.appendChild(p_3);
 
   const hr2 = document.createElement("hr");
@@ -799,7 +803,7 @@ function fillJobDetailsClient(jobData) {
 
   const p_3 = document.createElement("p");
   p_3.className = "card-text";
-  p_3.textContent = `Quem criou este trabalho: Nome Teste`;
+  p_3.textContent = `Quem criou este trabalho: ${jobData.nomeCriador}`;
   internalCard.appendChild(p_3);
 
   const hr2 = document.createElement("hr");
@@ -830,23 +834,23 @@ function fillJobDetailsClient(jobData) {
   h5_4.textContent = "Propostas realizadas:";
   divCardBody4.appendChild(h5_4);
 
-  jobData.mensagens.forEach((mensagens) => {
+  jobData.propostas.forEach((proposta) => {
     const divCard5 = document.createElement("div");
     divCard5.className = "card";
     divCardBody4.appendChild(divCard5);
-
+  
     const divCardBody5 = document.createElement("div");
     divCardBody5.className = "card-body";
     divCard5.appendChild(divCardBody5);
-
+  
     const h5_5 = document.createElement("h5");
     h5_5.className = "card-title";
-    h5_5.textContent = `Proposta de ${jobData.usuario_nome}`;
+    h5_5.textContent = `Proposta de ${proposta.nomeUsuario}`;
     divCardBody5.appendChild(h5_5);
-
+  
     const p_4 = document.createElement("p");
     p_4.className = "card-text";
-    p_4.textContent = mensagens.mensagem;
+    p_4.textContent = proposta.mensagem;
     divCardBody5.appendChild(p_4);
   });
 
