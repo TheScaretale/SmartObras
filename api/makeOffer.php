@@ -7,12 +7,13 @@ include "conn.php";
 $dados = json_decode(file_get_contents("php://input"), true);
 
 if(isset($dados["proposta"])){
-    $sql = "INSERT INTO servico_proposta(id_servico, id_usuario, mensagem, data_inclusao, data_validade)
-                VALUES(:id_servico, :id_usuario, :mensagem, NOW(), date_add(now(), interval 1 week));";
+    $sql = "INSERT INTO servico_proposta(id_servico, id_usuario, mensagem, data_inclusao, data_validade,orcamento_proposta)
+                VALUES(:id_servico, :id_usuario, :mensagem, NOW(), date_add(now(), interval 1 week), :orcamento);";
     $consulta = $banco->prepare($sql);
     $consulta->bindParam(':id_servico', $dados["id_servico"]);
-    $consulta->bindParam(':id_usuario', $_SESSION["id_usuario"]);
-    $consulta->bindParam(':mensagem', $dados["mensagem"]);
+    $consulta->bindParam(':id_usuario', $_SESSION["userId"]);
+    $consulta->bindParam(':mensagem', $dados["mensagemProposta"]);
+    $consulta->bindParam(':orcamento', $dados["orcamentoProposta"]);
     $consulta->execute();
 
     if($consulta == true){
