@@ -63,7 +63,7 @@ if (isset($_GET["logout"])) {
                 <div class="d-flex">
                     <ul class="navbar-nav me-5 mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a href="perfil.php" class="nav-link">
+                            <a href="perfil2.php" class="nav-link">
                                 <i class="bi bi-person" style="color: #000000;"></i> Perfil
                             </a>
                         </li>

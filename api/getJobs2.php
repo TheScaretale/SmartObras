@@ -6,7 +6,6 @@ header('Content-Type: application/json');
 
 include "conn.php";
 
-session_start();
 
 $dados = json_decode(file_get_contents("php://input"), true);
 

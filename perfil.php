@@ -32,7 +32,7 @@
                                      <i class="fa fa-star checked"></i>
                                      <i class="fa fa-star "></i>
                                      <i class="fa fa-star "></i>
-                                     <i class="fa fa-star"></i>
+                                     <i class="fa fa-star"> (10)</i>
                                  </div>
                                  <div class="text-end">
                                      <h5 class="review-count m-1">Projetos</h5>

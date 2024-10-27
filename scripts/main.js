@@ -853,6 +853,11 @@ function fillJobDetailsClient(jobData) {
       divCardBody5.className = "card-body";
       divCard5.appendChild(divCardBody5);
 
+      const offerId = document.createElement("input");
+      offerId.type = "hidden";
+      offerId.id = "offerId";
+      offerId.value = proposta.id_proposta;
+
       const h5_5 = document.createElement("h5");
       h5_5.className = "card-title";
       h5_5.textContent = `Proposta de ${proposta.nomeUsuario}`;
@@ -862,6 +867,12 @@ function fillJobDetailsClient(jobData) {
       p_4.className = "card-text";
       p_4.textContent = proposta.mensagem;
       divCardBody5.appendChild(p_4);
+
+      const acptBtn = document.createElement("button");
+      acptBtn.className = "btn btn-primary";
+      acptBtn.textContent = "Aceitar proposta";
+      acptBtn.onclick = acceptOffer;
+      divCardBody5.appendChild(acptBtn);
     });
   } else {
     const divCard4 = document.createElement("div");
@@ -886,15 +897,48 @@ function fillJobDetailsClient(jobData) {
       divCardBody5.className = "card-body";
       divCard5.appendChild(divCardBody5);
 
+      const row2 = document.createElement("div");
+      row2.className = "row";
+      divCardBody5.appendChild(row2);
+
+      const colCard1 = document.createElement("div");
+      colCard1.className = "col-md-9";
+      row2.appendChild(colCard1);
+
+      const offerId = document.createElement("input");
+      offerId.type = "hidden";
+      offerId.id = "offerId";
+      offerId.value = proposta.id_proposta;
+
       const h5_5 = document.createElement("h5");
       h5_5.className = "card-title";
       h5_5.textContent = `Proposta de ${proposta.nomeUsuario}`;
-      divCardBody5.appendChild(h5_5);
+      colCard1.appendChild(h5_5);
 
       const p_4 = document.createElement("p");
       p_4.className = "card-text";
       p_4.textContent = proposta.mensagem;
-      divCardBody5.appendChild(p_4);
+      colCard1.appendChild(p_4);
+
+      const colCard2 = document.createElement("div");
+      colCard2.className = "col-md-3";
+      row2.appendChild(colCard2);
+
+      if(jobData.status == "NULL" || jobData.status == "EMPTY"){
+        const acptBtn = document.createElement("button");
+        acptBtn.className = "btn btn-primary";
+        acptBtn.textContent = "Aceitar proposta";
+        acptBtn.onclick = () => acceptOffer(proposta.id_proposta);
+        colCard2.appendChild(acptBtn);
+      }else if(jobData.status == "1" && proposta.id_proposta == jobData.propostaAceita){
+        const h6Status = document.createElement("h6");
+        h6Status.className = "card-title";
+        h6Status.textContent = "Proposta aceita";
+        colCard2.appendChild(h6Status);
+      }else{
+
+      }
+
     });
   }
 
@@ -916,6 +960,32 @@ function makeOffer() {
   };
 
   fetch("./api/makeOffer.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      if (data.codigo === 1) {
+        alert(data.mensagem);
+      } else {
+        alert(data.mensagem);
+      }
+    });
+}
+
+function acceptOffer(idProposta) {
+  const id_servico = getURLJob();
+ 
+  const data = {
+    aceitar: 1,
+    id_servicoProposta: idProposta,
+    id_servico: id_servico,
+  };
+  fetch("./api/acceptOffer.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
