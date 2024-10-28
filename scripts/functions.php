@@ -2,7 +2,6 @@
 function checkOwner()
 {
     include "./api/conn.php";
-    session_start();
     $id_usuario = $_SESSION["userId"];
     $servicoId = $_GET['id_servico']; // Get the service ID from the URL
 

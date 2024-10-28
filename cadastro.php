@@ -1,12 +1,3 @@
- <!-- NavBar -->
- <?php
-session_start();
-if (isset($_GET["logout"])) {
-    session_unset();
-    session_destroy();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -111,7 +102,7 @@ if (isset($_GET["logout"])) {
                     </div>
                     <div class="mb-3">
                         <label for="passwordConf" class="form-label">Confirme a senha</label>
-                        <input type="password" class="form-control" id="password">
+                        <input type="password" class="form-control" id="passwordConf">
                     </div>
                     <div class="mb-3">
                         <label for="telefone" class="form-label">Telefone: </label>

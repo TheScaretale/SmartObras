@@ -10,7 +10,9 @@
  */
 
 include_once "config.env";
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 try{
     $banco = new PDO("mysql:host=$server;dbname=$db",$user,$passw);
     $banco->exec("set names utf8");
