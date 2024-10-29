@@ -17,7 +17,7 @@ if (isset($dados["getjobs"])) {
                 FROM servico s
                 WHERE EXISTS 
                 (SELECT * FROM servico_proposta sp 
-                WHERE sp.id_servico = s.id_servico 
+                WHERE sp.id_servico = s.id_servicoProposta 
                 AND sp.id_usuario = :usuario);";
     $consulta = $banco->prepare($sql);
     $consulta->bindParam(':usuario', $usuario);

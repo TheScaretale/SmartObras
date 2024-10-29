@@ -868,11 +868,18 @@ function fillJobDetailsClient(jobData) {
       p_4.textContent = proposta.mensagem;
       divCardBody5.appendChild(p_4);
 
-      const acptBtn = document.createElement("button");
-      acptBtn.className = "btn btn-primary";
-      acptBtn.textContent = "Aceitar proposta";
-      acptBtn.onclick = acceptOffer;
-      divCardBody5.appendChild(acptBtn);
+      if(jobData.status == "3" || jobData.status == "2"){
+        const acptBtn = document.createElement("button");
+        acptBtn.className = "btn btn-primary";
+        acptBtn.textContent = "Aceitar proposta";
+        acptBtn.onclick = () => acceptOffer(proposta.id_proposta);
+        divCardBody5.appendChild(acptBtn);
+      }else if(jobData.status == "1" && proposta.id_proposta == jobData.propostaAceita){
+        const h6Status = document.createElement("h6");
+        h6Status.className = "card-title";
+        h6Status.textContent = "Proposta aceita";
+        divCardBody5.appendChild(h6Status);
+      }
     });
   } else {
     const divCard4 = document.createElement("div");
@@ -924,7 +931,7 @@ function fillJobDetailsClient(jobData) {
       colCard2.className = "col-md-3";
       row2.appendChild(colCard2);
 
-      if(jobData.status == "NULL" || jobData.status == "EMPTY"){
+      if(jobData.status == "3" || jobData.status == "2"){
         const acptBtn = document.createElement("button");
         acptBtn.className = "btn btn-primary";
         acptBtn.textContent = "Aceitar proposta";
@@ -935,10 +942,7 @@ function fillJobDetailsClient(jobData) {
         h6Status.className = "card-title";
         h6Status.textContent = "Proposta aceita";
         colCard2.appendChild(h6Status);
-      }else{
-
       }
-
     });
   }
 
