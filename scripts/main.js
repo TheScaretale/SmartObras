@@ -666,10 +666,7 @@ function fillJobDetails(jobData) {
     bidBtn.setAttribute("data-bs-target", "#propostaModal");
     dGrid.appendChild(bidBtn);
     bidBtn.disabled = true;
-  }else if(jobData.propostaAceita == "1" && jobData.){
-
-  }
-  else{
+  }else{
     const bidBtn = document.createElement("button");
     bidBtn.className = "btn btn-primary";
     bidBtn.textContent = "Fazer uma proposta";
