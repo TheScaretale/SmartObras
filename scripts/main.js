@@ -658,13 +658,25 @@ function fillJobDetails(jobData) {
   dGrid.className = "d-grid gap-2";
   divCardBody2.appendChild(dGrid);
 
-  const bidBtn = document.createElement("button");
-  bidBtn.className = "btn btn-primary";
-  bidBtn.textContent = "Fazer uma proposta";
-  bidBtn.setAttribute("data-bs-toggle", "modal");
-  bidBtn.setAttribute("data-bs-target", "#propostaModal");
-  dGrid.appendChild(bidBtn);
+  if(jobData.propostaAceita == "1"){
+    const bidBtn = document.createElement("button");
+    bidBtn.className = "btn btn-primary";
+    bidBtn.textContent = "Trabalho em andamento";
+    bidBtn.setAttribute("data-bs-toggle", "modal");
+    bidBtn.setAttribute("data-bs-target", "#propostaModal");
+    dGrid.appendChild(bidBtn);
+    bidBtn.disabled = true;
+  }else if(jobData.propostaAceita == "1" && jobData.){
 
+  }
+  else{
+    const bidBtn = document.createElement("button");
+    bidBtn.className = "btn btn-primary";
+    bidBtn.textContent = "Fazer uma proposta";
+    bidBtn.setAttribute("data-bs-toggle", "modal");
+    bidBtn.setAttribute("data-bs-target", "#propostaModal");
+    dGrid.appendChild(bidBtn);
+  }
   const hr = document.createElement("hr");
   divCardBody2.appendChild(hr);
 
@@ -746,6 +758,7 @@ function fillJobDetailsClient(jobData) {
   const h5 = document.createElement("h3");
   h5.className = "card-title";
   h5.textContent = jobData.titulo;
+  h5.id = "titulo";
   divCardBody.appendChild(h5);
 
   const hr3 = document.createElement("hr");
@@ -758,6 +771,7 @@ function fillJobDetailsClient(jobData) {
 
   const p = document.createElement("p");
   p.className = "card-text";
+  p.id = "descricao";
   p.textContent = jobData.descricao;
   divCardBody.appendChild(p);
 
@@ -778,6 +792,7 @@ function fillJobDetailsClient(jobData) {
   const h5_2 = document.createElement("h5");
   h5_2.className = "card-title text-end";
   h5_2.textContent = `Orçamento do cliente: R$ ${jobData.orcamento}`;
+  h5_2.id = "orcamento";
   divCardBody2.appendChild(h5_2);
 
   const dGrid = document.createElement("div");
@@ -789,6 +804,7 @@ function fillJobDetailsClient(jobData) {
   bidBtn.textContent = "Editar trabalho";
   bidBtn.setAttribute("data-bs-toggle", "modal");
   bidBtn.setAttribute("data-bs-target", "#editarTrabalho");
+  bidBtn.onclick = loadJobData;
   dGrid.appendChild(bidBtn);
 
   const hr = document.createElement("hr");
@@ -938,10 +954,12 @@ function fillJobDetailsClient(jobData) {
         acptBtn.onclick = () => acceptOffer(proposta.id_proposta);
         colCard2.appendChild(acptBtn);
       }else if(jobData.status == "1" && proposta.id_proposta == jobData.propostaAceita){
-        const h6Status = document.createElement("h6");
-        h6Status.className = "card-title";
-        h6Status.textContent = "Proposta aceita";
-        colCard2.appendChild(h6Status);
+        const h5Status = document.createElement("h5");
+        h5Status.className = "card-title";
+        h5Status.textContent = "Proposta aceita";
+        colCard2.appendChild(h5Status);
+
+        bidBtn.disabled = true;
       }
     });
   }
@@ -990,6 +1008,51 @@ function acceptOffer(idProposta) {
     id_servico: id_servico,
   };
   fetch("./api/acceptOffer.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      if (data.codigo === 1) {
+        alert(data.mensagem);
+      } else {
+        alert(data.mensagem);
+      }
+    });
+}
+
+function loadJobData(){
+  const idServico = document.getElementById("idServico")
+  idServico.value = getURLJob();
+  const tituloServico = document.getElementById("tituloTrabalho");
+  tituloServico.value = document.getElementById("titulo").textContent;
+  const descricaoServico = document.getElementById("descricaoTrabalho");
+  descricaoServico.value = document.getElementById("descricao").textContent;
+  const orcamentoTrabalho = document.getElementById("orcamentoTrabalho");
+  orcamentoTrabalho.value = document.getElementById("orcamento").textContent;
+  const orcamentoNumeros = orcamentoTrabalho.value.match(/\d+/g).join('');
+  orcamentoTrabalho.value = orcamentoNumeros;
+}
+
+function editJob(){
+  const id_servico = document.getElementById("idServico").value;
+  const titulo = document.getElementById("tituloTrabalho").value;
+  const descricao = document.getElementById("descricaoTrabalho").value;
+  const orcamento = document.getElementById("orcamentoTrabalho").value;
+
+  const data = {
+    editar: 1,
+    id_servico: id_servico,
+    titulo: titulo,
+    descricao: descricao,
+    orcamento: orcamento,
+  };
+
+  fetch("./api/editJob.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

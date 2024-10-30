@@ -14,9 +14,10 @@ if (isset($dados["getId"])) {
                 sp.mensagem, 
                 sub.totalPropostas, 
                 u1.nome as nomeUsuario, 
-                u2.nome as nomeCriador, 
+                u2.nome as nomeCriador,
                 sp.id as id_proposta,
                 s.id_servicoProposta as propostaAceita,
+                u3.nome as nomeUsuarioPropostaAceita,
                 CASE 
                     WHEN s.id_servicoProposta IS NULL THEN 3
                     WHEN s.id_servicoProposta = '' THEN 2
@@ -39,6 +40,10 @@ if (isset($dados["getId"])) {
                 GROUP BY 
                     id_servico
             ) sub ON s.id_servico = sub.id_servico
+            LEFT JOIN 
+                servico_proposta sp_aceita ON sp_aceita.id = s.id_servicoProposta
+            LEFT JOIN 
+                usuario u3 ON sp_aceita.id_usuario = u3.id_usuario
             WHERE 
                 s.id_servico = :id";
     $consulta = $banco->prepare($sql);
