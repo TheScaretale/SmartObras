@@ -1,18 +1,10 @@
-const chatBtn = document.getElementById("chat-button");
-if (chatBtn) {
-  document.getElementById("chat-button").addEventListener("click", function () {
-    var chatWindow = document.getElementById("chat-window");
-    // Alterna entre abrir e fechar o chat
-    if (
-      chatWindow.style.display === "none" ||
-      chatWindow.style.display === ""
-    ) {
-      chatWindow.style.display = "block";
-    } else {
-      chatWindow.style.display = "none";
-    }
-  });
-}
+const tooltipTriggerList = document.querySelectorAll(
+  '[data-bs-toggle="tooltip"]'
+);
+const tooltipList = [...tooltipTriggerList].map(
+  (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+);
+
 
 function postData(url = "", data = {}) {
   return fetch(url, {
@@ -33,6 +25,12 @@ const loginBtn = document.getElementById("btnEntrar");
 if (loginBtn) {
   loginBtn.addEventListener("click", login);
 } //Carregar o botão de login e garantir que ele funcione
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    login(event);
+  }
+}); // Adicionar evento para a tecla "Enter"
 
 function login(event) {
   event.preventDefault(); //Evitar erro de CORS
@@ -412,6 +410,7 @@ if (jobsContainer) {
 
 function getJobsProfile() {
   const url = "./api/getJobs2.php";
+  const totalJobs = document.getElementById("totalProjetos")
   const dados = {
     getjobs: 1,
   };
@@ -431,6 +430,7 @@ function getJobsProfile() {
         container.innerHTML = ""; // Clear existing content
 
         if (Array.isArray(data)) {
+          totalJobs.textContent = data.length
           data.forEach((job) => {
             const jobElement = createJobElement(job);
             container.appendChild(jobElement);
@@ -447,6 +447,7 @@ function getJobsProfile() {
 
 function getJobsProfile2() {
   const url = "./api/getJobs.php";
+  const totalJobs = document.getElementById("totalProjetos")
   const dados = {
     source: "perfil",
   };
@@ -464,8 +465,8 @@ function getJobsProfile2() {
       const container = document.getElementById("profileJobsCliente"); // Replace with your container ID
       if (container) {
         container.innerHTML = ""; // Clear existing content
-
         if (Array.isArray(data)) {
+          totalJobs.textContent = data.length
           data.forEach((job) => {
             const jobElement = createJobElement(job);
             container.appendChild(jobElement);
@@ -620,7 +621,7 @@ function fillJobDetails(jobData) {
 
   //Card 4 Começa aqui
 
-  const divCard4 = document.createElement("div");
+  /* const divCard4 = document.createElement("div");
   divCard4.className = "card";
   divCol.appendChild(divCard4);
 
@@ -631,7 +632,7 @@ function fillJobDetails(jobData) {
   const h5_4 = document.createElement("h5");
   h5_4.className = "card-title text-center";
   h5_4.textContent = "Propostas realizadas:";
-  divCardBody4.appendChild(h5_4);
+  divCardBody4.appendChild(h5_4); */
 
   // Coluna da direita
 
@@ -658,15 +659,15 @@ function fillJobDetails(jobData) {
   dGrid.className = "d-grid gap-2";
   divCardBody2.appendChild(dGrid);
 
-  if(jobData.propostaAceita == "1"){
+  if (jobData.propostaAceita == "1") {
     const bidBtn = document.createElement("button");
     bidBtn.className = "btn btn-primary";
-    bidBtn.textContent = "Trabalho em andamento";
+    bidBtn.textContent = "Trabalho em andamento ou encerrado";
     bidBtn.setAttribute("data-bs-toggle", "modal");
     bidBtn.setAttribute("data-bs-target", "#propostaModal");
     dGrid.appendChild(bidBtn);
     bidBtn.disabled = true;
-  }else{
+  } else {
     const bidBtn = document.createElement("button");
     bidBtn.className = "btn btn-primary";
     bidBtn.textContent = "Fazer uma proposta";
@@ -881,13 +882,16 @@ function fillJobDetailsClient(jobData) {
       p_4.textContent = proposta.mensagem;
       divCardBody5.appendChild(p_4);
 
-      if(jobData.status == "3" || jobData.status == "2"){
+      if (jobData.status == "3" || jobData.status == "2") {
         const acptBtn = document.createElement("button");
         acptBtn.className = "btn btn-primary";
         acptBtn.textContent = "Aceitar proposta";
         acptBtn.onclick = () => acceptOffer(proposta.id_proposta);
         divCardBody5.appendChild(acptBtn);
-      }else if(jobData.status == "1" && proposta.id_proposta == jobData.propostaAceita){
+      } else if (
+        jobData.status == "1" &&
+        proposta.id_proposta == jobData.propostaAceita
+      ) {
         const h6Status = document.createElement("h6");
         h6Status.className = "card-title";
         h6Status.textContent = "Proposta aceita";
@@ -944,13 +948,16 @@ function fillJobDetailsClient(jobData) {
       colCard2.className = "col-md-3";
       row2.appendChild(colCard2);
 
-      if(jobData.status == "3" || jobData.status == "2"){
+      if (jobData.status == "3" || jobData.status == "2") {
         const acptBtn = document.createElement("button");
         acptBtn.className = "btn btn-primary";
         acptBtn.textContent = "Aceitar proposta";
         acptBtn.onclick = () => acceptOffer(proposta.id_proposta);
         colCard2.appendChild(acptBtn);
-      }else if(jobData.status == "1" && proposta.id_proposta == jobData.propostaAceita){
+      } else if (
+        jobData.status == "1" &&
+        proposta.id_proposta == jobData.propostaAceita
+      ) {
         const h5Status = document.createElement("h5");
         h5Status.className = "card-title";
         h5Status.textContent = "Proposta aceita";
@@ -998,7 +1005,7 @@ function makeOffer() {
 
 function acceptOffer(idProposta) {
   const id_servico = getURLJob();
- 
+
   const data = {
     aceitar: 1,
     id_servicoProposta: idProposta,
@@ -1022,8 +1029,8 @@ function acceptOffer(idProposta) {
     });
 }
 
-function loadJobData(){
-  const idServico = document.getElementById("idServico")
+function loadJobData() {
+  const idServico = document.getElementById("idServico");
   idServico.value = getURLJob();
   const tituloServico = document.getElementById("tituloTrabalho");
   tituloServico.value = document.getElementById("titulo").textContent;
@@ -1031,11 +1038,11 @@ function loadJobData(){
   descricaoServico.value = document.getElementById("descricao").textContent;
   const orcamentoTrabalho = document.getElementById("orcamentoTrabalho");
   orcamentoTrabalho.value = document.getElementById("orcamento").textContent;
-  const orcamentoNumeros = orcamentoTrabalho.value.match(/\d+/g).join('');
+  const orcamentoNumeros = orcamentoTrabalho.value.match(/\d+/g).join("");
   orcamentoTrabalho.value = orcamentoNumeros;
 }
 
-function editJob(){
+function editJob() {
   const id_servico = document.getElementById("idServico").value;
   const titulo = document.getElementById("tituloTrabalho").value;
   const descricao = document.getElementById("descricaoTrabalho").value;
@@ -1066,3 +1073,7 @@ function editJob(){
       }
     });
 }
+
+function retrieveMessage() {}
+
+function sendMessage() {}

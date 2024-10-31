@@ -100,7 +100,7 @@ if (isset($_GET["logout"])) {
  <!-- parte entrar -->
  <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
  <div class="card mt-4" style="width: 500px;"> 
-            <div class="card-body text-center">
+            <div class="card-body text-center" id="logimForm">
                 <div class="mb-3">
                     <label for="email" class="form-label">Endereço de email</label>
                     <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
@@ -117,7 +117,7 @@ if (isset($_GET["logout"])) {
                     <a href="esquecisenha.php">Esqueceu a senha?</a>
                 </div>
                 </div>
-                <a class="botaoo" id="btnEntrar">Entrar</a>
+                <btn class="botaoo" id="btnEntrar" type="submit">Entrar</btn>
             </div>
     </div>
 </div>

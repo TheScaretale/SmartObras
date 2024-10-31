@@ -76,13 +76,23 @@ if (isset($dados["source"])) {
 
         case 'perfil':
             $sql = "SELECT 
-                        s.id_servico, s.titulo, s.descricao, s.orcamento, s.id_tipo_servico, s.id_usuario, s.id_status, s.data_inclusao, s.data_validade, s.data_conclusao,
-                        (SELECT ROUND(AVG(ava_nota), 1) FROM avaliacao WHERE ava_id_usuario = s.id_usuario) AS avaliacao,
-                        DATEDIFF(CURDATE(), s.data_inclusao) AS diasPassados,
-                        (SELECT MAX(s.orcamento) FROM servico s) as valorMax,
-                        (SELECT MIN(s.orcamento) FROM servico s) as valorMin
-                    FROM servico s
-                    WHERE s.id_usuario = ?";
+    s.id_servico,
+    s.titulo,
+    s.descricao,
+    s.orcamento,
+    s.id_tipo_servico,
+    s.id_usuario,
+    s.id_status,
+    s.data_inclusao,
+    s.data_validade,
+    s.data_conclusao,
+    (SELECT ROUND(AVG(ava_nota), 1) FROM avaliacao WHERE ava_id_usuario = s.id_usuario) AS avaliacao,
+    DATEDIFF(CURDATE(), s.data_inclusao) AS diasPassados,
+    (SELECT MAX(orcamento) FROM servico) AS valorMax,
+    (SELECT MIN(orcamento) FROM servico) AS valorMin,
+    (SELECT COUNT(*) FROM servico where id_usuario = s.id_usuario) AS totalTrabalhos
+FROM servico s
+WHERE s.id_usuario = ?;";
             $params[] = $usuario;
             break;
         default:

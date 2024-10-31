@@ -1,127 +1,76 @@
-<section>
-  <div class="container py-5">
+<?php include "navbar.php" ?>
 
-    <div class="row d-flex justify-content-center">
-      <div class="col-md-10 col-lg-8 col-xl-6">
+<div class="d-flex">
+  <!-- Sidebar de Conversas -->
+  <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px; height: 600px;">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+        <span class="fs-4">Conversas</span>
+      </a>
+      <hr>
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <a href="#" class="nav-link active" aria-current="page">
+            <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+            Home
+          </a>
+        </li>
+        <li><a href="#" class="nav-link link-body-emphasis"><svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg> Dashboard</a></li>
+        <li><a href="#" class="nav-link link-body-emphasis"><svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg> Orders</a></li>
+        <li><a href="#" class="nav-link link-body-emphasis"><svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg> Products</a></li>
+        <li><a href="#" class="nav-link link-body-emphasis"><svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg> Customers</a></li>
+      </ul>
+      <hr>
+      <div class="dropdown">
+        <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+          <strong>mdo</strong>
+        </a>
+        <ul class="dropdown-menu text-small shadow">
+          <li><a class="dropdown-item" href="#">New project...</a></li>
+          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Sign out</a></li>
+        </ul>
+      </div>
+  </div>
 
-        <div class="card" id="chat2">
-          <div class="card-header d-flex justify-content-between align-items-center p-3">
-            <h5 class="mb-0">Chat</h5>
-            <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-sm" data-mdb-ripple-color="dark">Let's Chat
-              App</button>
+   <!-- Lista de Conversas -->
+   <div class="col-12 col-md-9 d-flex flex-column align-items-stretch bg-body-tertiary" style="height: 100vh; overflow-y: auto;">
+      <a href="/" class="d-flex align-items-center flex-shrink-0 p-3 link-body-emphasis text-decoration-none border-bottom">
+        <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+        <span class="fs-5 fw-semibold">List group</span>
+      </a>
+      <div class="list-group list-group-flush border-bottom scrollarea">
+        <a href="#" class="list-group-item list-group-item-action active py-3 lh-sm" aria-current="true">
+          <div class="d-flex w-100 align-items-center justify-content-between">
+            <strong class="mb-1">List group item heading</strong>
+            <small>Wed</small>
           </div>
-          <div class="card-body" data-mdb-perfect-scrollbar-init style="position: relative; height: 400px">
-
-            <div class="d-flex flex-row justify-content-start">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
-                alt="avatar 1" style="width: 45px; height: 100%;">
-              <div>
-                <p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary">Hi</p>
-                <p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary">How are you ...???
-                </p>
-                <p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary">What are you doing
-                  tomorrow? Can we come up a bar?</p>
-                <p class="small ms-3 mb-3 rounded-3 text-muted">23:58</p>
-              </div>
-            </div>
-
-            <div class="divider d-flex align-items-center mb-4">
-              <p class="text-center mx-3 mb-0" style="color: #a2aab7;">Today</p>
-            </div>
-
-            <div class="d-flex flex-row justify-content-end mb-4 pt-1">
-              <div>
-                <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">Hiii, I'm good.</p>
-                <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">How are you doing?</p>
-                <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">Long time no see! Tomorrow
-                  office. will
-                  be free on sunday.</p>
-                <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">00:06</p>
-              </div>
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
-                alt="avatar 1" style="width: 45px; height: 100%;">
-            </div>
-
-            <div class="d-flex flex-row justify-content-start mb-4">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
-                alt="avatar 1" style="width: 45px; height: 100%;">
-              <div>
-                <p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary">Okay</p>
-                <p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary">We will go on
-                  Sunday?</p>
-                <p class="small ms-3 mb-3 rounded-3 text-muted">00:07</p>
-              </div>
-            </div>
-
-            <div class="d-flex flex-row justify-content-end mb-4">
-              <div>
-                <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">That's awesome!</p>
-                <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">I will meet you Sandon Square
-                  sharp at
-                  10 AM</p>
-                <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">Is that okay?</p>
-                <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">00:09</p>
-              </div>
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
-                alt="avatar 1" style="width: 45px; height: 100%;">
-            </div>
-
-            <div class="d-flex flex-row justify-content-start mb-4">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
-                alt="avatar 1" style="width: 45px; height: 100%;">
-              <div>
-                <p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary">Okay i will meet
-                  you on
-                  Sandon Square</p>
-                <p class="small ms-3 mb-3 rounded-3 text-muted">00:11</p>
-              </div>
-            </div>
-
-            <div class="d-flex flex-row justify-content-end mb-4">
-              <div>
-                <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">Do you have pictures of Matley
-                  Marriage?</p>
-                <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">00:11</p>
-              </div>
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
-                alt="avatar 1" style="width: 45px; height: 100%;">
-            </div>
-
-            <div class="d-flex flex-row justify-content-start mb-4">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
-                alt="avatar 1" style="width: 45px; height: 100%;">
-              <div>
-                <p class="small p-2 ms-3 mb-1 rounded-3 bg-body-tertiary">Sorry I don't
-                  have. i
-                  changed my phone.</p>
-                <p class="small ms-3 mb-3 rounded-3 text-muted">00:13</p>
-              </div>
-            </div>
-
-            <div class="d-flex flex-row justify-content-end">
-              <div>
-                <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">Okay then see you on sunday!!
-                </p>
-                <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">00:15</p>
-              </div>
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
-                alt="avatar 1" style="width: 45px; height: 100%;">
-            </div>
-
+          <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
+        </a>
+<hr>
+        <a href="#" class="list-group-item list-group-item-action active py-3 lh-sm" aria-current="true">
+          <div class="d-flex w-100 align-items-center justify-content-between">
+            <strong class="mb-1">List group item heading</strong>
+            <small>Wed</small>
           </div>
-          <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
-              alt="avatar 3" style="width: 40px; height: 100%;">
-            <input type="text" class="form-control form-control-lg" id="exampleFormControlInput1"
-              placeholder="Type message">
-            <a class="ms-1 text-muted" href="#!"><i class="fas fa-paperclip"></i></a>
-            <a class="ms-3 text-muted" href="#!"><i class="fas fa-smile"></i></a>
-            <a class="ms-3" href="#!"><i class="fas fa-paper-plane"></i></a>
+          <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
+        </a>
+<hr>
+        <a href="#" class="list-group-item list-group-item-action active py-3 lh-sm" aria-current="true">
+          <div class="d-flex w-100 align-items-center justify-content-between">
+            <strong class="mb-1">List group item heading</strong>
+            <small>Wed</small>
           </div>
-        </div>
-
+          <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
+        </a>
+        
       </div>
     </div>
-
   </div>
-</section>
+</div>
+
+<?php include "footer.php" ?>
+    

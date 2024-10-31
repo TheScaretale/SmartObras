@@ -66,12 +66,10 @@ include "navbar.php";
                     </div>
                     
                 </div>
-                <button class="btn btn-primary" id="filterButton">Aplicar Filtros</button>
+                <button class="btn btn-primary ms-3" id="filterButton">Aplicar Filtros</button>
             </div>
         </div>
     </div>
-
-
 
     <div class="col-lg-8">
         <div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">

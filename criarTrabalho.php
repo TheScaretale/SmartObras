@@ -4,6 +4,8 @@ include "navbar.php";
 
 <head>
     <link rel="stylesheet" href="styles/cadastro.css">
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
@@ -13,10 +15,12 @@ include "navbar.php";
                 <!-- Cria o form aqui -->
                 <div class="mb-3 w-100">
                     <label class="form-label" for="titulo">Título do Serviço</label>
+                    <i class="bi bi-question-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Amigão ta obvio né"></i>
                     <input class="form-control" type="text" placeholder="Título" id="titulo">
                 </div>
                 <div class="mb-3 w-100">
                     <label for="descricao" class="form-label">Descrição do serviço</label>
+                    <i class="bi bi-question-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Amigão ta obvio né"></i>
                     <div class="form-floating">
                         <textarea class="form-control" placeholder="Descrição" id="descricao"></textarea>
                         <label for="descricao">Descrição</label>
@@ -24,22 +28,25 @@ include "navbar.php";
                 </div>
                 <div class="mb-3 w-100">
                     <label class="form-label">Qual o tipo do serviço</label>
+                    <i class="bi bi-question-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Amigão ta obvio né"></i>
                     <select class="form-select form-select-sm" id="tipo_servico">
                         <option selected>Selecione o tipo de serviço</option>
                         <option value="1">Azulejista</option>
                         <option value="2">Eletricista</option>
                         <option value="3">Hidráulica</option>
-                    </select>        
+                    </select>
                 </div>
                 <div class="mb-3 w-100">
                     <label class="form-label" for="orcamento">Orçamento</label>
+                    <i class="bi bi-question-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Amigão ta obvio né"></i>
                     <div class="input-group">
                         <span class="input-group-text">R$</span>
                         <input type="text" id="orcamento" class="form-control" aria-label="Amount">
                     </div>
                 </div>
                 <div class="mb-3 w-100">
-                    <label for="tipoOrcamento" class="form-label">Qual o tipo do orçamento?</label>
+                    <label for="tipoOrcamento" class="form-label">Qual o tipo do orçamento</label>
+                    <i class="bi bi-question-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Amigão ta obvio né"></i>
                     <select id="tipoOrcamento" class="form-select form-select-sm">
                         <option value="1">Por hora</option>
                         <option value="2">Por dia</option>

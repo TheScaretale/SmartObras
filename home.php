@@ -40,7 +40,7 @@
                     </div>
                     <div class="text-end">
                         <h5 class="review-count m-1">Projetos</h5>
-                        <p class="m-0">32</p>
+                        <p class="m-0" id="totalProjetos"></p>
                     </div>
                 </div>
             </div>
