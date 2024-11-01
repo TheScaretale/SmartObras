@@ -25,97 +25,60 @@
 
 <div class="container-fluid">
     <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-light text-black min-vh-100">
-
-        
-            <!-- <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-black min-vh-100">
-                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <div class="col-auto col-md-5 col-xl-4 px-sm-4 px-2 bg-light text-black min-vh-80">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-black min-vh-100">
+                <a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline">Mensagens</span>
                 </a>
-        
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
-                        <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1 </a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></a>
-                    </li>
-                    <li>
-                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
-                        <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span> </a>
-                        <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 1</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
-                    </li>
-                </ul>
-                <hr>
-                <div class="dropdown pb-4">
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                        <span class="d-none d-sm-inline mx-1">loser</span>
+
+                <!-- List Group de mensagens recentes -->
+                <div class="list-group" id="jobsTable">
+                    <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                        <img src="https://github.com/twbs.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+                        <div class="d-flex gap-2 w-100 justify-content-between">
+                            <div>
+                                <h6 class="mb-0">User1</h6>
+                                <p class="mb-0 opacity-75">Mensagem recente...</p>
+                            </div>
+                            <small class="opacity-50 text-nowrap">2m</small>
+                        </div>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                        <li><a class="dropdown-item" href="#">New project...</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
-                    </ul>
+                    <!-- Outras mensagens recentes podem ser adicionadas aqui -->
                 </div>
-            </div> -->
+            </div>
         </div>
-        <div class="col py-3">
-            <h3>Left Sidebar with Submenus</h3>
-            <p class="lead"> An example 2-level sidebar with collasible menu items. The menu functions like an "accordion" where only a single menu is be open at a time. While the sidebar itself is not toggle-able, it does responsively shrink in width on smaller screens.</p>
-            <ul class="list-unstyled">
-                <li>
-                    <h5>Responsive</h5> shrinks in width, hides text labels and collapses to icons only on mobile
-                </li>
-            </ul>
+
+        <div class="col py-3" id="janelaChat">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h5 class="card-title"> Nome do usuario </h5>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="card mb-3 align-self-start">
+                                <div class="card-body">
+                                    <p id="mensagemDestinatario">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis minima veniam quo voluptate omnis ut officia repudiandae minus possimus ducimus, optio expedita consequatur excepturi iusto quos porro nihil, cum officiis? Architecto illo ad inventore reiciendis, eveniet aliquam ea voluptates quidem fugit perspiciatis praesentium quas velit quis asperiores adipisci laborum est!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-md-5 offset-md-7">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <p id="mensagemRemetente">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia soluta repellat ipsam optio dolores? Blanditiis ad aspernatur ratione error libero. Perferendis obcaecati in ipsam quos. At velit amet illum cumque.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="input-group">
+                        <textarea class="form-control" placeholder="Digite sua mensagem..." id="auto-resize" rows="1" oninput="autoResize(this)"></textarea>
+                        <button class="btn btn-primary">Enviar</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

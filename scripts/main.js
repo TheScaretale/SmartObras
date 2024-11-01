@@ -5,6 +5,11 @@ const tooltipList = [...tooltipTriggerList].map(
   (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
 );
 
+function autoResize(textarea){
+  textarea.style.height = 'auto';
+  textarea.style.height = textarea.scrollHeight + 'px';
+}
+
 
 function postData(url = "", data = {}) {
   return fetch(url, {
@@ -1074,6 +1079,8 @@ function editJob() {
     });
 }
 
-function retrieveMessage() {}
+function retrieveMessage() {
+
+}
 
 function sendMessage() {}
