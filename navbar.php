@@ -58,8 +58,12 @@ if (isset($_GET["logout"])) {
                             <a href="criarTrabalho.php" class="nav-link">Criar trabalho</a>
                         </li>
                         <li class="nav-item">
+                            <a href="chat.php" class="nav-link">Mensagens</a>
+                        </li>
+                        <li class="nav-item">
                             <a href="sobre.php" class="nav-link">Sobre</a>
                         </li>
+                        
                 </ul>
                 <div class="d-flex">
                     <ul class="navbar-nav me-5 mb-2 mb-lg-0">

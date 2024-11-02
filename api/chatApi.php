@@ -1,4 +1,30 @@
 <?php
+/**
+ * Este script processa mensagens de chat recebidas via JSON.
+ * 
+ * Inclui o arquivo de conexão com o banco de dados e decodifica o JSON recebido.
+ * 
+ * Dependendo do tipo de mensagem, realiza diferentes operações no banco de dados:
+ * - 'receber': Seleciona mensagens da conversa do usuário.
+ * - 'enviar': Insere uma nova mensagem na conversa.
+ * 
+ * Parâmetros JSON esperados:
+ * - "mensagem": Tipo de operação ('receber' ou 'enviar').
+ * - "userId": ID do usuário que está enviando ou recebendo a mensagem.
+ * - "id_usuario_para" (somente para 'enviar'): ID do usuário destinatário.
+ * - "conteudoMsg" (somente para 'enviar'): Conteúdo da mensagem a ser enviada.
+ * 
+ * Respostas JSON:
+ * - Código 1: Mensagem enviada com sucesso.
+ * - Código 2: Tipo de mensagem inválido.
+ * - Código 3: Erro durante a execução da operação.
+ * - Código 4: JSON inválido ou usuário não autenticado (comentado).
+ * 
+ * Exceções:
+ * - Captura exceções e retorna uma mensagem de erro com código 3.
+ * 
+ * @throws Exception Se ocorrer um erro durante a execução da consulta SQL.
+ */
 
 include "conn.php";
 

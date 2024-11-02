@@ -1084,3 +1084,9 @@ function retrieveMessage() {
 }
 
 function sendMessage() {}
+
+
+function editProfile(){
+
+  
+}

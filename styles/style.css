@@ -80,3 +80,9 @@ body{
     border-color: var(--laranja2) !important;
 }
 
+.list-group-item.active {
+    background-color: var(--laranja1)!important;
+    border-color: orange !important;
+    color: white;
+}
+

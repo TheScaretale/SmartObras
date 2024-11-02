@@ -60,10 +60,9 @@
              <div class="col-sm-3 col-lg-3 mt-3 ms-lg-5">
                  <?php if ($_SESSION["userType"] == "P") { ?>
                      <h5 class="bold card-title">Informações</h5>
-                     <p><span>Classificações dos clientes</span><strong class="pull-right">0</strong></p>
-                     <p><span>Certificações</span><strong class="pull-right">0</strong></p>
-                     <p><span>Último login</span><strong class="pull-right">0</strong></p>
-                     <p><span>Ingressou</span><strong class="pull-right">há 0</strong></p>
+                     <p>Email:<span id="emailPerfil"></span></p>
+                     <p>Telefone<span id="telefonePerfil"></span></p>
+                     <p>Foto<span id="fotoPerfil"></span></p>
                  <?php } else { ?>
                      <h5 class="bold card-title">Informações</h5>
                      <p><span>Não sei o que colocar</span><strong class="pull-right">0</strong></p>
@@ -74,7 +73,9 @@
              </div>
 
              <div style="display: flex; justify-content: flex-end;">
-                 <button type="button" style="width: 150px; height: 35px; font-size: 15px;" class="btn">Editar Perfil</button>
+             <div style="display: flex; justify-content: flex-end;">
+    <a href="editar_perfil.php" class="btn" style="width: 150px; height: 35px; font-size: 15px;">Editar Perfil</a>
+</div>
              </div>
          </div>
      </div>

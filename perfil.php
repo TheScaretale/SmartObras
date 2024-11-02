@@ -23,7 +23,7 @@
                              </div>
                          </div>
                          <div class="col-sm-6">
-                             <h3 class="card-title">Giovanna da Rosa Novo</h3>
+                             <h3 class="card-title"></h3>
                              <hr>
                              <h5 class="card-title">Azulejista e Hidraulica</h5>
                              <div class="d-flex justify-content-between align-items-center">
@@ -124,13 +124,14 @@
                      <p><span>Classificações dos clientes</span><strong class="pull-right">0</strong></p>
                      <p><span>Certificações</span><strong class="pull-right">0</strong></p>
                      <p><span>Último login</span><strong class="pull-right">0</strong></p>
-                     <p><span>Ingressou</span><strong class="pull-right">há 0</strong></p>
+                     <p><span>Ingressou</span><strong class="pull-right"></strong></p>
                      <div class="d-flex justify-content-between align-items-center mt-3"></div>
                  </div>
              </div>
          </div>
      </div>
  </div>
+
 
  <?php
     include "footer.php";
