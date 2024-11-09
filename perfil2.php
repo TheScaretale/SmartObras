@@ -5,7 +5,7 @@
 
  <div class="card  mt-3">
      <div class="card-body">
-         <div class="row">
+         <div class="row" id="containerPerfil">
              <div class="col-md-5 col-lg-3 text-center">
                  <div id="section-logo">
                      <svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -14,16 +14,8 @@
                      </svg>
                  </div>
                  <div class="">
-                     <?php
-                        $user = $_SESSION["user"];
-                        $nomeSobrenome = explode(" ", $user);
-                        $nome = $nomeSobrenome[0];
-                        $sobrenome = isset($nomeSobrenome[1]) ? $nomeSobrenome[1] : '';
-                        ?>
                      <div style="margin-top: 15px;">
-                         <p class="card-title" style="font-size: 40px; font-weight: bold; margin: 0;">
-                             <?php echo $nome; ?> <?php echo $sobrenome; ?>
-                         </p>
+                         <p id="nomePerfil" class="card-title" style="font-size: 40px; font-weight: bold; margin: 0;"></p>
                      </div>
                      <div class="d-flex justify-content-between align-items-center">
                          <div class="ratings" style="margin-left: 2.5rem;">
@@ -62,20 +54,23 @@
                      <h5 class="bold card-title">Informações</h5>
                      <p>Email:<span id="emailPerfil"></span></p>
                      <p>Telefone<span id="telefonePerfil"></span></p>
-                     <p>Foto<span id="fotoPerfil"></span></p>
+
                  <?php } else { ?>
                      <h5 class="bold card-title">Informações</h5>
-                     <p><span>Não sei o que colocar</span><strong class="pull-right">0</strong></p>
-                     <p><span>why?</span><strong class="pull-right">0</strong></p>
-                     <p><span>Último login</span><strong class="pull-right">0</strong></p>
-                     <p><span>Ingressou</span><strong class="pull-right">há 0</strong></p>
+                     <p>Email: <span id="emailPerfil"></span></p>
+                     <p>Telefone: <span id="telefonePerfil"></span></p>
+
                  <?php } ?>
              </div>
 
-             <div style="display: flex; justify-content: flex-end;">
-             <div style="display: flex; justify-content: flex-end;">
-    <a href="editar_perfil.php" class="btn" style="width: 150px; height: 35px; font-size: 15px;">Editar Perfil</a>
-</div>
+             <div id="profileBtns" style="display: flex; justify-content: flex-end;">
+                <button type="button" class="btn btn-warning" id="btnReturn" hidden>
+                        Voltar
+                </button>
+                <div class="me-2"></div>
+                <btn onclick="profileEditMode()" id="btnEditPerfil" class="btn btn-warning">
+                        Editar Perfil
+                </btn>
              </div>
          </div>
      </div>

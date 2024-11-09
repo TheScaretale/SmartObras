@@ -5,11 +5,10 @@ const tooltipList = [...tooltipTriggerList].map(
   (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
 );
 
-function autoResize(textarea){
-  textarea.style.height = 'auto';
-  textarea.style.height = textarea.scrollHeight + 'px';
+function autoResize(textarea) {
+  textarea.style.height = "auto";
+  textarea.style.height = textarea.scrollHeight + "px";
 }
-
 
 function postData(url = "", data = {}) {
   return fetch(url, {
@@ -415,7 +414,7 @@ if (jobsContainer) {
 
 function getJobsProfile() {
   const url = "./api/getJobs2.php";
-  const totalJobs = document.getElementById("totalProjetos")
+  const totalJobs = document.getElementById("totalProjetos");
   const dados = {
     getjobs: 1,
   };
@@ -435,7 +434,7 @@ function getJobsProfile() {
         container.innerHTML = ""; // Clear existing content
 
         if (Array.isArray(data)) {
-          totalJobs.textContent = data.length
+          totalJobs.textContent = data.length;
           data.forEach((job) => {
             const jobElement = createJobElement(job);
             container.appendChild(jobElement);
@@ -452,7 +451,7 @@ function getJobsProfile() {
 
 function getJobsProfile2() {
   const url = "./api/getJobs.php";
-  const totalJobs = document.getElementById("totalProjetos")
+  const totalJobs = document.getElementById("totalProjetos");
   const dados = {
     source: "perfil",
   };
@@ -471,7 +470,7 @@ function getJobsProfile2() {
       if (container) {
         container.innerHTML = ""; // Clear existing content
         if (Array.isArray(data)) {
-          totalJobs.textContent = data.length
+          totalJobs.textContent = data.length;
           data.forEach((job) => {
             const jobElement = createJobElement(job);
             container.appendChild(jobElement);
@@ -623,23 +622,6 @@ function fillJobDetails(jobData) {
   p.className = "card-text";
   p.textContent = jobData.descricao;
   divCardBody.appendChild(p);
-
-  //Card 4 Começa aqui
-
-  /* const divCard4 = document.createElement("div");
-  divCard4.className = "card";
-  divCol.appendChild(divCard4);
-
-  const divCardBody4 = document.createElement("div");
-  divCardBody4.className = "card-body";
-  divCard4.appendChild(divCardBody4);
-
-  const h5_4 = document.createElement("h5");
-  h5_4.className = "card-title text-center";
-  h5_4.textContent = "Propostas realizadas:";
-  divCardBody4.appendChild(h5_4); */
-
-  // Coluna da direita
 
   const divCol2 = document.createElement("div");
   divCol2.className = "col-md-4";
@@ -1079,14 +1061,120 @@ function editJob() {
     });
 }
 
-function retrieveMessage() {
-
-}
+function retrieveMessage() {}
 
 function sendMessage() {}
 
+function profileEditMode(){
+  const btnEdit = document.getElementById("btnEditPerfil");
+  btnEdit.className = "btn btn-danger";
+  btnEdit.textContent = "Salvar alterações!"
 
-function editProfile(){
+  btnEdit.onclick = function(){
+    editProfile();
+    btnEdit.className = "btn btn-warning";
+    btnEdit.textContent = "Editar Perfil"
+  }
 
+  const btnReturn = document.getElementById("btnReturn");
+  btnReturn.hidden = false;
   
+  btnReturn.onclick = function(){
+    btnEdit.className = "btn btn-warning";
+    btnEdit.textContent = "Editar Perfil"
+    btnReturn.hidden = true;
+
+    nome.contentEditable = false;
+    nome.className = ""
+
+    email.contentEditable = false;
+    email.className = ""
+
+    telefone.contentEditable = false;
+    telefone.className = ""
+  }
+
+  const nome = document.getElementById("nomePerfil")
+  const email = document.getElementById("emailPerfil")
+  const telefone = document.getElementById("telefonePerfil")
+  const foto = document.getElementById("fotoPerfil")
+
+  nome.contentEditable = true;
+  nome.className = "form-control"
+
+  email.contentEditable = true;
+  email.className = "form-control"
+
+  telefone.contentEditable = true;
+  telefone.className = "form-control"
+
+}
+
+function editProfile() {
+  const nome = document.getElementById("nomePerfil");
+  const email = document.getElementById("emailPerfil");
+  const telefone = document.getElementById("telefonePerfil");
+  //const foto = document.getElementById("fotoPerfil");
+
+  const data = {
+    perfil: "editar",
+    nome: nome.value,
+    email: email.value,
+    telefone: telefone.value,
+    //foto: foto.value,
+  };
+
+  fetch("./api/editProfile.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      if (data.codigo === 1) {
+        alert(data.mensagem);
+      } else {
+        alert(data.mensagem);
+      }
+    });
+}
+
+function formatPhoneNumber(phoneNumber) {
+  const cleaned = ('' + phoneNumber).replace(/\D/g, '');
+  const match = cleaned.match(/^(\d{2})(\d{4,5})(\d{4})$/);
+  if (match) {
+    return `(${match[1]}) ${match[2]}-${match[3]}`;
+  }
+  return phoneNumber;
+}
+
+function getProfileData() {
+  const nome = document.getElementById("nomePerfil");
+  const email = document.getElementById("emailPerfil");
+  const telefone = document.getElementById("telefonePerfil");
+  const foto = document.getElementById("foto");
+
+  const data = {
+    perfil: "abrir",
+  };
+
+  fetch("./api/getProfileData.php")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      nome.textContent = data.nome;
+      email.textContent = data.email;
+      telefone.textContent = formatPhoneNumber(data.telefone);
+      //foto.value = data.foto;
+    });
+}
+
+if (window.location.pathname.endsWith("perfil2.php")) {
+  console.log("AAAA");
+  document.addEventListener("DOMContentLoaded", function () {
+    getProfileData();
+  });
 }

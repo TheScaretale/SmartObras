@@ -4,24 +4,16 @@ include "conn.php";
 
 $dados = json_decode(file_get_contents('php://input'), true);
 
-if(isset($dados["perfil"])){
+if (isset($dados["editarPerfil"])) {
     $usuario = $_SESSION["userId"];
-    $params = [];
+    $sql = "INSERT INTO usuario (nome, email, senha, telefone, foto) VALUES (:nome, :email, :senha, :telefone, :foto)";
+    $consulta = $banco->prepare($sql);
+    $consulta->execute($params);
 
-    switch($dados){
-        case "abrir":
-            $sql = "SELECT * FROM usuario WHERE id_usuario = :id";
-            $params = [':id' => $usuario];
-            break;
-        case "editar":
-            $sql = "";
-            $params = [
-                "email" => $dados["email"],
-                "telefone" => $dados["telefone"],
-                "foto" => $dados["foto"],
-            ];
-            break;
+    $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+    if ($resultado == true) {
+        echo json_encode(array('codigo' => 1, $resultado));
+    } else {
+        echo json_encode(array('codigo' => 2, 'mensagem' => 'Usuário não encontrado'));
     }
-
-
 }
