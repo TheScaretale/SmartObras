@@ -6,14 +6,23 @@ $dados = json_decode(file_get_contents('php://input'), true);
 
 if (isset($dados["editarPerfil"])) {
     $usuario = $_SESSION["userId"];
-    $sql = "INSERT INTO usuario (nome, email, senha, telefone, foto) VALUES (:nome, :email, :senha, :telefone, :foto)";
-    $consulta = $banco->prepare($sql);
-    $consulta->execute($params);
+    $nome = $dados["nome"];
+    $email = $dados["email"];
+    $telefone = $dados["telefone"];
 
-    $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
-    if ($resultado == true) {
-        echo json_encode(array('codigo' => 1, $resultado));
-    } else {
-        echo json_encode(array('codigo' => 2, 'mensagem' => 'Usuário não encontrado'));
+    $sql = "UPDATE usuario SET nome = :nome, email = :email, telefone = :telefone WHERE id_usuario = :id";
+    $consulta = $banco->prepare($sql);
+    $consulta->bindParam(':nome', $nome);
+    $consulta->bindParam(':email', $email);
+    $consulta->bindParam(':telefone', $telefone);
+    $consulta->bindParam(':id', $usuario);
+    $consulta->execute();
+    
+    if($consulta->rowCount() > 0){  
+        echo json_encode(array('codigo' => 1, 'mensagem' => 'Perfil editado com sucesso'));
+    }else{
+        echo json_encode(array('codigo' => 2, 'mensagem' => 'Erro ao editar perfil'));
     }
+}else{
+    echo json_encode(array('codigo' => 3, 'mensagem' => 'Erro ao editar perfil'));
 }

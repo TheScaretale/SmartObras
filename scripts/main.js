@@ -1065,85 +1065,103 @@ function retrieveMessage() {}
 
 function sendMessage() {}
 
-function profileEditMode(){
+function profileEditMode() {
   const btnEdit = document.getElementById("btnEditPerfil");
-  btnEdit.className = "btn btn-danger";
-  btnEdit.textContent = "Salvar alterações!"
-
-  btnEdit.onclick = function(){
-    editProfile();
-    btnEdit.className = "btn btn-warning";
-    btnEdit.textContent = "Editar Perfil"
-  }
-
   const btnReturn = document.getElementById("btnReturn");
-  btnReturn.hidden = false;
-  
-  btnReturn.onclick = function(){
-    btnEdit.className = "btn btn-warning";
-    btnEdit.textContent = "Editar Perfil"
-    btnReturn.hidden = true;
-
-    nome.contentEditable = false;
-    nome.className = ""
-
-    email.contentEditable = false;
-    email.className = ""
-
-    telefone.contentEditable = false;
-    telefone.className = ""
-  }
-
-  const nome = document.getElementById("nomePerfil")
-  const email = document.getElementById("emailPerfil")
-  const telefone = document.getElementById("telefonePerfil")
-  const foto = document.getElementById("fotoPerfil")
-
-  nome.contentEditable = true;
-  nome.className = "form-control"
-
-  email.contentEditable = true;
-  email.className = "form-control"
-
-  telefone.contentEditable = true;
-  telefone.className = "form-control"
-
-}
-
-function editProfile() {
   const nome = document.getElementById("nomePerfil");
   const email = document.getElementById("emailPerfil");
   const telefone = document.getElementById("telefonePerfil");
-  //const foto = document.getElementById("fotoPerfil");
+  const foto = document.getElementById("btnFoto");
 
-  const data = {
-    perfil: "editar",
-    nome: nome.value,
-    email: email.value,
-    telefone: telefone.value,
-    //foto: foto.value,
+  function setEditMode() {
+    btnEdit.className = "btn btn-danger";
+    btnEdit.textContent = "Salvar alterações!";
+    btnEdit.onclick = saveChanges;
+
+    nome.contentEditable = true;
+    nome.className = "form-control";
+
+    email.contentEditable = true;
+    email.className = "form-control";
+
+    telefone.contentEditable = true;
+    telefone.className = "form-control";
+
+    foto.hidden = false;
+
+    btnReturn.hidden = false;
+  }
+
+  function saveChanges() {
+    editProfile();
+    btnEdit.className = "btn btn-warning";
+    btnEdit.textContent = "Editar Perfil";
+    btnEdit.onclick = setEditMode;
+  }
+
+  btnReturn.onclick = function () {
+    btnEdit.className = "btn btn-warning";
+    btnEdit.textContent = "Editar Perfil";
+    btnEdit.onclick = setEditMode;
+    btnReturn.hidden = true;
+
+    nome.contentEditable = false;
+    nome.className = "";
+
+    email.contentEditable = false;
+    email.className = "";
+
+    telefone.contentEditable = false;
+    telefone.className = "";
+
+    foto.hidden = true;
   };
 
-  fetch("./api/editProfile.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Success:", data);
-      if (data.codigo === 1) {
-        alert(data.mensagem);
-      } else {
-        alert(data.mensagem);
-      }
-    });
+  setEditMode();
+}
+
+function editProfile() {
+  const nome = document.getElementById("nomePerfil").textContent;
+  const email = document.getElementById("emailPerfil").textContent;
+  const telefone = document.getElementById("telefonePerfil").textContent;
+  const foto = document.getElementById("foto").files[0];
+
+  const reader = new FileReader();
+  reader.onload = function (event) {
+    const fotoBase64 = event.target.result;
+
+    const data = {
+      editarPerfil: 1,
+      nome: nome,
+      email: email,
+      telefone: telefone,
+      foto: fotoBase64,
+    };
+    console.log(data);
+    fetch("./api/editProfile.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        if (data.codigo === 1) {
+          alert(data.mensagem);
+          location.reload();
+        } else {
+          alert(data.mensagem);
+        }
+      });
+  };
+
+  reader.readAsDataURL(foto);
 }
 
 function formatPhoneNumber(phoneNumber) {
-  const cleaned = ('' + phoneNumber).replace(/\D/g, '');
+  const cleaned = ("" + phoneNumber).replace(/\D/g, "");
   const match = cleaned.match(/^(\d{2})(\d{4,5})(\d{4})$/);
   if (match) {
     return `(${match[1]}) ${match[2]}-${match[3]}`;
