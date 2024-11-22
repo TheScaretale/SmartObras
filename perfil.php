@@ -3,135 +3,152 @@
     include "navbar.php";
     ?>
 
- <div class="container mt-5" id="jobDetails">
-     <div class="row">
-         <div class="col-md-8">
-             <div class="card">
-                 <div class="card-body">
-                     <div class="row">
-                         <div class="col-sm-4 col-md-5 col-lg-3 text-center">
-                             <div id="section-logo">
-                                 <div class="profile-photo img img-circle img-landscape"><img src="https://wkncdn.com/newx/assets/build/img/logos/default_logo_1-normal.c4ce6a3dc.jpg" itemprop="photo" width="200" alt="Freelancer Giovanna da Rosa Novo" title="Giovanna da Rosa Novo" loading="lazy" height="192"> <a class="edit-btn">Editar foto</a></div>
-                             </div>
-                             <div class="badges">
-                                 <div class="clearfix"></div>
-                                 <div class="row">
-                                     <div class="col-md-12 medals">
-                                         <div data-toggle="tooltip" title="" class=" profile-badge profile-badge-normal iron" data-original-title="Freelancer iron"></div>
-                                     </div>
-                                 </div>
-                             </div>
+ <div class="card  mt-3">
+     <div class="card-body">
+         <div class="row" id="containerPerfil">
+             <div class="col-md-5 col-lg-3 text-center">
+                 <div id="section-logo">
+                     <img src="data:image/png;base64" alt="" class="fotoPerfil">
+                     <input type="file" name="foto" id="fotoInput" hidden="">
+                     <label for="fotoInput" id="btnFoto" class="btn btn-primary mt-3" hidden="">Selecionar foto</label>
+                 </div>
+                 <div class="">
+                     <div style="margin-top: 15px;">
+                         <h2 id="nomePerfil"></h2>
+                     </div>
+                     <div class="d-flex justify-content-between align-items-center">
+                         <div class="ratings" style="margin-left: 2.5rem;">
+                             <i class="fa fa-star checked" style="font-size: 24px;"></i>
+                             <i class="fa fa-star checked" style="font-size: 24px;"></i>
+                             <i class="fa fa-star" style="font-size: 24px;"></i>
+                             <i class="fa fa-star" style="font-size: 24px;"></i>
+                             <i class="fa fa-star" style="font-size: 24px;">(10)</i>
                          </div>
-                         <div class="col-sm-6">
-                             <h3 class="card-title"></h3>
-                             <hr>
-                             <h5 class="card-title">Azulejista e Hidraulica</h5>
-                             <div class="d-flex justify-content-between align-items-center">
-                                 <div class="ratings">
-                                     <i class="fa fa-star checked"></i>
-                                     <i class="fa fa-star checked"></i>
-                                     <i class="fa fa-star "></i>
-                                     <i class="fa fa-star "></i>
-                                     <i class="fa fa-star"> (10)</i>
-                                 </div>
-                                 <div class="text-end">
-                                     <h5 class="review-count m-1">Projetos</h5>
-                                     <p class="m-0">32</p>
-                                 </div>
-                             </div>
-                             <h5 class="card-title">Freelancer experiente em Azulejista, Hidraulica</h5>
+                     </div>
+                 </div>
+                 <hr>
+                 <div class="profissao">
+                     <h4>Azulejista e Hidraulica</h4>
+                 </div>
+             </div>
 
-                             <h5 class="card-title">Selecione no maximo 1 Habilidade</h5>
-                             <div class="form-check">
-                                 <input class="form-check-input" type="checkbox" value="" id="flexAzulejista">
-                                 <label class="form-check-label" for="flexAzulejista">
-                                     Azulejista
-                                 </label>
-                             </div>
-                             <div class="form-check">
-                                 <input class="form-check-input" type="checkbox" value="" id="flexEletricista" checked>
-                                 <label class="form-check-label" for="flexEletricista">
-                                     Eletricista
-                                 </label>
-                             </div>
-                             <div class="form-check">
-                                 <input class="form-check-input" type="checkbox" value="" id="flexHidráulica" checked>
-                                 <label class="form-check-label" for="flexHidráulica">
-                                     Hidráulica
-                                 </label>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
+             <div class="col-1"></div>
+
+             <div class="col-sm-3 col-lg-3 mt-3 ms-lg-4">
+                 <?php if ($_SESSION["userType"] == "P") { ?>
+                     <h5 class="bold card-title">Atividades</h5>
+                     <p><span>Projetos realizados</span><strong class="pull-right">0</strong></p>
+                     <p><span>Projetos em Execução</span><strong class="pull-right">0</strong></p>
+                 <?php } else { ?>
+                     <h5 class="bold card-title">Meus Projetos</h5>
+                     <p><span>Projetos em aberto</span><strong class="pull-right">0</strong></p>
+                     <p><span>Projetos em Andamento</span><strong class="pull-right">0</strong></p>
+                     <p><span>Projetos em Concluidos</span><strong class="pull-right">0</strong></p>
+                 <?php } ?>
              </div>
-             <div class="card mt-3">
-                 <div class="card-body">
-                     <p class="d-inline-flex gap-1">
-                         <a class="btn btn-primary" data-bs-toggle="collapse" href="#ProjetosRealizados" role="button" aria-expanded="false" aria-controls="ProjetosRealizados">
-                             Projetos Realizados
-                         </a>
-                     </p>
-                     <div class="collapse" id="ProjetosRealizados">
-                         <div class="card card-body">
-                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias sint, error enim iusto nemo quos facere sequi eos voluptatibus officiis tempore quo vitae dolore numquam ipsam, qui iste? Delectus, nobis.
-                         </div>
-                     </div>
-                 </div>
+
+
+             <div class="col-sm-3 col-lg-3 mt-3 ms-lg-5">
+                 <?php if ($_SESSION["userType"] == "P") { ?>
+                     <h5 class="bold card-title">Informações</h5>
+                     <p>Email:<span id="emailPerfil"></span></p>
+                     <p>Telefone<span id="telefonePerfil"></span></p>
+
+                 <?php } else { ?>
+                     <h5 class="bold card-title">Informações</h5>
+                     <p>Email: <span id="emailPerfil"></span></p>
+                     <p>Telefone: <span id="telefonePerfil"></span></p>
+
+                 <?php } ?>
              </div>
-             <div class="card mt-3">
-                 <div class="card-body">
-                     <p class="d-inline-flex gap-1">
-                         <a class="btn btn-primary" data-bs-toggle="collapse" href="#SobreMim" role="button" aria-expanded="false" aria-controls="SobreMim">
-                             Sobre mim
-                         </a>
-                     </p>
-                     <div class="collapse" id="SobreMim">
-                         <div class="card card-body">
-                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias sint, error enim iusto nemo quos facere sequi eos voluptatibus officiis tempore quo vitae dolore numquam ipsam, qui iste? Delectus, nobis.
-                         </div>
-                     </div>
-                 </div>
+
+             <div id="profileBtns" style="display: flex; justify-content: flex-end;">
+                <button type="button" class="btn btn-warning" id="btnReturn" hidden>
+                        Voltar
+                </button>
+                <div class="me-2"></div>
+                <btn onclick="profileEditMode()" id="btnEditPerfil" class="btn btn-warning">
+                        Editar Perfil
+                </btn>
              </div>
-             <div class="card mt-3">
-                 <div class="card-body">
-                     <p class="d-inline-flex gap-1">
-                         <a class="btn btn-primary" data-bs-toggle="collapse" href="#HistoricoProfissional" role="button" aria-expanded="false" aria-controls="HistoricoProfissional">
-                             Historico Profissional
-                         </a>
-                     </p>
-                     <div class="collapse" id="HistoricoProfissional">
-                         <div class="card card-body">
-                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias sint, error enim iusto nemo quos facere sequi eos voluptatibus officiis tempore quo vitae dolore numquam ipsam, qui iste? Delectus, nobis.
+         </div>
+     </div>
+ </div>
+ <div class="card mt-3">
+     <div class="card-body">
+         <p class="d-inline-flex gap-1">
+             <a class="btn btn-primary" data-bs-toggle="collapse" href="#ProjetosRealizados" role="button" aria-expanded="false" aria-controls="ProjetosRealizados">
+                 Projetos Realizados
+             </a>
+         </p>
+         <div class="collapse" id="ProjetosRealizados">
+             <div class="card card-body">
+                 <p class="mb-4">
+                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias sint, error enim iusto nemo quos facere sequi eos voluptatibus officiis tempore quo vitae dolore numquam ipsam, qui iste? Delectus, nobis.
+                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos vel repellat architecto minus dolorum, quaerat molestiae, facere hic alias ut quam mollitia nam repudiandae reiciendis atque dignissimos dolor laboriosam placeat.
+                 </p>
+
+                 <div class="d-none d-md-flex justify-content-around">
+                     <img src="https://www.liuazulejista.com.br/299221/" class="rounded" style="width: 300px; height: 300px" alt="...">
+                     <img src="https://blog.inovesuaobra.com.br/wp-content/uploads/2020/11/79fa1-azulejista-968067.jpg" class="rounded" style="width: 300px; height: 300px" alt="...">
+                     <img src="assets/gih2.jpeg" class="rounded" style="width: 300px; height: 300px" alt="...">
+                 </div>
+
+                 <div id="carouselExampleControls" class="carousel slide d-md-none" data-bs-ride="carousel">
+                     <div class="carousel-inner">
+                         <div class="carousel-item active">
+                             <img src="https://www.liuazulejista.com.br/299221/" class="d-block w-100" style="height: 300px" alt="...">
+                         </div>
+                         <div class="carousel-item">
+                             <img src="https://blog.inovesuaobra.com.br/wp-content/uploads/2020/11/79fa1-azulejista-968067.jpg" class="d-block w-100" style="height: 300px" alt="...">
+                         </div>
+                         <div class="carousel-item">
+                             <img src="assets/gih2.jpeg" class="d-block w-100" style="height: 300px" alt="...">
                          </div>
                      </div>
+                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                         <span class="visually-hidden">Previous</span>
+                     </button>
+                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                         <span class="visually-hidden">Next</span>
+                     </button>
                  </div>
              </div>
          </div>
-         <br>
-         <div class="col-md-4">
-             <div class="card">
-                 <div class="card-body">
-                     <h5>
-                         <p class="bold card-title">Atividades</p>
-                     </h5>
-                     <p><span>Projetos realizados</span><strong class="pull-right">0</strong></p>
-                     <p><span>Projetos em Execução</span><strong class="pull-right">0</strong></p>
-                     <p><span>Horas Trabalhadas</span><strong class="pull-right">0</strong></p>
-                     <hr>
-                     <h5>
-                         <p class="bold card-title">Informações</p>
-                     </h5>
-                     <p><span>Classificações dos clientes</span><strong class="pull-right">0</strong></p>
-                     <p><span>Certificações</span><strong class="pull-right">0</strong></p>
-                     <p><span>Último login</span><strong class="pull-right">0</strong></p>
-                     <p><span>Ingressou</span><strong class="pull-right"></strong></p>
-                     <div class="d-flex justify-content-between align-items-center mt-3"></div>
-                 </div>
+
+     </div>
+ </div>
+ <div class="card mt-3">
+     <div class="card-body">
+         <p class="d-inline-flex gap-1">
+             <a class="btn btn-primary" data-bs-toggle="collapse" href="#SobreMim" role="button" aria-expanded="false" aria-controls="SobreMim">
+                 Sobre mim
+             </a>
+         </p>
+         <div class="collapse" id="SobreMim">
+             <div class="card card-body">
+                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias sint, error enim iusto nemo quos facere sequi eos voluptatibus officiis tempore quo vitae dolore numquam ipsam, qui iste? Delectus, nobis.
              </div>
          </div>
      </div>
  </div>
 
+ <div class="card mt-3">
+     <div class="card-body">
+         <p class="d-inline-flex gap-1">
+             <a class="btn btn-primary" data-bs-toggle="collapse" href="#HistoricoProfissional" role="button" aria-expanded="false" aria-controls="HistoricoProfissional">
+                 Historico Profissional
+             </a>
+         </p>
+         <div class="collapse" id="HistoricoProfissional">
+             <div class="card card-body">
+                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias sint, error enim iusto nemo quos facere sequi eos voluptatibus officiis tempore quo vitae dolore numquam ipsam, qui iste? Delectus, nobis.
+             </div>
+         </div>
+     </div>
+ </div>
 
  <?php
     include "footer.php";

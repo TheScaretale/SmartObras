@@ -87,7 +87,10 @@ body{
 }
 
 .fotoPerfil{
-    height: 250px;
-    width: 250px;
-    border-radius: 20%;
+    height: 180px;
+    width: 180px;
+    border-radius: 50%;
+    border: 3px solid var(--laranja1);
+    object-fit: cover;
+    
 }

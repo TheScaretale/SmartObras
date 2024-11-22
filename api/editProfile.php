@@ -9,13 +9,15 @@ if (isset($dados["editarPerfil"])) {
     $nome = $dados["nome"];
     $email = $dados["email"];
     $telefone = $dados["telefone"];
+    $foto = $dados["foto"];
 
-    $sql = "UPDATE usuario SET nome = :nome, email = :email, telefone = :telefone WHERE id_usuario = :id";
+    $sql = "UPDATE usuario SET nome = :nome, email = :email, telefone = :telefone, foto = :foto WHERE id_usuario = :id";
     $consulta = $banco->prepare($sql);
     $consulta->bindParam(':nome', $nome);
     $consulta->bindParam(':email', $email);
     $consulta->bindParam(':telefone', $telefone);
     $consulta->bindParam(':id', $usuario);
+    $consulta->bindParam(':foto', $foto);
     $consulta->execute();
     
     if($consulta->rowCount() > 0){  

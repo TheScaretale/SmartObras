@@ -1124,18 +1124,49 @@ function editProfile() {
   const nome = document.getElementById("nomePerfil").textContent;
   const email = document.getElementById("emailPerfil").textContent;
   const telefone = document.getElementById("telefonePerfil").textContent;
-  const foto = document.getElementById("foto").files[0];
+  const fotoInput = document.getElementById("fotoInput");
+  const foto = fotoInput.files[0];
 
-  const reader = new FileReader();
-  reader.onload = function (event) {
-    const fotoBase64 = event.target.result;
+  if (foto) {
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const fotoBase64 = event.target.result.split(',')[1]; // Extract base64 string
 
+      const data = {
+        editarPerfil: 1,
+        nome: nome,
+        email: email,
+        telefone: telefone,
+        foto: fotoBase64,
+      };
+      console.log(data);
+      fetch("./api/editProfile.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+          if (data.codigo === 1) {
+            alert(data.mensagem);
+            location.reload();
+          } else {
+            alert(data.mensagem);
+          }
+        });
+    };
+
+    reader.readAsDataURL(foto);
+  } else {
     const data = {
       editarPerfil: 1,
       nome: nome,
       email: email,
       telefone: telefone,
-      foto: fotoBase64,
+      foto: null, // No photo uploaded
     };
     console.log(data);
     fetch("./api/editProfile.php", {
@@ -1155,9 +1186,7 @@ function editProfile() {
           alert(data.mensagem);
         }
       });
-  };
-
-  reader.readAsDataURL(foto);
+  }
 }
 
 function formatPhoneNumber(phoneNumber) {
@@ -1173,11 +1202,7 @@ function getProfileData() {
   const nome = document.getElementById("nomePerfil");
   const email = document.getElementById("emailPerfil");
   const telefone = document.getElementById("telefonePerfil");
-  const foto = document.getElementById("foto");
-
-  const data = {
-    perfil: "abrir",
-  };
+  const foto = document.querySelector(".fotoPerfil");
 
   fetch("./api/getProfileData.php")
     .then((response) => response.json())
@@ -1186,11 +1211,19 @@ function getProfileData() {
       nome.textContent = data.nome;
       email.textContent = data.email;
       telefone.textContent = formatPhoneNumber(data.telefone);
-      //foto.value = data.foto;
+      if (data.foto) {
+        foto.src = `data:image/png;base64,${data.foto}`;
+      } else {
+        foto.src = "default-image-path";
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
     });
 }
 
-if (window.location.pathname.endsWith("perfil2.php")) {
+
+if (window.location.pathname.endsWith("perfil.php")) {
   console.log("AAAA");
   document.addEventListener("DOMContentLoaded", function () {
     getProfileData();

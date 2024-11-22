@@ -19,22 +19,22 @@ if (isset($_GET["logout"])) {
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-        <?php
-                if(empty($_SESSION["user"])){
-            ?>
-            <a href="index.php" class="navbar-brand">
-                <img src="assets/logo.png" alt="" width="150" height="50">
-            </a>
             <?php
-                } else {
+            if (empty($_SESSION["user"])) {
             ?>
-            <a href="home.php" class="navbar-brand">
-                <img src="assets/logo.png" alt="" width="150" height="50">
-            </a>
+                <a href="index.php" class="navbar-brand">
+                    <img src="assets/logo.png" alt="" width="150" height="50">
+                </a>
             <?php
-                }
+            } else {
+            ?>
+                <a href="home.php" class="navbar-brand">
+                    <img src="assets/logo.png" alt="" width="150" height="50">
+                </a>
+            <?php
+            }
             ?>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#conteudoNavbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -48,21 +48,30 @@ if (isset($_GET["logout"])) {
                         <li class="nav-item">
                             <a href="trabalhar.php" class="nav-link">Encontre trabalho</a>
                         </li>
-                        <li class="nav-item">
+                   <!--      <li class="nav-item">
                             <a href="contratar.php" class="nav-link">Encontre profissionais</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a href="criarTrabalho.php" class="nav-link">Criar trabalho</a>
                         </li>
                         <li class="nav-item">
-                            <a href="encontrartrabalho.php" class="nav-link">Encontrar trabalho</a>
+                            <a href="chat.php" class="nav-link">Mensagens</a>
                         </li>
                         <li class="nav-item">
                             <a href="sobre.php" class="nav-link">Sobre</a>
                         </li>
+                        
                 </ul>
                 <div class="d-flex">
-                    <a href="index.php?logout" class="btn btn-outline-success" type="submit">Sair</a>
+                    <ul class="navbar-nav me-5 mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a href="perfil.php" class="nav-link">
+                                <i class="bi bi-person" style="color: #000000;"></i> Perfil
+                            </a>
+                        </li>
+                    </ul>
+
+                    <a href="index.php?logout" class="botaoo" type="submit">Sair</a>
                 </div>
 
             <?php
@@ -83,7 +92,7 @@ if (isset($_GET["logout"])) {
             </div>
         </div>
     </nav>
-
+    
     <div class="container-fluid">
         <div class="row">
             <!-- cor -->

@@ -1,114 +1,42 @@
-<?php include "navbar.php" ?>
+<?php include "navbar.php"; ?>
 
-<style>
-    .list-group-item.active {
-        background-color: var(--laranja1) !important;
-        border-color: orange !important;
-        color: white;
-    }
-</style>
-<div class="container-fluid">
-    <div class="row flex-nowrap">
-        <!-- Barra Lateral -->
-        <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-body-tertiary">
-            <a href="/" class="d-flex align-items-center flex-shrink-0 p-3 link-body-emphasis text-decoration-none border-bottom">
-                <svg class="bi pe-none me-2" width="30" height="24">
-                    <use xlink:href="#bootstrap" />
-                </svg>
-                <span class="fs-5 fw-semibold">Mensagens</span>
-            </a>
-            <div class="list-group list-group-flush border-bottom scrollarea">
-                <a href="chat2.php" class="list-group-item list-group-item-action active py-3 lh-sm" aria-current="true">
-                    <div class="d-flex w-100 align-items-center justify-content-between">
-                        <strong class="mb-1">List group item heading</strong>
-                        <small>Wed</small>
-                    </div>
-                    <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-                </a>
+<div class="my-3"></div> 
 
+<div class="container">
+  <div class="d-flex flex-column align-items-stretch bg-body-tertiary w-100">
+    <!-- Cabeçalho de Mensagens -->
+    <a class="d-flex align-items-center p-3 link-body-emphasis text-decoration-none border-bottom">
+      <svg class="bi pe-none me-2" width="30" height="24">
+        <use xlink:href="#bootstrap" />
+      </svg>
+      <span class="fs-5 fw-semibold">Mensagens</span>
+    </a>
 
-                <a href="#" class="list-group-item list-group-item-action py-3 lh-sm">
-                    <div class="d-flex w-100 align-items-center justify-content-between">
-                        <strong class="mb-1">List group item heading</strong>
-                        <small class="text-body-secondary">Tues</small>
-                    </div>
-                    <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-                </a>
-                <!-- Repita os itens conforme necessário -->
-                <a href="#" class="list-group-item list-group-item-action py-3 lh-sm">
-                    <div class="d-flex w-100 align-items-center justify-content-between">
-                        <strong class="mb-1">List group item heading</strong>
-                        <small class="text-body-secondary">Tues</small>
-                    </div>
-                    <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action py-3 lh-sm">
-                    <div class="d-flex w-100 align-items-center justify-content-between">
-                        <strong class="mb-1">List group item heading</strong>
-                        <small class="text-body-secondary">Tues</small>
-                    </div>
-                    <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action py-3 lh-sm">
-                    <div class="d-flex w-100 align-items-center justify-content-between">
-                        <strong class="mb-1">List group item heading</strong>
-                        <small class="text-body-secondary">Tues</small>
-                    </div>
-                    <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action py-3 lh-sm">
-                    <div class="d-flex w-100 align-items-center justify-content-between">
-                        <strong class="mb-1">List group item heading</strong>
-                        <small class="text-body-secondary">Tues</small>
-                    </div>
-                    <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action py-3 lh-sm">
-                    <div class="d-flex w-100 align-items-center justify-content-between">
-                        <strong class="mb-1">List group item heading</strong>
-                        <small class="text-body-secondary">Tues</small>
-                    </div>
-                    <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action py-3 lh-sm">
-                    <div class="d-flex w-100 align-items-center justify-content-between">
-                        <strong class="mb-1">List group item heading</strong>
-                        <small class="text-body-secondary">Tues</small>
-                    </div>
-                    <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action py-3 lh-sm">
-                    <div class="d-flex w-100 align-items-center justify-content-between">
-                        <strong class="mb-1">List group item heading</strong>
-                        <small class="text-body-secondary">Tues</small>
-                    </div>
-                    <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action py-3 lh-sm">
-                    <div class="d-flex w-100 align-items-center justify-content-between">
-                        <strong class="mb-1">List group item heading</strong>
-                        <small class="text-body-secondary">Tues</small>
-                    </div>
-                    <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action py-3 lh-sm">
-                    <div class="d-flex w-100 align-items-center justify-content-between">
-                        <strong class="mb-1">List group item heading</strong>
-                        <small class="text-body-secondary">Tues</small>
-                    </div>
-                    <div class="col-10 mb-1 small">Some placeholder content in a paragraph below the heading and date.</div>
-                </a>
-            </div>
+    <!-- List Group com mensagens -->
+    <div class="list-group">
+      <a href="chat2.php" class="list-group-item list-group-item-action d-flex gap-3 py-3" id="" aria-current="true">
+        <img id="ft_perfil"  src="https://github.com/twbs.png" alt="twbs" width="40" height="40" class="rounded-circle flex-shrink-0">
+        <div class="d-flex gap-2 w-100 justify-content-between" style="height: 70px;">
+          <div>
+            <h6 id="msg_nome" class="mb-0">List group item heading</h6>
+            <p id="previacnvs" class="mb-0 opacity-75" style="margin-top: 30px;">assunto...</p>
+          </div>
+          <small id="data_msg" class="opacity-50 text-nowrap">now</small>
         </div>
+      </a>
+
+      <a href="chat2.php" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+        <img id="ft_perfil" src="https://github.com/twbs.png" alt="twbs" width="40" height="40" class="rounded-circle flex-shrink-0">
+        <div class="d-flex gap-2 w-100 justify-content-between" style="height: 70px;">
+          <div>
+            <h6 id="msg_nome" class="mb-0">List group item heading</h6>
+            <p id="previacnvs" class="mb-0 opacity-75" style="margin-top: 30px;">assunto...</p>
+          </div>
+          <small id="data_msg" class="opacity-50 text-nowrap">now</small>
+        </div>
+      </a>
     </div>
+  </div>
 </div>
 
-<?php include "footer.php" ?>
+<?php include "footer.php"; ?>
