@@ -9,15 +9,24 @@ if (isset($dados["editarPerfil"])) {
     $nome = $dados["nome"];
     $email = $dados["email"];
     $telefone = $dados["telefone"];
-    $foto = $dados["foto"];
 
-    $sql = "UPDATE usuario SET nome = :nome, email = :email, telefone = :telefone, foto = :foto WHERE id_usuario = :id";
+    if (isset($dados["foto"])) {
+        $foto = $dados["foto"];
+        $sql = "UPDATE usuario SET nome = :nome, email = :email, telefone = :telefone, foto = :foto WHERE id_usuario = :id";
+    } else {
+        $sql = "UPDATE usuario SET nome = :nome, email = :email, telefone = :telefone WHERE id_usuario = :id";
+    }
+
     $consulta = $banco->prepare($sql);
     $consulta->bindParam(':nome', $nome);
     $consulta->bindParam(':email', $email);
     $consulta->bindParam(':telefone', $telefone);
     $consulta->bindParam(':id', $usuario);
-    $consulta->bindParam(':foto', $foto);
+
+    if (isset($dados["foto"])) {
+        $consulta->bindParam(':foto', $foto);
+    }
+
     $consulta->execute();
     
     if($consulta->rowCount() > 0){  
@@ -25,6 +34,6 @@ if (isset($dados["editarPerfil"])) {
     }else{
         echo json_encode(array('codigo' => 2, 'mensagem' => 'Erro ao editar perfil'));
     }
-}else{
+} else{
     echo json_encode(array('codigo' => 3, 'mensagem' => 'Erro ao editar perfil'));
 }

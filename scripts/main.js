@@ -1308,7 +1308,7 @@ function createChatElement(chat) {
   fragment.appendChild(input);
 
   const a = document.createElement("a");
-  a.href = "chat2.php?id=" + chat.id_usuario_para;
+  a.href = "chat.php?id=" + chat.id_usuario_para;
   a.className = "list-group-item list-group-item-action d-flex gap-3 py-3";
   a.setAttribute("aria-current", "true");
   fragment.appendChild(a);
@@ -1388,6 +1388,10 @@ function getURLChat() {
   return $_GET["id"];
 }
 
+janelaChat = document.getElementById("janelaChat")
+if(janelaChat){
+  getMessages()
+}
 
 function getMessages(){
   const url = "./api/chatApi.php"
@@ -1408,10 +1412,9 @@ function getMessages(){
     .then((response) => response.json())
     .then((data) => {
       console.log("Success:", data);
-      const container = document.getElementById("chatMessages");
+      const container = document.getElementById("janelaChat");
+      container.innerHTML = ""; // Clear existing content
       if (container) {
-        container.innerHTML = ""; // Clear existing content
-
         if (Array.isArray(data)) {
           data.forEach((message) => {
             const messageElement = createMessageElement(message);
@@ -1425,4 +1428,67 @@ function getMessages(){
     .catch((error) => {
       console.error("Error:", error);
     });
+}
+
+function createMessageElement(message){
+  const fragment = document.createDocumentFragment(); //cria um fragmento com a intenção de acelerar o processo de renderização da pagina
+
+  const mainCard = document.createElement("div");
+  mainCard.className = "card";
+  fragment.appendChild(mainCard);
+
+  const cardBody = document.createElement("div");
+  cardBody.className = "card-body";
+  mainCard.appendChild(cardBody);
+
+
+  const divMain = document.createElement("div");
+  divMain.className = "d-flex gap-2 w-100 justify-content-between";
+  cardBody.appendChild(divMain);
+
+  const divContent = document.createElement("div");
+  divContent.className = "row";
+  divMain.appendChild(divContent);
+
+  //destinatario
+
+  const divDestinatario = document.createElement("div");
+  divDestinatario.className = "col-md-5 chat-box mensagem-destinatario"
+  divContent.appendChild(divDestinatario);
+
+  const cardDestinatario = document.createElement("div");
+  cardDestinatario.className = "card mb-3";
+  divDestinatario.appendChild(cardDestinatario);
+
+  const cardBodyDestinatario = document.createElement("div");
+  cardBodyDestinatario.className = "card-body";
+  cardDestinatario.appendChild(cardBodyDestinatario);
+
+  const p = document.createElement("p");
+  p.textContent = message.mensagem;
+  cardBodyDestinatario.appendChild(p);
+
+  const divSeparador = document.createElement("div");
+  divSeparador.className = "w-100";
+  divContent.appendChild(divSeparador);
+
+  //remetente
+
+  const divRemetente = document.createElement("div");
+  divRemetente.className = "col-md-5 chat-box mensagem-destinatario"
+  divMain.appendChild(divRemetente);
+
+  const cardRemetente = document.createElement("div");
+  cardRemetente.className = "card mb-3";
+  divRemetente.appendChild(cardRemetente);
+
+  const cardBodyRemetente = document.createElement("div");
+  cardBodyRemetente.className = "card-body";
+  cardRemetente.appendChild(cardBodyRemetente);
+
+  const p2 = document.createElement("p");
+  p2.textContent = message.mensagem;
+  cardBodyDestinatario.appendChild(p);
+
+  return fragment;
 }

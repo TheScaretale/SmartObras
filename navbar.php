@@ -4,6 +4,10 @@ if (isset($_GET["logout"])) {
     session_unset();
     session_destroy();
 }
+
+if (empty($_SESSION["user"])) {
+    header("Location: index.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +62,7 @@ if (isset($_GET["logout"])) {
                             <a href="criarTrabalho.php" class="nav-link">Criar trabalho</a>
                         </li>
                         <li class="nav-item">
-                            <a href="chat.php" class="nav-link">Mensagens</a>
+                            <a href="listaConversas.php" class="nav-link">Mensagens</a>
                         </li>
                         <li class="nav-item">
                             <a href="sobre.php" class="nav-link">Sobre</a>

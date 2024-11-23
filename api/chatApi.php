@@ -32,10 +32,6 @@ $dados = json_decode(file_get_contents("php://input"), true);
 
 if(isset($dados["mensagem"])){
     try{
-    /* if (!isset($_SESSION["userId"])) {
-        echo json_encode(array('codigo' => 4, 'mensagem' => 'Usuário não autenticado'));
-        exit;
-    } */
     $usuario = $_SESSION["userId"];
     $destinatario = $dados["idDestinatario"];
     $sql = "";

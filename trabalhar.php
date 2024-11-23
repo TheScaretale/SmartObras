@@ -1,9 +1,5 @@
 <?php
 include "navbar.php";
-
-/*if (empty($_SESSION["user"])) {
-    header("Location: index.php");
-}*/
 ?>
 <head>
     <link rel="stylesheet" href="styles/style.css">
