@@ -36,25 +36,30 @@ if(isset($dados["mensagem"])){
         echo json_encode(array('codigo' => 4, 'mensagem' => 'Usuário não autenticado'));
         exit;
     } */
-    $usuario = $dados["userId"];
+    $usuario = $_SESSION["userId"];
+    $destinatario = $dados["idDestinatario"];
     $sql = "";
     $mensagem = $dados["mensagem"];
     $params = [];
 
     switch($mensagem){
         case 'receber':
-            $sql = "SELECT c.*, u.nome AS nomeRemetente , u2.nome AS nomeDestinatario FROM conversa c
-                        JOIN usuario u ON c.id_usuário_de = u.id_usuario
-                        JOIN usuario u2 ON c.id_usuario_para = u2.id_usuario
-                        WHERE id_usuario_de = :id";
-            $params = [':id' => $usuario];
+            $sql = "SELECT c.*, u.nome AS nomeRemetente, u2.nome AS nomeDestinatario 
+                    FROM conversa c
+                    JOIN usuario u ON c.id_usuario_de = u.id_usuario
+                    JOIN usuario u2 ON c.id_usuario_para = u2.id_usuario
+                    WHERE (id_usuario_de = :id AND id_usuario_para = :idDestinatario)
+                       OR (id_usuario_de = :idDestinatario AND id_usuario_para = :id)
+                    ORDER BY c.datamensagem";
+            $params = [':id' => $usuario,
+                       ':idDestinatario' => $destinatario];
             break;
         case 'enviar':
-            $sql = "INSERT INTO conversa(id_usuário_de, id_usuario_para, datamensagem, mensagem) VALUES
-                    (:id_usuário_de, :id_usuario_para, NOW(), :mensagem);";
+            $sql = "INSERT INTO conversa(id_usuario_de, id_usuario_para, datamensagem, mensagem) VALUES
+                    (:id_usuario_de, :id_usuario_para, NOW(), :mensagem);";
             $params = [
-                ':id_usuário_de' => $usuario,
-                ':id_usuario_para' => $dados["id_usuario_para"],
+                ':id_usuario_de' => $usuario,
+                ':id_usuario_para' => $destinatario,
                 ':mensagem' => $dados["conteudoMsg"]
             ];
             break;

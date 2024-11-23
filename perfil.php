@@ -51,8 +51,8 @@
              <div class="col-sm-3 col-lg-3 mt-3 ms-lg-5">
                  <?php if ($_SESSION["userType"] == "P") { ?>
                      <h5 class="bold card-title">Informações</h5>
-                     <p>Email:<span id="emailPerfil"></span></p>
-                     <p>Telefone<span id="telefonePerfil"></span></p>
+                     <p>Email: <span id="emailPerfil"></span></p>
+                     <p>Telefone <span id="telefonePerfil"></span></p>
 
                  <?php } else { ?>
                      <h5 class="bold card-title">Informações</h5>
@@ -63,92 +63,63 @@
              </div>
 
              <div id="profileBtns" style="display: flex; justify-content: flex-end;">
-                <button type="button" class="btn btn-warning" id="btnReturn" hidden>
-                        Voltar
-                </button>
-                <div class="me-2"></div>
-                <btn onclick="profileEditMode()" id="btnEditPerfil" class="btn btn-warning">
-                        Editar Perfil
-                </btn>
-             </div>
-         </div>
-     </div>
- </div>
- <div class="card mt-3">
-     <div class="card-body">
-         <p class="d-inline-flex gap-1">
-             <a class="btn btn-primary" data-bs-toggle="collapse" href="#ProjetosRealizados" role="button" aria-expanded="false" aria-controls="ProjetosRealizados">
-                 Projetos Realizados
-             </a>
-         </p>
-         <div class="collapse" id="ProjetosRealizados">
-             <div class="card card-body">
-                 <p class="mb-4">
-                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias sint, error enim iusto nemo quos facere sequi eos voluptatibus officiis tempore quo vitae dolore numquam ipsam, qui iste? Delectus, nobis.
-                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos vel repellat architecto minus dolorum, quaerat molestiae, facere hic alias ut quam mollitia nam repudiandae reiciendis atque dignissimos dolor laboriosam placeat.
-                 </p>
-
-                 <div class="d-none d-md-flex justify-content-around">
-                     <img src="https://www.liuazulejista.com.br/299221/" class="rounded" style="width: 300px; height: 300px" alt="...">
-                     <img src="https://blog.inovesuaobra.com.br/wp-content/uploads/2020/11/79fa1-azulejista-968067.jpg" class="rounded" style="width: 300px; height: 300px" alt="...">
-                     <img src="assets/gih2.jpeg" class="rounded" style="width: 300px; height: 300px" alt="...">
-                 </div>
-
-                 <div id="carouselExampleControls" class="carousel slide d-md-none" data-bs-ride="carousel">
-                     <div class="carousel-inner">
-                         <div class="carousel-item active">
-                             <img src="https://www.liuazulejista.com.br/299221/" class="d-block w-100" style="height: 300px" alt="...">
-                         </div>
-                         <div class="carousel-item">
-                             <img src="https://blog.inovesuaobra.com.br/wp-content/uploads/2020/11/79fa1-azulejista-968067.jpg" class="d-block w-100" style="height: 300px" alt="...">
-                         </div>
-                         <div class="carousel-item">
-                             <img src="assets/gih2.jpeg" class="d-block w-100" style="height: 300px" alt="...">
-                         </div>
-                     </div>
-                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                         <span class="visually-hidden">Previous</span>
-                     </button>
-                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                         <span class="visually-hidden">Next</span>
-                     </button>
-                 </div>
-             </div>
-         </div>
-
-     </div>
- </div>
- <div class="card mt-3">
-     <div class="card-body">
-         <p class="d-inline-flex gap-1">
-             <a class="btn btn-primary" data-bs-toggle="collapse" href="#SobreMim" role="button" aria-expanded="false" aria-controls="SobreMim">
-                 Sobre mim
-             </a>
-         </p>
-         <div class="collapse" id="SobreMim">
-             <div class="card card-body">
-                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias sint, error enim iusto nemo quos facere sequi eos voluptatibus officiis tempore quo vitae dolore numquam ipsam, qui iste? Delectus, nobis.
+                 <button type="button" class="btn btn-warning" id="btnReturn" hidden>
+                     Voltar
+                 </button>
+                 <div class="me-2"></div>
+                 <btn onclick="profileEditMode()" id="btnEditPerfil" class="btn btn-warning">
+                     Editar Perfil
+                 </btn>
              </div>
          </div>
      </div>
  </div>
 
- <div class="card mt-3">
-     <div class="card-body">
-         <p class="d-inline-flex gap-1">
-             <a class="btn btn-primary" data-bs-toggle="collapse" href="#HistoricoProfissional" role="button" aria-expanded="false" aria-controls="HistoricoProfissional">
-                 Historico Profissional
-             </a>
-         </p>
-         <div class="collapse" id="HistoricoProfissional">
-             <div class="card card-body">
-                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestias sint, error enim iusto nemo quos facere sequi eos voluptatibus officiis tempore quo vitae dolore numquam ipsam, qui iste? Delectus, nobis.
-             </div>
-         </div>
-     </div>
- </div>
+ <!-- Projetos Realizados -->
+<div class="card mt-3">
+    <div class="card-body">
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#ProjetosRealizados" role="button" aria-expanded="false" aria-controls="ProjetosRealizados">
+            Projetos Realizados
+        </a>
+        <div class="collapse" id="ProjetosRealizados">
+            <div class="card card-body" id="ProjetosRealizadosContent" contentEditable="false">
+                <!-- Conteúdo inicial de exemplo -->
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias sint, error enim iusto nemo quos facere sequi eos voluptatibus officiis tempore quo vitae dolore numquam ipsam, qui iste? Delectus, nobis.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sobre Mim -->
+<div class="card mt-3">
+    <div class="card-body">
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#SobreMim" role="button" aria-expanded="false" aria-controls="SobreMim">
+            Sobre mim
+        </a>
+        <div class="collapse" id="SobreMim">
+            <div class="card card-body" id="SobreMimContent" contentEditable="false">
+                <!-- Conteúdo inicial de exemplo -->
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </div>
+        </div>
+    </div>
+</div>  
+
+<!-- Histórico Profissional -->
+<div class="card mt-3">
+    <div class="card-body">
+        <a class="btn btn-primary" data-bs-toggle="collapse" href="#HistoricoProfissional" role="button" aria-expanded="false" aria-controls="HistoricoProfissional">
+            Histórico Profissional
+        </a>
+        <div class="collapse" id="HistoricoProfissional">
+            <div class="card card-body" id="HistoricoProfissionalContent" contentEditable="false">
+                <!-- Conteúdo inicial de exemplo -->
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias sint, error enim iusto nemo quos facere sequi eos voluptatibus officiis tempore quo vitae dolore numquam ipsam, qui iste? Delectus, nobis.
+            </div>
+        </div>
+    </div>
+</div>
+
 
  <?php
     include "footer.php";

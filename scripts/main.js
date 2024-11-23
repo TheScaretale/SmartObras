@@ -1061,10 +1061,6 @@ function editJob() {
     });
 }
 
-function retrieveMessage() {}
-
-function sendMessage() {}
-
 function profileEditMode() {
   const btnEdit = document.getElementById("btnEditPerfil");
   const btnReturn = document.getElementById("btnReturn");
@@ -1072,6 +1068,16 @@ function profileEditMode() {
   const email = document.getElementById("emailPerfil");
   const telefone = document.getElementById("telefonePerfil");
   const foto = document.getElementById("btnFoto");
+
+  /* Teste*/
+  const projetosRealizados = document.getElementById(
+    "ProjetosRealizadosContent"
+  );
+  const sobreMim = document.getElementById("SobreMimContent");
+  const historicoProfissional = document.getElementById(
+    "HistoricoProfissionalContent"
+  );
+  /* Teste*/
 
   function setEditMode() {
     btnEdit.className = "btn btn-danger";
@@ -1088,6 +1094,15 @@ function profileEditMode() {
     telefone.className = "form-control";
 
     foto.hidden = false;
+
+    /* Teste*/
+    projetosRealizados.contentEditable = true;
+    projetosRealizados.className = "form-control";
+    sobreMim.contentEditable = true;
+    sobreMim.className = "form-control";
+    historicoProfissional.contentEditable = true;
+    historicoProfissional.className = "form-control";
+    /* Teste*/
 
     btnReturn.hidden = false;
   }
@@ -1115,6 +1130,15 @@ function profileEditMode() {
     telefone.className = "";
 
     foto.hidden = true;
+
+    /* Teste*/
+    projetosRealizados.contentEditable = false;
+    projetosRealizados.className = "";
+    sobreMim.contentEditable = false;
+    sobreMim.className = "";
+    historicoProfissional.contentEditable = false;
+    historicoProfissional.className = "";
+    /* Teste*/
   };
 
   setEditMode();
@@ -1127,10 +1151,20 @@ function editProfile() {
   const fotoInput = document.getElementById("fotoInput");
   const foto = fotoInput.files[0];
 
+  /* Teste*/
+  const projetosRealizados = document.getElementById(
+    "ProjetosRealizadosContent"
+  ).textContent;
+  const sobreMim = document.getElementById("SobreMimContent").textContent;
+  const historicoProfissional = document.getElementById(
+    "HistoricoProfissionalContent"
+  ).textContent;
+  /* Teste*/
+
   if (foto) {
     const reader = new FileReader();
     reader.onload = function (event) {
-      const fotoBase64 = event.target.result.split(',')[1]; // Extract base64 string
+      const fotoBase64 = event.target.result.split(",")[1]; // Extract base64 string
 
       const data = {
         editarPerfil: 1,
@@ -1138,6 +1172,11 @@ function editProfile() {
         email: email,
         telefone: telefone,
         foto: fotoBase64,
+        /* Teste*/
+        projetosRealizados: projetosRealizados,
+        sobreMim: sobreMim,
+        historicoProfissional: historicoProfissional,
+        /* Teste*/
       };
       console.log(data);
       fetch("./api/editProfile.php", {
@@ -1167,6 +1206,12 @@ function editProfile() {
       email: email,
       telefone: telefone,
       foto: null, // No photo uploaded
+
+      /* Teste*/
+      projetosRealizados: projetosRealizados,
+      sobreMim: sobreMim,
+      historicoProfissional: historicoProfissional,
+      /* Teste*/
     };
     console.log(data);
     fetch("./api/editProfile.php", {
@@ -1222,10 +1267,162 @@ function getProfileData() {
     });
 }
 
-
 if (window.location.pathname.endsWith("perfil.php")) {
   console.log("AAAA");
   document.addEventListener("DOMContentLoaded", function () {
     getProfileData();
   });
+}
+
+function getChats() {
+  const url = "./api/getChats.php";
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      const container = document.getElementById("listaConversas");
+      if (container) {
+        container.innerHTML = ""; // Clear existing content
+
+        if (Array.isArray(data)) {
+          data.forEach((chat) => {
+            const chatElement = createChatElement(chat);
+            container.appendChild(chatElement);
+          });
+        } else {
+          console.error("Expected an array but got:", data);
+        }
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+function createChatElement(chat) {
+  const fragment = document.createDocumentFragment(); //cria um fragmento com a intenção de acelerar o processo de renderização da pagina
+
+  const input = document.createElement("input");
+  input.type = "hidden";
+  input.value = chat.id_usuario_para;
+  fragment.appendChild(input);
+
+  const a = document.createElement("a");
+  a.href = "chat2.php?id=" + chat.id_usuario_para;
+  a.className = "list-group-item list-group-item-action d-flex gap-3 py-3";
+  a.setAttribute("aria-current", "true");
+  fragment.appendChild(a);
+
+  const img = document.createElement("img");
+  img.src = "data:image/png;base64," + chat.foto;
+  img.alt = "Foto de peril";
+  img.width = 32;
+  img.height = 32;
+  img.className = "rounded-circle flex-shrink-0";
+  a.appendChild(img);
+
+  const divMain = document.createElement("div");
+  divMain.className = "d-flex gap-2 w-100 justify-content-between";
+  a.appendChild(divMain);
+
+  const divContent = document.createElement("div");
+  divMain.appendChild(divContent);
+
+  const h6 = document.createElement("h6");
+  h6.className = "mb-0";
+  h6.textContent = chat.nome;
+  divContent.appendChild(h6);
+
+  const hr = document.createElement("hr");
+  divContent.appendChild(hr);
+
+  const p = document.createElement("p");
+  p.className = "mb-0 opacity-75";
+  p.textContent = chat.mensagem;
+  divContent.appendChild(p);
+
+  const divPrice = document.createElement("div");
+  divPrice.style.flexDirection = "column";
+  divMain.appendChild(divPrice);
+
+  const pTime = document.createElement("p");
+  pTime.className = "text-end";
+  pTime.style.opacity = 0.5;
+  pTime.textContent = chat.dataUltimaMensagem;
+  divPrice.appendChild(pTime);
+
+  return fragment;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const listaConversas = document.getElementById("listaConversas");
+  if (listaConversas) {
+    getChats();
+  }
+});
+
+chatInput = document.getElementById("chatInput");
+if (chatInput) {
+  function handleInput(textarea) {
+    const maxWords = 50; // Limite de palavras
+    const words = textarea.value.split(/\s+/); // Divide o texto em palavras usando espaços
+
+    if (words.length > maxWords) {
+      // Mantém apenas as primeiras palavras dentro do limite
+      textarea.value = words.slice(0, maxWords).join(" ");
+    }
+
+    textarea.style.height = "auto"; // Reseta altura para recalcular
+    textarea.style.height = Math.min(textarea.scrollHeight, 100) + "px"; // Ajusta até 4 linhas
+  }
+}
+
+function getURLChat() {
+  const urlGET = window.location.search.substring(1).split("&");
+  let $_GET = {};
+  for (let i = 0; i < urlGET.length; i++) {
+    let temp = urlGET[i].split("=");
+    $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
+  }
+
+  return $_GET["id"];
+}
+
+
+function getMessages(){
+  const url = "./api/chatApi.php"
+  let idDestinatario = getURLChat();
+  
+  const dados ={
+    mensagem: "receber",
+    idDestinatario: idDestinatario
+  }
+
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dados),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      const container = document.getElementById("chatMessages");
+      if (container) {
+        container.innerHTML = ""; // Clear existing content
+
+        if (Array.isArray(data)) {
+          data.forEach((message) => {
+            const messageElement = createMessageElement(message);
+            container.appendChild(messageElement);
+          });
+        } else {
+          console.error("Expected an array but got:", data);
+        }
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
