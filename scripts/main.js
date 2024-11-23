@@ -1393,14 +1393,14 @@ if(janelaChat){
   getMessages()
 }
 
-function getMessages(){
-  const url = "./api/chatApi.php"
+function getMessages() {
+  const url = "./api/chatApi.php";
   let idDestinatario = getURLChat();
-  
-  const dados ={
+
+  const dados = {
     mensagem: "receber",
     idDestinatario: idDestinatario
-  }
+  };
 
   fetch(url, {
     method: "POST",
@@ -1416,10 +1416,8 @@ function getMessages(){
       container.innerHTML = ""; // Clear existing content
       if (container) {
         if (Array.isArray(data)) {
-          data.forEach((message) => {
-            const messageElement = createMessageElement(message);
-            container.appendChild(messageElement);
-          });
+          const messageElement = createMessageElement(data);
+          container.appendChild(messageElement);
         } else {
           console.error("Expected an array but got:", data);
         }
@@ -1430,65 +1428,143 @@ function getMessages(){
     });
 }
 
-function createMessageElement(message){
-  const fragment = document.createDocumentFragment(); //cria um fragmento com a intenção de acelerar o processo de renderização da pagina
+function createMessageElement(messages) {
+  const receiverId = getURLChat();
 
-  const mainCard = document.createElement("div");
-  mainCard.className = "card";
-  fragment.appendChild(mainCard);
+  // Create main container
+  const container = document.createElement('div');
+  container.className = 'col chat-container';
+  container.id = 'janelaChat';
 
-  const cardBody = document.createElement("div");
-  cardBody.className = "card-body";
-  mainCard.appendChild(cardBody);
+  // Create card
+  const card = document.createElement('div');
+  card.className = 'card';
 
+  // Create card body
+  const cardBody = document.createElement('div');
+  cardBody.className = 'card-body';
 
-  const divMain = document.createElement("div");
-  divMain.className = "d-flex gap-2 w-100 justify-content-between";
-  cardBody.appendChild(divMain);
+  // Create header with user profile
+  const header = document.createElement('div');
+  header.className = 'd-flex align-items-center justify-content-start';
 
-  const divContent = document.createElement("div");
-  divContent.className = "row";
-  divMain.appendChild(divContent);
+  const img = document.createElement('img');
+  img.id = 'ft_perfil';
+  img.src = 'https://github.com/twbs.png';
+  img.alt = 'twbs';
+  img.width = 40;
+  img.height = 40;
+  img.className = 'rounded-circle flex-shrink-0';
 
-  //destinatario
+  const userName = document.createElement('h5');
+  userName.id = 'msg_nome';
+  userName.className = 'card-title ms-2 mb-0';
+  userName.textContent = messages.length > 0 ? messages[0].nomeDestinatario : '';
 
-  const divDestinatario = document.createElement("div");
-  divDestinatario.className = "col-md-5 chat-box mensagem-destinatario"
-  divContent.appendChild(divDestinatario);
+  header.appendChild(img);
+  header.appendChild(userName);
 
-  const cardDestinatario = document.createElement("div");
-  cardDestinatario.className = "card mb-3";
-  divDestinatario.appendChild(cardDestinatario);
+  // Create horizontal line
+  const hr1 = document.createElement('hr');
 
-  const cardBodyDestinatario = document.createElement("div");
-  cardBodyDestinatario.className = "card-body";
-  cardDestinatario.appendChild(cardBodyDestinatario);
+  // Append header and horizontal line to card body
+  cardBody.appendChild(header);
+  cardBody.appendChild(hr1);
 
-  const p = document.createElement("p");
-  p.textContent = message.mensagem;
-  cardBodyDestinatario.appendChild(p);
+  messages.forEach((message) => {
+    const isSender = message.id_usuario_para == receiverId;
 
-  const divSeparador = document.createElement("div");
-  divSeparador.className = "w-100";
-  divContent.appendChild(divSeparador);
+    // Create a new row for each message
+    const row = document.createElement('div');
+    row.className = 'row';
 
-  //remetente
+    // Create message box
+    const messageCol = document.createElement('div');
+    messageCol.className = `col-md-5 chat-box ${isSender ? 'mensagem-remetente' : 'mensagem-destinatario'}`;
 
-  const divRemetente = document.createElement("div");
-  divRemetente.className = "col-md-5 chat-box mensagem-destinatario"
-  divMain.appendChild(divRemetente);
+    const messageCard = document.createElement('div');
+    messageCard.className = 'card mb-3';
 
-  const cardRemetente = document.createElement("div");
-  cardRemetente.className = "card mb-3";
-  divRemetente.appendChild(cardRemetente);
+    const messageCardBody = document.createElement('div');
+    messageCardBody.className = 'card-body';
 
-  const cardBodyRemetente = document.createElement("div");
-  cardBodyRemetente.className = "card-body";
-  cardRemetente.appendChild(cardBodyRemetente);
+    const messageText = document.createElement('p');
+    messageText.id = isSender ? 'mensagemRemetente' : 'mensagemDestinatario';
+    messageText.textContent = message.mensagem;
 
-  const p2 = document.createElement("p");
-  p2.textContent = message.mensagem;
-  cardBodyDestinatario.appendChild(p);
+    messageCardBody.appendChild(messageText);
+    messageCard.appendChild(messageCardBody);
+    messageCol.appendChild(messageCard);
 
-  return fragment;
+    // Append message box to row
+    row.appendChild(messageCol);
+
+    // Create line break
+    const lineBreak = document.createElement('div');
+    lineBreak.className = 'w-100';
+    row.appendChild(lineBreak);
+
+    // Append row to card body
+    cardBody.appendChild(row);
+  });
+
+  const divChatInput = document.createElement('div');
+  divChatInput.className = 'chat-input';
+  cardBody.appendChild(divChatInput);
+
+  const textArea = document.createElement('textarea');
+  textArea.id = 'chatInput';
+  textArea.className = 'form-control';
+  textArea.placeholder = 'Digite sua mensagem...';
+  textArea.rows = 1;
+  divChatInput.appendChild(textArea);
+
+  const me3 = document.createElement('div');  
+  me3.className = 'me-3';
+  divChatInput.appendChild(me3);
+
+  const btnChat = document.createElement('button');
+  btnChat.className = 'btn btn-primary';
+  btnChat.textContent = 'Enviar';
+  btnChat.onclick = sendMessage;
+  divChatInput.appendChild(btnChat);
+
+  // Append card body to card
+  card.appendChild(cardBody);
+
+  // Append card to container
+  container.appendChild(card);
+
+  return container;
+}
+
+function sendMessage(){
+  const url= "./api/chatApi.php";
+
+  const data ={
+    mensagem: "enviar",
+    idDestinatario: getURLChat(),
+    conteudoMsg: document.getElementById("chatInput").value
+  }
+
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      if(data.codigo === 1){
+        alert(data.mensagem);
+        getMessages();
+      }else{
+        alert(data.mensagem);
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
