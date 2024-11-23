@@ -1450,8 +1450,8 @@ function createMessageElement(messages) {
 
   const img = document.createElement('img');
   img.id = 'ft_perfil';
-  img.src = 'https://github.com/twbs.png';
-  img.alt = 'twbs';
+  img.src = 'data:image/png;base64,' + messages[0].fotoDestinatario;
+  img.alt = 'Foto de perfil destinatario';
   img.width = 40;
   img.height = 40;
   img.className = 'rounded-circle flex-shrink-0';

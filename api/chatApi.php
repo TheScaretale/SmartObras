@@ -40,10 +40,11 @@ if(isset($dados["mensagem"])){
 
     switch($mensagem){
         case 'receber':
-            $sql = "SELECT c.*, u.nome AS nomeRemetente, u2.nome AS nomeDestinatario 
+            $sql = "SELECT c.*, u.nome AS nomeRemetente, u2.nome AS nomeDestinatario, u3.foto as fotoDestinatario
                     FROM conversa c
                     JOIN usuario u ON c.id_usuario_de = u.id_usuario
                     JOIN usuario u2 ON c.id_usuario_para = u2.id_usuario
+                    JOIN usuario u3 on c.id_usuario_para = u3.id_usuario
                     WHERE (id_usuario_de = :id AND id_usuario_para = :idDestinatario)
                        OR (id_usuario_de = :idDestinatario AND id_usuario_para = :id)
                     ORDER BY c.datamensagem";
