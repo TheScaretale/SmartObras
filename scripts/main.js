@@ -1330,7 +1330,7 @@ function createChatElement(chat) {
 
   const h6 = document.createElement("h6");
   h6.className = "mb-0";
-  h6.textContent = chat.nome;
+  h6.textContent = chat.nome_de;
   divContent.appendChild(h6);
 
   const hr = document.createElement("hr");
@@ -1402,6 +1402,9 @@ function getMessages() {
     idDestinatario: idDestinatario
   };
 
+  console.log (dados);
+  console.log(url)
+
   fetch(url, {
     method: "POST",
     headers: {
@@ -1450,7 +1453,13 @@ function createMessageElement(messages) {
 
   const img = document.createElement('img');
   img.id = 'ft_perfil';
-  img.src = 'data:image/png;base64,' + messages[0].fotoDestinatario;
+  // Adiciona verificação de segurança
+  if (messages && messages.length > 0 && messages[0].fotoDestinatario) {
+    img.src = 'data:image/png;base64,' + messages[0].fotoDestinatario;
+  } else {
+    // Usa imagem padrão se não houver foto
+    img.src = 'https://soscasacuritiba.com.br/wp-content/uploads/2023/11/como-iniciar-na-profissao-de-pedreiro.webp';
+  }
   img.alt = 'Foto de perfil destinatario';
   img.width = 40;
   img.height = 40;

@@ -105,22 +105,6 @@
     </div>
 </div>  
 
-<!-- Histórico Profissional -->
-<div class="card mt-3">
-    <div class="card-body">
-        <a class="btn btn-primary" data-bs-toggle="collapse" href="#HistoricoProfissional" role="button" aria-expanded="false" aria-controls="HistoricoProfissional">
-            Histórico Profissional
-        </a>
-        <div class="collapse" id="HistoricoProfissional">
-            <div class="card card-body" id="HistoricoProfissionalContent" contentEditable="false">
-                <!-- Conteúdo inicial de exemplo -->
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias sint, error enim iusto nemo quos facere sequi eos voluptatibus officiis tempore quo vitae dolore numquam ipsam, qui iste? Delectus, nobis.
-            </div>
-        </div>
-    </div>
-</div>
-
-
- <?php
+<?php
     include "footer.php";
-    ?>
+?>

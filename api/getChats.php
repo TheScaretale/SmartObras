@@ -12,8 +12,10 @@ $sql = "SELECT
     c.id_usuario_de,
     c.mensagem, 
     c.datamensagem,
-    u.nome,
-    u2.foto,
+    u_para.nome AS nome_para,
+    u_de.nome AS nome_de,
+    u_para.foto AS foto_para,
+    u_de.foto AS foto_de,
     CASE
         WHEN TIMESTAMPDIFF(SECOND, c.datamensagem, NOW()) < 60 THEN CONCAT(TIMESTAMPDIFF(SECOND, c.datamensagem, NOW()), ' segundos atrás')
         WHEN TIMESTAMPDIFF(MINUTE, c.datamensagem, NOW()) < 60 THEN CONCAT(TIMESTAMPDIFF(MINUTE, c.datamensagem, NOW()), ' minutos atrás')
@@ -23,9 +25,9 @@ $sql = "SELECT
 FROM 
     conversa c
 JOIN 
-    usuario u ON c.id_usuario_para = u.id_usuario
+    usuario u_para ON c.id_usuario_para = u_para.id_usuario
 JOIN
-    usuario u2 ON c.id_usuario_para = u2.id_usuario
+    usuario u_de ON c.id_usuario_de = u_de.id_usuario
 JOIN (
     SELECT 
         GREATEST(id_usuario_de, id_usuario_para) AS user1,
@@ -34,7 +36,7 @@ JOIN (
     FROM 
         conversa
     WHERE 
-        id_usuario_de = :id
+        id_usuario_de = :id OR id_usuario_para = :id
     GROUP BY 
         user1, user2
 ) last_messages 
@@ -42,6 +44,10 @@ ON
     (GREATEST(c.id_usuario_de, c.id_usuario_para) = last_messages.user1 AND 
      LEAST(c.id_usuario_de, c.id_usuario_para) = last_messages.user2 AND 
      c.datamensagem = last_messages.last_message_time)
+LEFT JOIN 
+    servico s ON s.id_servicoProposta = c.id_usuario_para
+LEFT JOIN 
+    servico_proposta sp ON sp.id = s.id_servicoProposta
 ORDER BY 
     c.datamensagem DESC;";
 

@@ -12,6 +12,7 @@
 include_once "config.env";
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
+    error_log($_SESSION["userId"]);
 }
 try{
     $banco = new PDO("mysql:host=$server;dbname=$db",$user,$passw);
