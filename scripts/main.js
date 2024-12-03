@@ -883,6 +883,20 @@ function fillJobDetailsClient(jobData) {
         h6Status.className = "card-title";
         h6Status.textContent = "Proposta aceita";
         divCardBody5.appendChild(h6Status);
+
+        const chatBtn = document.createElement("a");
+        chatBtn.className = "btn btn-primary mt-2";
+        chatBtn.href = "chat.php?id=" + jobData.idTrabalhador;
+        chatBtn.textContent = "Iniciar chat";
+        divCardBody5.appendChild(chatBtn);
+
+        const workerId = document.createElement("input");
+        workerId.type = "hidden";
+        workerId.id = "workerId";
+        workerId.value = jobData.idTrabalhador;
+        divCardBody5.appendChild(workerId);
+
+        console.log(workerId.value);
       }
     });
   } else {
@@ -949,6 +963,20 @@ function fillJobDetailsClient(jobData) {
         h5Status.className = "card-title";
         h5Status.textContent = "Proposta aceita";
         colCard2.appendChild(h5Status);
+
+        const chatBtn = document.createElement("a");
+        chatBtn.className = "btn btn-primary mt-2";
+        chatBtn.href = "chat.php?id=" + jobData.idTrabalhador;
+        chatBtn.textContent = "Iniciar chat";
+        colCard2.appendChild(chatBtn);
+
+        const workerId = document.createElement("input");
+        workerId.type = "hidden";
+        workerId.id = "workerId";
+        workerId.value = jobData.idTrabalhador;
+        colCard2.appendChild(workerId);
+
+        console.log(workerId.value);
 
         bidBtn.disabled = true;
       }
@@ -1069,15 +1097,15 @@ function profileEditMode() {
   const telefone = document.getElementById("telefonePerfil");
   const foto = document.getElementById("btnFoto");
 
-  /* Teste*/
-  const projetosRealizados = document.getElementById(
+  
+  /* const projetosRealizados = document.getElementById(
     "ProjetosRealizadosContent"
   );
   const sobreMim = document.getElementById("SobreMimContent");
   const historicoProfissional = document.getElementById(
     "HistoricoProfissionalContent"
-  );
-  /* Teste*/
+  ); */
+  
 
   function setEditMode() {
     btnEdit.className = "btn btn-danger";
@@ -1095,14 +1123,13 @@ function profileEditMode() {
 
     foto.hidden = false;
 
-    /* Teste*/
-    projetosRealizados.contentEditable = true;
+    /* projetosRealizados.contentEditable = true;
     projetosRealizados.className = "form-control";
     sobreMim.contentEditable = true;
     sobreMim.className = "form-control";
     historicoProfissional.contentEditable = true;
-    historicoProfissional.className = "form-control";
-    /* Teste*/
+    historicoProfissional.className = "form-control"; */
+  
 
     btnReturn.hidden = false;
   }
@@ -1131,14 +1158,13 @@ function profileEditMode() {
 
     foto.hidden = true;
 
-    /* Teste*/
-    projetosRealizados.contentEditable = false;
+
+    /* projetosRealizados.contentEditable = false;
     projetosRealizados.className = "";
     sobreMim.contentEditable = false;
     sobreMim.className = "";
     historicoProfissional.contentEditable = false;
-    historicoProfissional.className = "";
-    /* Teste*/
+    historicoProfissional.className = ""; */
   };
 
   setEditMode();
@@ -1300,22 +1326,22 @@ function getChats() {
 }
 
 function createChatElement(chat) {
-  const fragment = document.createDocumentFragment(); //cria um fragmento com a intenção de acelerar o processo de renderização da pagina
+  const fragment = document.createDocumentFragment(); // Create a fragment for performance
 
   const input = document.createElement("input");
   input.type = "hidden";
-  input.value = chat.id_usuario_para;
+  input.value = chat.id_usuario_other; // Use id of the other user
   fragment.appendChild(input);
 
   const a = document.createElement("a");
-  a.href = "chat.php?id=" + chat.id_usuario_para;
+  a.href = "chat.php?id=" + chat.id_usuario_other; // Link to conversation with the other user
   a.className = "list-group-item list-group-item-action d-flex gap-3 py-3";
   a.setAttribute("aria-current", "true");
   fragment.appendChild(a);
 
   const img = document.createElement("img");
-  img.src = "data:image/png;base64," + chat.foto;
-  img.alt = "Foto de peril";
+  img.src = "data:image/png;base64," + chat.foto_other; // Use the other user's photo
+  img.alt = "Foto de perfil";
   img.width = 32;
   img.height = 32;
   img.className = "rounded-circle flex-shrink-0";
@@ -1330,7 +1356,7 @@ function createChatElement(chat) {
 
   const h6 = document.createElement("h6");
   h6.className = "mb-0";
-  h6.textContent = chat.nome_de;
+  h6.textContent = chat.nome_other; // Display the other user's name
   divContent.appendChild(h6);
 
   const hr = document.createElement("hr");
@@ -1338,7 +1364,7 @@ function createChatElement(chat) {
 
   const p = document.createElement("p");
   p.className = "mb-0 opacity-75";
-  p.textContent = chat.mensagem;
+  p.textContent = chat.mensagem; // Display the last message
   divContent.appendChild(p);
 
   const divPrice = document.createElement("div");
@@ -1348,7 +1374,7 @@ function createChatElement(chat) {
   const pTime = document.createElement("p");
   pTime.className = "text-end";
   pTime.style.opacity = 0.5;
-  pTime.textContent = chat.dataUltimaMensagem;
+  pTime.textContent = chat.dataUltimaMensagem; // Display time since last message
   divPrice.appendChild(pTime);
 
   return fragment;
@@ -1457,7 +1483,6 @@ function createMessageElement(messages) {
   if (messages && messages.length > 0 && messages[0].fotoDestinatario) {
     img.src = 'data:image/png;base64,' + messages[0].fotoDestinatario;
   } else {
-    // Usa imagem padrão se não houver foto
     img.src = 'https://soscasacuritiba.com.br/wp-content/uploads/2023/11/como-iniciar-na-profissao-de-pedreiro.webp';
   }
   img.alt = 'Foto de perfil destinatario';
@@ -1480,42 +1505,45 @@ function createMessageElement(messages) {
   cardBody.appendChild(header);
   cardBody.appendChild(hr1);
 
-  messages.forEach((message) => {
-    const isSender = message.id_usuario_para == receiverId;
+  // Only render messages if they exist and have content
+  if (messages && messages.length > 0 && messages[0].mensagem) {
+    messages.forEach((message) => {
+      const isSender = message.id_usuario_para == receiverId;
 
-    // Create a new row for each message
-    const row = document.createElement('div');
-    row.className = 'row';
+      // Create a new row for each message
+      const row = document.createElement('div');
+      row.className = 'row';
 
-    // Create message box
-    const messageCol = document.createElement('div');
-    messageCol.className = `col-md-5 chat-box ${isSender ? 'mensagem-remetente' : 'mensagem-destinatario'}`;
+      // Create message box
+      const messageCol = document.createElement('div');
+      messageCol.className = `col-md-5 chat-box ${isSender ? 'mensagem-remetente' : 'mensagem-destinatario'}`;
 
-    const messageCard = document.createElement('div');
-    messageCard.className = 'card mb-3';
+      const messageCard = document.createElement('div');
+      messageCard.className = 'card mb-3';
 
-    const messageCardBody = document.createElement('div');
-    messageCardBody.className = 'card-body';
+      const messageCardBody = document.createElement('div');
+      messageCardBody.className = 'card-body';
 
-    const messageText = document.createElement('p');
-    messageText.id = isSender ? 'mensagemRemetente' : 'mensagemDestinatario';
-    messageText.textContent = message.mensagem;
+      const messageText = document.createElement('p');
+      messageText.id = isSender ? 'mensagemRemetente' : 'mensagemDestinatario';
+      messageText.textContent = message.mensagem;
 
-    messageCardBody.appendChild(messageText);
-    messageCard.appendChild(messageCardBody);
-    messageCol.appendChild(messageCard);
+      messageCardBody.appendChild(messageText);
+      messageCard.appendChild(messageCardBody);
+      messageCol.appendChild(messageCard);
 
-    // Append message box to row
-    row.appendChild(messageCol);
+      // Append message box to row
+      row.appendChild(messageCol);
 
-    // Create line break
-    const lineBreak = document.createElement('div');
-    lineBreak.className = 'w-100';
-    row.appendChild(lineBreak);
+      // Create line break
+      const lineBreak = document.createElement('div');
+      lineBreak.className = 'w-100';
+      row.appendChild(lineBreak);
 
-    // Append row to card body
-    cardBody.appendChild(row);
-  });
+      // Append row to card body
+      cardBody.appendChild(row);
+    });
+  }
 
   const divChatInput = document.createElement('div');
   divChatInput.className = 'chat-input';

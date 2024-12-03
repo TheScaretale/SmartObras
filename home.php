@@ -31,16 +31,8 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
-                    <div class="ratings">
-                        <i class="fa fa-star checked"></i>
-                        <i class="fa fa-star checked"></i>
-                        <i class="fa fa-star "></i>
-                        <i class="fa fa-star "></i>
-                        <i class="fa fa-star"></i>
-                    </div>
                     <div class="text-end">
-                        <h5 class="review-count m-1">Projetos</h5>
-                        <p class="m-0" id="totalProjetos"></p>
+                        <h5 class="review-count m-1">Projetos: <span id="totalProjetos"></span></h5>
                     </div>
                 </div>
             </div>
