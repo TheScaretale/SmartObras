@@ -81,8 +81,10 @@
         </a>
         <div class="collapse" id="SobreMim">
             <div class="mb-3"></div>
-            <div class="card card-body" id="SobreMimContent" contentEditable="false">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <div class="card card-body" contentEditable="false">
+                <span id="sobreMimContent">
+                    
+                </span>
             </div>
         </div>
     </div>

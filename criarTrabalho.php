@@ -15,12 +15,12 @@ include "navbar.php";
                 <!-- Cria o form aqui -->
                 <div class="mb-3 w-100">
                     <label class="form-label" for="titulo">Título do Serviço</label>
-                    <i class="bi bi-question-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Amigão ta obvio né"></i>
+                    <i class="bi bi-question-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Titulo do trabalho, é o assunto principal do trabalho"></i>
                     <input class="form-control" type="text" placeholder="Título" id="titulo">
                 </div>
                 <div class="mb-3 w-100">
                     <label for="descricao" class="form-label">Descrição do serviço</label>
-                    <i class="bi bi-question-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Amigão ta obvio né"></i>
+                    <i class="bi bi-question-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Detalhes do trabalho e outras informações."></i>
                     <div class="form-floating">
                         <textarea class="form-control" placeholder="Descrição" id="descricao"></textarea>
                         <label for="descricao">Descrição</label>
@@ -28,7 +28,7 @@ include "navbar.php";
                 </div>
                 <div class="mb-3 w-100">
                     <label class="form-label">Qual o tipo do serviço</label>
-                    <i class="bi bi-question-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Amigão ta obvio né"></i>
+                    <i class="bi bi-question-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Categoria do trabalho."></i>
                     <select class="form-select form-select-sm" id="tipo_servico">
                         <option selected>Selecione o tipo de serviço</option>
                         <option value="1">Azulejista</option>
@@ -38,7 +38,7 @@ include "navbar.php";
                 </div>
                 <div class="mb-3 w-100">
                     <label class="form-label" for="orcamento">Orçamento</label>
-                    <i class="bi bi-question-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Amigão ta obvio né"></i>
+                    <i class="bi bi-question-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Quanto você pretende gastar com o serviço?"></i>
                     <div class="input-group">
                         <span class="input-group-text">R$</span>
                         <input type="text" id="orcamento" class="form-control" aria-label="Amount">
@@ -46,7 +46,7 @@ include "navbar.php";
                 </div>
                 <div class="mb-3 w-100">
                     <label for="tipoOrcamento" class="form-label">Qual o tipo do orçamento</label>
-                    <i class="bi bi-question-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Amigão ta obvio né"></i>
+                    <i class="bi bi-question-circle ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Escolher a maneira como pretende pagar, isso é apenas uma sugestão, combine com o profissional depois."></i>
                     <select id="tipoOrcamento" class="form-select form-select-sm">
                         <option value="1">Por hora</option>
                         <option value="2">Por dia</option>

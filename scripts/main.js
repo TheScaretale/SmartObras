@@ -1096,15 +1096,7 @@ function profileEditMode() {
   const email = document.getElementById("emailPerfil");
   const telefone = document.getElementById("telefonePerfil");
   const foto = document.getElementById("btnFoto");
-
-  
-  /* const projetosRealizados = document.getElementById(
-    "ProjetosRealizadosContent"
-  );
-  const sobreMim = document.getElementById("SobreMimContent");
-  const historicoProfissional = document.getElementById(
-    "HistoricoProfissionalContent"
-  ); */
+  const sobre = document.getElementById("sobreMimContent");
   
 
   function setEditMode() {
@@ -1123,12 +1115,8 @@ function profileEditMode() {
 
     foto.hidden = false;
 
-    /* projetosRealizados.contentEditable = true;
-    projetosRealizados.className = "form-control";
-    sobreMim.contentEditable = true;
-    sobreMim.className = "form-control";
-    historicoProfissional.contentEditable = true;
-    historicoProfissional.className = "form-control"; */
+    sobre.contentEditable = true;
+    sobre.className = "form-control";
   
 
     btnReturn.hidden = false;
@@ -1158,13 +1146,8 @@ function profileEditMode() {
 
     foto.hidden = true;
 
-
-    /* projetosRealizados.contentEditable = false;
-    projetosRealizados.className = "";
-    sobreMim.contentEditable = false;
-    sobreMim.className = "";
-    historicoProfissional.contentEditable = false;
-    historicoProfissional.className = ""; */
+    sobre.contentEditable = false;
+    sobre.className = "";
   };
 
   setEditMode();
@@ -1176,16 +1159,7 @@ function editProfile() {
   const telefone = document.getElementById("telefonePerfil").textContent;
   const fotoInput = document.getElementById("fotoInput");
   const foto = fotoInput.files[0];
-
-  /* Teste*/
-  const projetosRealizados = document.getElementById(
-    "ProjetosRealizadosContent"
-  ).textContent;
-  const sobreMim = document.getElementById("SobreMimContent").textContent;
-  const historicoProfissional = document.getElementById(
-    "HistoricoProfissionalContent"
-  ).textContent;
-  /* Teste*/
+  const sobre = document.getElementById("sobreMimContent").textContent;
 
   if (foto) {
     const reader = new FileReader();
@@ -1198,11 +1172,7 @@ function editProfile() {
         email: email,
         telefone: telefone,
         foto: fotoBase64,
-        /* Teste*/
-        projetosRealizados: projetosRealizados,
-        sobreMim: sobreMim,
-        historicoProfissional: historicoProfissional,
-        /* Teste*/
+        sobreMim: sobre,
       };
       console.log(data);
       fetch("./api/editProfile.php", {
@@ -1232,12 +1202,7 @@ function editProfile() {
       email: email,
       telefone: telefone,
       foto: null, // No photo uploaded
-
-      /* Teste*/
-      projetosRealizados: projetosRealizados,
-      sobreMim: sobreMim,
-      historicoProfissional: historicoProfissional,
-      /* Teste*/
+      sobreMim: sobre,
     };
     console.log(data);
     fetch("./api/editProfile.php", {
@@ -1274,6 +1239,7 @@ function getProfileData() {
   const email = document.getElementById("emailPerfil");
   const telefone = document.getElementById("telefonePerfil");
   const foto = document.querySelector(".fotoPerfil");
+  const sobre = document.getElementById("sobreMimContent");
 
   fetch("./api/getProfileData.php")
     .then((response) => response.json())
@@ -1287,6 +1253,7 @@ function getProfileData() {
       } else {
         foto.src = "default-image-path";
       }
+      sobre.textContent = data.curriculo;
     })
     .catch((error) => {
       console.error("Error:", error);
