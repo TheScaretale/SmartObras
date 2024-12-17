@@ -1,0 +1,202 @@
+/* variables */
+:root{
+    --header-height: 4.5rem;
+    /*cores */
+    --laranja1: #f27405;
+    --laranja2: #f25c05;
+    --vinho: #8c5656; /* é vinho isso mesmo? */
+    --rosaClaro: #d9baba;
+    --fundo: #f2f2f2
+}
+
+body{
+    background-color: var(--fundo) !important;
+}
+
+.botaoo {
+    color: black;
+    width: 150px;
+    border: 2px solid var(--laranja1);
+    padding: 5px 24px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease; 
+    border-radius: 8px;
+}
+
+.botaoo:hover {
+    background-color: var(--laranja2) ;
+    color: white;
+    transform: scale(1.1); 
+}
+
+.botaoo:active {
+    transform: scale(0.95); 
+}
+
+/*entra*/
+.botao {
+    color: black;
+    width: 150px;
+
+    border: 2px solid var(--laranja1);
+    padding: 5px 24px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease; 
+    border-radius: 8px;
+}
+
+.botao:hover {
+    background-color: var(--laranja2) ;
+    color: white;
+    transform: scale(1.1); 
+}
+
+.botao:active {
+    transform: scale(0.95); 
+}
+
+.btn-primary{
+    border-color: var(--laranja2) !important;
+    background-color: white !important;
+    border: 2px solid var(--laranja2) !important;
+    color: black !important;
+    transition: all 0.3s ease !important; 
+}
+
+.btn-primary:hover{
+    background-color: var(--laranja2) !important;
+    color: white !important;
+    border-color: var(--laranja2) !important;
+    transform: scale(1.1) !important;
+}
+
+.btn-primary:active{
+    transform: scale(0.95) !important;
+    background-color: var(--laranja2) !important;
+    border-color: var(--laranja2) !important;
+}
+
+.list-group-item.active {
+    background-color: var(--laranja1)!important;
+    border-color: orange !important;
+    color: white;
+}
+
+.fotoPerfil{
+    height: 180px;
+    width: 180px;
+    border-radius: 50%;
+    border: 3px solid var(--laranja1);
+    object-fit: cover;
+    
+}
+
+
+/* Chat2 */
+   /* Estilos gerais */
+   .text-white {
+    color: inherit !important;
+}
+
+.nav-link {
+    background-color: transparent !important;
+    color: inherit !important;
+}
+
+.nav-link.active,
+.nav-pills .nav-link.active {
+    background-color: transparent !important;
+    color: inherit !important;
+}
+
+.bg-light .nav-link,
+.bg-light .nav-link.active {
+    color: #333 !important;
+}
+
+/* Estilo da barra lateral */
+.sidebar {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.sidebar .list-group-item {
+    border: none;
+}
+
+/* Estilo da área de chat */
+.chat-container {
+    padding: 20px;
+}
+
+.chat-box {
+    max-width: 60%;
+    margin-bottom: 15px;
+}
+
+.chat-input {
+display: flex;
+align-items: center;
+padding: 8px;
+border-radius: 30px;
+box-shadow: none; /* Remove o efeito de sombra */
+background-color: transparent; /* Remove o fundo cinza */
+}
+
+.chat-textarea {
+flex: 1;
+border: 1px solid #ccc; /* Adiciona uma borda leve para visualização */
+outline: none;
+resize: none;
+padding: 10px 12px;
+font-size: 14px;
+border-radius: 20px;
+max-height: 100px; /* Altura máxima para 4 linhas */
+overflow-y: hidden; /* Exibe barra de rolagem se necessário */
+background-color: white; /* Fundo do textarea para contraste */
+transition: overflow-y 0.2s; /* Transição suave para exibir a barra */
+}
+
+.chat-textarea::placeholder {
+color: #888;
+}
+
+.chat-submit {
+background-color: #007bff;
+color: white;
+border: none;
+border-radius: 5px;
+padding: 10px 16px;
+font-size: 14px;
+cursor: pointer;
+transition: background-color 0.3s, transform 0.2s;
+}
+
+.chat-submit:hover {
+background-color: #0056b3;
+transform: scale(1.05); /* Efeito de destaque ao passar o mouse */
+}
+
+.chat-input textarea {
+    flex: 1;
+    resize: none;
+    border-radius: 10px;
+}
+
+.mensagem-remetente {
+    margin-left: auto;
+}
+
+.mensagem-destinatario {
+    margin-right: auto;
+}
+
+/* Estilo do botão */
+.chat-input button {
+    margin-left: auto;
+}

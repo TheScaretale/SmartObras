@@ -1,0 +1,41 @@
+/* variables */
+:root{
+    --header-height: 4.5rem;
+    /*cores */
+    --laranja1: #f27405;
+    --laranja2: #f25c05;
+    --vinho: #8c5656; /* é vinho isso mesmo? */
+    --rosaClaro: #d9baba;
+    --fundo: #f2f2f2
+}
+
+body{
+    background-color: var(--laranja1) !important;
+}
+
+.botaoo {
+    color: black;
+    width: 150px;
+    border: 2px solid var(--laranja1);
+    padding: 5px 24px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease; 
+    border-radius: 8px;
+}
+
+.botaoo:hover {
+    background-color: var(--laranja2) ;
+    color: white;
+    transform: scale(1.1); 
+}
+
+.botaoo:active {
+    transform: scale(0.95); 
+}
+.input-group .btn {
+    cursor: pointer;
+}
+
+
